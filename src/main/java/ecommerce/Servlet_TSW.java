@@ -18,5 +18,18 @@ public class Servlet_TSW extends HttpServlet {
 	  
 	    response.getWriter().println("Hello, world!");
 	}
-
+	
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String paramName = request.getParameter("name");
+	    
+	    // Esegui qualche elaborazione
+	    String responseMessage = "Hello, " + paramName;
+	    
+	    // Imposta il tipo di contenuto della risposta
+	    response.setContentType("text/plain");
+	    
+	    // Scrivi la risposta
+	    response.getWriter().println(responseMessage);
+	}
 }
