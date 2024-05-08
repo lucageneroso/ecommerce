@@ -1,0 +1,12 @@
+body {
+    background-color: white;
+    color: black;
+}
+
+/* Stili per la barra di navigazione */
+.navbar {
+    background-color: orange;
+}
+.navbar a {
+    color: white;
+}
