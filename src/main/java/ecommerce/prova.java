@@ -1,9 +1,13 @@
 package ecommerce;
 
 public class prova {
-ad
+  ad
 
 public prova() {
 	
 }
+  
+  public void set() {
+	  
+  }
 }
