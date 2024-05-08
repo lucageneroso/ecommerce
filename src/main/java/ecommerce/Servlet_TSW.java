@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.ServletException;
 import java.io.IOException;
 
-//gggggggggggggggggggg
+//ggggggggggggggggggggg
 
 public class Servlet_TSW extends HttpServlet {
 	/**
