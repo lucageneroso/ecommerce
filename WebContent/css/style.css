@@ -1,12 +1,17 @@
-body {
-    background-color: white;
-    color: black;
+
+   
+   
+h1.header{
+	background-color: #ff8000;
+	color: white;
+	padding: 40px;
+	text-align: center;
+	
+
+   
+    
 }
 
 /* Stili per la barra di navigazione */
-.navbar {
-    background-color: orange;
-}
-.navbar a {
-    color: white;
-}
+
+
