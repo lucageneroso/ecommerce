@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="keywords" content="">
     <meta name="description" content="">
-    <title>Chi siamo</title>
+    <title>Chi siamo, siamo Luca pietro e riccardo</title>
     <link rel="stylesheet" href="<%= request.getContextPath() %>/nicepage.css" media="screen">
     <link rel="stylesheet" href="<%= request.getContextPath() %>/Chi-siamo.css" media="screen">
     <script class="u-script" type="text/javascript" src="<%= request.getContextPath() %>/jquery.js" defer=""></script>
