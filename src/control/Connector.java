@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.DriverManager;
 
+//Classe per controllare la connessione al database
 public class Connector {
 
     public static void main(String[] args) {
