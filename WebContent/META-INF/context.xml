@@ -3,5 +3,11 @@
     <!-- Parametri specifici dell'applicazione, se necessario -->
     
     <!-- Eventuali risorse aggiuntive, come per esempio -->
-    <!-- <Resource ... /> -->
+    <Resource name="jdbc/ingrosso"
+        auth="Container"
+        driverClassName="com.mysql.cj.jdbc.Driver"
+        type="javax.sql.DataSource"
+        username="root"
+        password="root"
+        url="jdbc:mysql://localhost:3306/ingrosso?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC"/>
 </Context>
