@@ -17,7 +17,7 @@ body {
 	margin: 0;
 	overflow-x: hidden;
 }
-/* Stile per il contenitore dello slideshow */
+/* Stile per il contenitore dello slideshow aa*/
 .slideshow-container {
 	width: 100%;
 	position: relative;
