@@ -13,10 +13,6 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="C:/Users/lucag/Downloads/mysql-connector-java-8.0.19.jar"/>
-	<classpathentry kind="lib" path="C:/Users/lucag/Downloads/commons-io-2.11.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/lucag/Downloads/servlet-api.jar"/>
-	<classpathentry kind="lib" path="C:/Users/lucag/Downloads/javax.servlet-api-3.0.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/lucag/Downloads/gson-2.8.9.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Definitiva"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

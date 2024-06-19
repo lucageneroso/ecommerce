@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.Base64" %>
-<%@ page import="java.util.*, model.Prodotto, model.Cart, model.immagine"%>
+<%@ page import="java.util.*,model.Prodotto,model.Cart,model.immagine"%>
 
 <%
     Prodotto product = (Prodotto) request.getAttribute("product");
