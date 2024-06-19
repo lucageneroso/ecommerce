@@ -15,7 +15,7 @@ public class Utente {
     public int getTipo_account() {
         return tipo_account;
     }
-    
+    //ue ue
     public void setTipo_account(int tipo_account) {
         this.tipo_account = tipo_account;
     }
