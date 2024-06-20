@@ -21,19 +21,17 @@ import com.google.gson.GsonBuilder;
 
 public class ProductDao {
 
-	private static DataSource ds;
+    private static DataSource ds;
 
-	static {
-		try {
-			Context initCtx = new InitialContext();
-			Context envCtx = (Context) initCtx.lookup("java:comp/env");
+    static {
+        try {
+            InitialContext initialContext = new InitialContext();
+            ds = (DataSource) initialContext.lookup("java:comp/env/jdbc/ingrosso");
+        } catch (NamingException e) {
+            System.out.println("Error:" + e.getMessage());
+        }
+    }
 
-			ds = (DataSource) envCtx.lookup("jdbc/ingrosso");
-
-		} catch (NamingException e) {
-			System.out.println("Error:" + e.getMessage());
-		}
-	}
 	private static final String TABLE_NAME = "Prodotto";
 	
 	public synchronized void doSave(Prodotto product) throws SQLException {
@@ -269,15 +267,12 @@ public class ProductDao {
 				bean.setCategoria(rs.getString("Categoria"));
 				bean.setImg(rs.getBytes("Foto"));
 				bean.setSconto(rs.getDouble("Sconto"));	
-				/*byte[] imageByte = blob.getBytes(1,(int) blob.length());
-				bean.setImg(imageByte);
 				
-	            if (bean.getImg() == null) {
-	                byte[] emptyImage = new byte[0];
-	                bean.setImg(emptyImage);
-	            }*/
-				
-				products.add(bean);
+				Blob blob = rs.getBlob("foto");
+	            byte[] imageByte = blob.getBytes(1, (int) blob.length());
+	            bean.setImg(imageByte);
+	            
+	            products.add(bean);
 			}
 
 		} finally {
