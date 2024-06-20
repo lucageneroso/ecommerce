@@ -3,30 +3,35 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Ordine {
-    private int numeroOrdine;
+    private int id_ORDINE;
     private String indirizzo;
-    private String cap;
-    private String provincia ;
-    private String citta;
+    private int IVA_cliente; 
     private Date dataOrdine;
     private double totale;
     private String stato;
-    private String email;
+    private int numeroProdotti;
     
-    public String getEmail() {
-        return email;
+    public int getNumeroProdotti() {
+    	return this.numeroProdotti;
     }
+    public void setNumeroProdotti(int x) {
+    	this.numeroProdotti=x;
+    }
+    
+   public int getIVA_cliente() {
+	   return this.IVA_cliente;
+   }
+   public void setIVA_cliente(int IVA) {
+	   this.IVA_cliente=IVA;
+   }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
     
     public int getNumeroOrdine() {
-        return numeroOrdine;
+        return id_ORDINE;
     }
     
     public void setNumeroOrdine(int numeroOrdine) {
-        this.numeroOrdine = numeroOrdine;
+        this.id_ORDINE = numeroOrdine;
     }
     
     
@@ -39,29 +44,6 @@ public class Ordine {
 		this.indirizzo = indirizzo;
 	}
 
-	public String getCap() {
-		return cap;
-	}
-
-	public void setCap(String cap) {
-		this.cap = cap;
-	}
-
-	public String getProvincia() {
-		return provincia;
-	}
-
-	public void setProvincia(String provincia) {
-		this.provincia = provincia;
-	}
-
-	public String getCitta() {
-		return citta;
-	}
-
-	public void setCitta(String citta) {
-		this.citta = citta;
-	}
 
 	public Date getData() {
         return dataOrdine;
@@ -91,7 +73,7 @@ public class Ordine {
     public String toString() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String dataFormattata = dateFormat.format(dataOrdine);
-        return "Numero ordine: " + numeroOrdine +
+        return "Numero ordine: " + id_ORDINE +
                ", Data: " + dataFormattata +
                ", Totale: " + totale +
                ", Stato: " + stato;

@@ -15,13 +15,13 @@ import javax.sql.DataSource;
 public class OrdineDAO {
 	private static DataSource ds;
     private List<Ordine> ordini;
-    private static final String TABLE_NAME = "ordine";
+    private static final String TABLE_NAME = "Ordine";
     static {
 		try {
 			Context initCtx = new InitialContext();
 			Context envCtx = (Context) initCtx.lookup("java:comp/env");
 
-			ds = (DataSource) envCtx.lookup("jdbc/sito");
+			ds = (DataSource) envCtx.lookup("jdbc/ingrosso");
 
 		} catch (NamingException e) {
 			System.out.println("Error:" + e.getMessage());
@@ -36,36 +36,40 @@ public class OrdineDAO {
         ordini.add(ordine);
     }
     
-    public List<Ordine> getOrdini(String email) {
+    public List<Ordine> getOrdini(String indirizzo) {
     	Connection connection = null;
 	    PreparedStatement preparedStatement = null;
     	List<Ordine> ordini = new ArrayList<>();
-    	String selectSQL = "SELECT * FROM ordine WHERE email = ?";
+    	String selectSQL = "SELECT * FROM ordine WHERE indirizzo = ?";
     	
     	try {
 	        connection = ds.getConnection();
 	        preparedStatement = connection.prepareStatement(selectSQL);
-	        preparedStatement.setString(1, email);
+	        preparedStatement.setString(1, indirizzo);
 
 	        ResultSet rs = preparedStatement.executeQuery();
 
 	        while (rs.next()) {
                 int numeroOrdine = rs.getInt("numeroOrdine");
-                Date data = rs.getDate("dataOrdine");
+                Date data = rs.getDate("data");
                 double totale = rs.getDouble("totale");
                 String stato = rs.getString("stato");
-                String indirizzo = rs.getString("indirizzo");
-                String cap = rs.getString("cap");
-                String provincia = rs.getString("provincia");
-                String citta = rs.getString("citta");
-                
+                //String indirizzo = rs.getString("indirizzo");
+                //String cap = rs.getString("cap");
+                //String provincia = rs.getString("provincia");
+                //String citta = rs.getString("citta");
+                int numeroProdotti = rs.getInt("numero_prodotti");
+                int IVA = rs.getInt("IVA_cliente");
+
 
                 Ordine ordine = new Ordine();
-                ordine.setCap(cap);
-                ordine.setCitta(citta);
+                //ordine.setCap(cap);
+                //ordine.setCitta(citta);
                 ordine.setData(data);
                 ordine.setIndirizzo(indirizzo);
-                ordine.setProvincia(provincia);
+                ordine.setIVA_cliente(IVA);
+                ordine.setNumeroProdotti(numeroProdotti);
+                //ordine.setProvincia(provincia);
                 ordine.setTotale(totale);
                 ordine.setNumeroOrdine(numeroOrdine);
                 ordine.setStato(stato);
@@ -119,9 +123,8 @@ public class OrdineDAO {
 		Connection connection = null;
 	    PreparedStatement preparedStatement = null;
     	List<Prodotto> prodotti = new ArrayList<Prodotto>();
-    	String selectSQL = "SELECT product.id, product.nome, product.foto FROM product, composizione" 
-    		    + " WHERE composizione.codP = product.id"
-    		    + " AND composizione.numeroO = ?";
+    	String selectSQL = "SELECT prodotto.id, prodotto.nome,  FROM Prodotto" 
+    		    + " WHERE Prodotto.id=id0";
 
     	
     	try {
@@ -132,9 +135,9 @@ public class OrdineDAO {
 	        ResultSet rs = preparedStatement.executeQuery();
 
 	        while (rs.next()) {
-	        	int id = rs.getInt("product.id");
-	        	String nome = rs.getString("product.nome");
-	        	byte[] foto = rs.getBytes("product.foto");
+	        	int id = rs.getInt("Prodotto.id");
+	        	String nome = rs.getString("Prodotto.nome");
+	        	byte[] foto = rs.getBytes("Prodotto.foto");
 	        	Prodotto bean = new Prodotto();
 	        	bean.setID(id);
 	        	bean.setNome(nome);
@@ -179,27 +182,29 @@ public class OrdineDAO {
 	        ResultSet rs = preparedStatement.executeQuery();
 
 	        while (rs.next()) {
-	            int numeroOrdine = rs.getInt("numeroOrdine");
-	            Date data = rs.getDate("dataOrdine");
-	            double totale = rs.getDouble("totale");
-	            String stato = rs.getString("stato");
-	            String indirizzo = rs.getString("indirizzo");
-	            String cap = rs.getString("cap");
-	            String provincia = rs.getString("provincia");
-	            String citta = rs.getString("citta");
-	            String email = rs.getString("email");
+	        	int numeroOrdine = rs.getInt("numeroOrdine");
+                Date data = rs.getDate("data");
+                double totale = rs.getDouble("totale");
+                String stato = rs.getString("stato");
+                //String indirizzo = rs.getString("indirizzo");
+                //String cap = rs.getString("cap");
+                //String provincia = rs.getString("provincia");
+                //String citta = rs.getString("citta");
+                int numeroProdotti = rs.getInt("numero_prodotti");
+                int IVA = rs.getInt("IVA_cliente");
 
 	            Ordine ordine = new Ordine();
-	            ordine.setCap(cap);
-	            ordine.setCitta(citta);
-	            ordine.setData(data);
-	            ordine.setIndirizzo(indirizzo);
-	            ordine.setProvincia(provincia);
-	            ordine.setTotale(totale);
-	            ordine.setNumeroOrdine(numeroOrdine);
-	            ordine.setStato(stato);
-	            ordine.setEmail(email); 
-	            ordini.add(ordine);
+	            //ordine.setCap(cap);
+                //ordine.setCitta(citta);
+                ordine.setData(data);
+                ordine.setIndirizzo(indirizzo);
+                ordine.setIVA_cliente(IVA);
+                ordine.setNumeroProdotti(numeroProdotti);
+                //ordine.setProvincia(provincia);
+                ordine.setTotale(totale);
+                ordine.setNumeroOrdine(numeroOrdine);
+                ordine.setStato(stato);
+                ordini.add(ordine);
 	        }
 
 	    } catch (SQLException e) {
@@ -215,50 +220,8 @@ public class OrdineDAO {
 	    return ordini;
 	}
 
-	public List<Ordine> searchByEmail(String email) throws SQLException {
-	    Connection connection = null;
-	    PreparedStatement preparedStatement = null;
 
-	    List<Ordine> ordini = new ArrayList<>();
-	    String selectSQL = "SELECT * FROM ordine WHERE email LIKE ?";
-
-	    try {
-	        connection = ds.getConnection();
-	        preparedStatement = connection.prepareStatement(selectSQL);
-	        
-	        preparedStatement.setString(1, "%" + email + "%");
-
-	        ResultSet rs = preparedStatement.executeQuery();
-
-	        while (rs.next()) {
-	            Ordine ordine = new Ordine();
-	            ordine.setNumeroOrdine(rs.getInt("numeroOrdine"));
-	            ordine.setData(rs.getDate("dataOrdine"));
-	            ordine.setTotale(rs.getDouble("totale"));
-	            ordine.setStato(rs.getString("stato"));
-	            ordine.setEmail(rs.getString("email"));
-	            ordine.setIndirizzo(rs.getString("indirizzo"));
-	            ordine.setCitta(rs.getString("citta"));
-	            ordine.setProvincia(rs.getString("provincia"));
-	            ordine.setCap(rs.getString("cap"));
-
-	            ordini.add(ordine);
-	        }
-
-	    } finally {
-	        try {
-	            if (preparedStatement != null)
-	                preparedStatement.close();
-	        } finally {
-	            if (connection != null)
-	                connection.close();
-	        }
-	    }
-
-	    return ordini;
-	}
-
-	public void ValutaProd(String email, int codP, int val) {
+	/*public void ValutaProd(String email, int codP, int val) {
 		Connection connection = null;
 	    PreparedStatement preparedStatement = null;
 	    String sql1 ="INSERT INTO recensioni (valutazione, email, codp)"+
@@ -292,45 +255,6 @@ public class OrdineDAO {
         }
     }
 
-}
+}*/
 	
-	public synchronized Ordine doRetrieveByKey(int numeroOrdine, String key2) throws SQLException {
-		Connection con = null;
-		PreparedStatement statement = null;
-		Ordine ordine = new Ordine();
-		
-		String query = "SELECT * FROM " + OrdineDAO.TABLE_NAME + " WHERE numeroOrdine = ? AND email = ?";
-		
-		try {
-			con = DriverManagerConnectionPool.getConnection();
-			statement = con.prepareStatement(query);
-			statement.setInt(1, numeroOrdine);
-			statement.setString(2, key2);
-			
-			
-			ResultSet result = statement.executeQuery();
-			
-			while(result.next()) {
-				ordine.setNumeroOrdine(result.getInt("numeroOrdine"));
-				ordine.setEmail(result.getString("email"));
-				ordine.setStato(result.getString("stato"));
-				ordine.setTotale(result.getDouble("totale"));
-				ordine.setData(result.getDate("dataOrdine"));
-				ordine.setCitta(result.getString("citta"));
-				ordine.setCap(result.getString("cap"));
-				ordine.setIndirizzo(result.getString("indirizzo"));
-				ordine.setProvincia(result.getString("provincia"));
-			}
-		} finally {
-			try {
-				if(statement != null) {
-					statement.close();
-				}
-			} finally {
-				DriverManagerConnectionPool.releaseConnection(con);
-			}
-		}
-
-		return ordine;
-	}
 }

@@ -1,6 +1,5 @@
 package model;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class Prodotto {
@@ -9,9 +8,8 @@ public class Prodotto {
 	String Nome;
 	String Descrizione;
 	double Prezzo;
-	String Sesso;
 	String categoria;
-	private Double iva;
+	private double sconto;
 	
 	byte [] img;
 	ArrayList<immagine> allimg;
@@ -51,15 +49,7 @@ public class Prodotto {
 		Nome = nome;
 	}
 	public double getPrezzo() {
-		double importoIva = (Prezzo) * (iva / 100);
-		double totale = Prezzo + importoIva;
-		
-		//sostituisco la virgola con un punto nella stringa e arrotondo a 2 numeri dopo la virgola
-		DecimalFormat df = new DecimalFormat("#0.00");
-		String totaleFormatted = df.format(totale);
-		totaleFormatted = totaleFormatted.replace(",", ".");
-		
-		return Double.parseDouble(totaleFormatted);
+		return this.Prezzo;
 		
 	}
 	public void setPrezzo(double prezzo) {
@@ -77,12 +67,7 @@ public class Prodotto {
 	public void setAllimg(ArrayList<immagine> allimg) {
 		this.allimg = allimg;
 	}
-	public String getSesso() {
-		return Sesso;
-	}
-	public void setSesso(String sesso) {
-		Sesso = sesso;
-	}
+	
 	public String getCategoria() {
 		return categoria;
 	}
@@ -90,12 +75,12 @@ public class Prodotto {
 		this.categoria = categoria;
 	}
 	
-	public Double getIva() {
-        return iva;
+	public double getSconto() {
+        return sconto;
     }
 
-    public void setIva(Double iva) {
-        this.iva = iva;
+    public void setSconto(double sconto) {
+        this.sconto = sconto;
     }
 
 }

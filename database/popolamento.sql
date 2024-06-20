@@ -1,3 +1,4 @@
+
 DROP DATABASE IF EXISTS ingrosso;
 CREATE DATABASE ingrosso;
 USE ingrosso;
@@ -53,12 +54,13 @@ CREATE TABLE IF NOT EXISTS Prodotto (
     Descrizione VARCHAR(255),
     Categoria VARCHAR(255),
     Situato_in VARCHAR(50) NOT NULL,
-    Sconto INT,
+    Sconto DECIMAL(10, 2),
+    Foto BLOB,
     FOREIGN KEY (Fornitore_IVA) REFERENCES Fornitore(IVA)
 );
 
-INSERT INTO Prodotto(idProdotto, Quantita, Fornitore_IVA, Prezzo, Nome, Descrizione, Categoria, Situato_in, Sconto)
-VALUES (1, 100, 13579, 9.90, 'Rotolone', 'Rotolone comodo per pulire', 'Cucina', 'Via Spennata', 0);
+INSERT INTO Prodotto(idProdotto, Quantita, Fornitore_IVA, Prezzo, Nome, Descrizione, Categoria, Situato_in, Sconto, Foto)
+VALUES (1, 100, 13579, 9.90, 'Rotolone', 'Rotolone comodo per pulire', 'Cucina', 'Via Spennata', 0, LOAD_FILE('/WebContent/images/rotolone.png'));
 
 DROP TABLE IF EXISTS Acquista;
 CREATE TABLE IF NOT EXISTS Acquista (
