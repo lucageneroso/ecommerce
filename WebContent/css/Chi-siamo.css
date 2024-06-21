@@ -1,3 +1,194 @@
-.u-section-1 .u-sheet-1 {
-  min-height: 400px;
+
+.header{
+  background-color:	#C0C0C0	;
+  margin:0;
+  align-items:center;
+  border-bottom:2px solid black;
+  padding: 5px 10;
+  width: 100%;
+  display:flex;
+  box-sizing: border-box;
+  top: 0;
+  left: 0;
+   
+  }
+  
+ .image{
+  
+    margin: 0;
+    height: 100px; /* Imposta un'altezza appropriata */
+    margin-right: 20px;
+    
+
+ }
+ 
+ nav {
+    margin-left: 20px;
+}
+
+.nav-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.nav-list li {
+	margin-top:5px;
+    margin-right: 15px;
+    margin-left:50px;
+}
+
+.nav-list li a {
+    text-decoration: none;
+    font-size:20px;
+    color: #333;
+    padding: 5px 10px;
+    border-radius: 3px;
+    transition: background-color 0.3s;
+}
+
+.nav-list li a:hover {
+    background-color: #555;
+    color: #fff;
+}
+.navbar .dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.navbar .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.navbar .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.navbar .dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.navbar .dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.navbar .dropdown:hover .dropbtn {
+    background-color: #555;
+    color: white;
+}
+ 
+ 
+ .cerca-form{
+  
+    margin-left:200px;
+    display: flex;
+    align-items: center;
+}
+.cerca-form input[type="text"] {
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-top:3px;
+    
+}
+
+.cerca-form button {
+    padding: 5px 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 3px;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.cerca-form button:hover {
+    background-color: #555;
+}
+
+
+
+.login-button{
+    text-decoration: none;
+    font-size:20px;
+    color: #333;
+    padding: 5px 10px;
+    border-radius: 30px;
+    transition: background-color 0.3s;
+    margin-left:159px;
+     
+
+     
+  
+  
+}
+
+.login-button:hover{
+	background-color: #555;
+    color: #fff; 
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Box-sizing per includere il padding nel calcolo della larghezza */
+}
+
+/* Stile per il corpo della pagina */
+container {
+    font-family: 'Arial', sans-serif; /* Tipo di carattere predefinito */
+    line-height: 1.6; /* Altezza della riga */
+    background-color: #fff; /* Colore di sfondo */
+    color: #333; /* Colore del testo principale */
+    padding: 20px; /* Spaziatura interna */
+}
+
+/* Stile per l'intestazione principale "Chi Siamo" */
+h1 {
+    font-size: 36px; /* Dimensione del font */
+    text-align: center; /* Allineamento al centro */
+    margin-bottom: 20px; /* Spaziatura inferiore */
+    color: #333; /* Colore del testo */
+}
+
+/* Stile per i sottotitoli "La nostra Storia", "Il nostro Team", "Contattaci" */
+h2 {
+    font-size: 28px; /* Dimensione del font */
+    margin-top: 30px; /* Spaziatura superiore */
+    color: #555; /* Colore del testo */
+}
+
+/* Stile per i paragrafi di testo */
+p {
+    font-size: 16px; /* Dimensione del font */
+    text-align: justify; /* Allineamento del testo giustificato */
+    margin-bottom: 15px; /* Spaziatura inferiore */
+    color: #666; /* Colore del testo */
+}
+
+/* Stile per il link "Torna alla Home" */
+a {
+    display: inline-block; /* Mostra il link come blocco */
+    text-align: center; /* Allineamento al centro */
+    margin-top: 30px; /* Spaziatura superiore */
+    color: #007bff; /* Colore del link */
+    text-decoration: none; /* Rimuove la sottolineatura */
+    font-weight: bold; /* Grassetto */
+    transition: color 0.3s; /* Transizione del colore al passaggio del mouse */
+}
+
+a:hover {
+    color: #0056b3; /* Cambia colore al passaggio del mouse */
 }

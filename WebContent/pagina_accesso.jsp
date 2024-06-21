@@ -104,7 +104,7 @@ String mess3 = (String) request.getAttribute("errore3");
     </form>
     <div class="register-link">
         <p>Non sei ancora registrato?</p>
-        <a href="pagina_registrazione.jsp">Crea un account</a>
+        <a href="Registrazione.jsp">Crea un account</a>
     </div>
 </div>
 
