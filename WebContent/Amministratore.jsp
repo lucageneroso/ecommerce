@@ -306,7 +306,7 @@ input[type="file"]{
             <% if (base64img != null) { %>
                 <td><img src="data:image/jpg;base64, <%= base64img %>" width="100" height="100" alt="#"></td>
             <% } %>
-            <td><%= bean.getSesso() %></td>
+            
             <td>
                 <a href="#" onclick="mostraInputPrezzo('<%= bean.getID() %>'); return false;">
                     <input type="submit" value="Modifica">
@@ -422,16 +422,12 @@ input[type="file"]{
 		    <% 
 		    if (ordini != null && !ordini.isEmpty()) {
 		        for (Ordine ordine : ordini) { %>
-		            <tr data-email="<%= ordine.getEmail() %>">
-		                <td><%= ordine.getEmail() %></td>
+		            <tr data-email="<%= ordine.getIndirizzo() %>">
 		                <td><%= ordine.getNumeroOrdine() %></td>
 		                <td><%= ordine.getData() %></td>
 		                <td><%= ordine.getTotale() %>€</td>
 		                <td><%= ordine.getStato() %></td>
 		                <td><%= ordine.getIndirizzo() %></td>
-		                <td><%= ordine.getCitta() %></td>
-		                <td><%= ordine.getProvincia() %></td>
-		                <td><%= ordine.getCap() %></td>
 		            </tr>
 		        <% }
 		    }
