@@ -1,15 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <% 
-String mess = (String) request.getAttribute("errore"); 
-String mess2 = (String) request.getAttribute("errore2");
-String mess3 = (String) request.getAttribute("errore3");
+String messaggio = (String) request.getAttribute("messaggio");
 %>
 <!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accedi</title>
+    <title>Registrazione</title>
     <style>
         body {
             margin: 0;
@@ -46,6 +44,7 @@ String mess3 = (String) request.getAttribute("errore3");
             flex-direction: column;
         }
         
+        input[type="text"],
         input[type="email"],
         input[type="password"] {
             width: 100%;
@@ -69,12 +68,12 @@ String mess3 = (String) request.getAttribute("errore3");
             font-size: 16px;
         }
         
-        .register-link {
+        .login-link {
             margin-top: 20px;
             text-align: center;
         }
         
-        .register-link a {
+        .login-link a {
             color: orange;
             text-decoration: none;
         }
@@ -89,24 +88,25 @@ String mess3 = (String) request.getAttribute("errore3");
 <body>
 
 <div class="container">
-    <h1>Accedi</h1>
-    <form action="accedi" method="post">
-        <input type="hidden" name="action" value="login">
-        <% if (mess != null) { %>
-            <p style="color: red;"><%=mess%></p>
+    <h1>Crea un Account</h1>
+    <form action="registration" method="post">
+        <input type="hidden" name="action" value="insertbreve">
+        <% if (messaggio != null) { %>
+            <p style="color: red;"><%= messaggio %></p>
         <% } %>
-        <% if (mess3 != null) { %>
-            <p style="color: red;"><%=mess3%></p>
-        <% } %>
-        <input type="email" name="username" placeholder="Username" required>
+        <input type="text" name="nome" placeholder="Nome" required>
+        <input type="text" name="cognome" placeholder="Cognome" required>
+        <input type="email" name="email" placeholder="Email" required>
         <input type="password" name="pass" placeholder="Password" required>
-        <button type="submit">Accedi</button>
+        <button type="submit">Crea Account</button>
     </form>
-    <div class="register-link">
-        <p>Non sei ancora registrato?</p>
-        <a href="Registrazione.jsp">Crea un account</a>
+    <div class="login-link">
+        <p>Già registrato?</p>
+        <a href="pagina_accesso.jsp">Accedi</a>
     </div>
 </div>
 
 </body>
 </html>
+
+

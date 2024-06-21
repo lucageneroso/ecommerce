@@ -1,0 +1,241 @@
+@charset "ISO-8859-1";
+
+
+
+body, html{ width: 100% ;height:100%; font-size: 16px; font-family: Lobster; box-sizing: border-box;margin: 0;padding: 0;}
+:before,*:after{ box-sizing: border-box; }
+h1,h2,h3,h4,h5,h6, p, ol, ul{margin: 0;padding: 0;}
+ol,ul{list-style-type: none;}
+img{height: auto;}
+
+
+
+.header{
+  background-color:	#C0C0C0	;
+  margin:0;
+  align-items:center;
+  border-bottom:2px solid black;
+  padding: 5px 10;
+  width: 100%;
+  display:flex;
+  box-sizing: border-box;
+  top: 0;
+  left: 0;
+   
+  }
+  
+ .image{
+  
+    margin: 0;
+    height: 100px; /* Imposta un'altezza appropriata */
+    margin-right: 20px;
+    
+
+ }
+ 
+ nav {
+    margin-left: 20px;
+}
+
+.nav-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.nav-list li {
+	margin-top:5px;
+    margin-right: 15px;
+    margin-left:50px;
+}
+
+.nav-list li a {
+    text-decoration: none;
+    font-size:20px;
+    color: #333;
+    padding: 5px 10px;
+    border-radius: 3px;
+    transition: background-color 0.3s;
+}
+
+.nav-list li a:hover {
+    background-color: #555;
+    color: #fff;
+}
+.navbar .dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.navbar .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.navbar .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.navbar .dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.navbar .dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.navbar .dropdown:hover .dropbtn {
+    background-color: #555;
+    color: white;
+}
+ 
+ 
+ .cerca-form{
+  
+    margin-left:200px;
+    display: flex;
+    align-items: center;
+}
+.cerca-form input[type="text"] {
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-top:3px;
+    
+}
+
+.cerca-form button {
+    padding: 5px 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 3px;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.cerca-form button:hover {
+    background-color: #555;
+}
+.carrello {
+  
+    position: absolute; /* Posizionamento assoluto per spostare l'elemento */
+    right: 0px; /* Sposta l'elemento 10px dal bordo destro */
+    top: 50%; /* Sposta l'elemento a metà dell'altezza del container genitore */
+    transform: translateY(-50%); /* Centra verticalmente l'elemento */
+
+}
+
+.carrello-icon {
+    max-width: 150px; /* Imposta una larghezza massima per l'immagine */
+    height: auto; /* Assicura che l'altezza sia regolata proporzionalmente */
+    margin: 0 auto; /* Centra l'immagine orizzontalmente */
+    display: block; /* Assicura che l'immagine non abbia spazi extra attorno */
+}
+
+.carrello-icon:hover {
+    transform: scale(1.1);
+}
+
+
+.login-button{
+    text-decoration: none;
+    font-size:20px;
+    color: #333;
+    padding: 5px 10px;
+    border-radius: 30px;
+    transition: background-color 0.3s;
+    margin-left:150px;
+
+
+     
+  
+  
+}
+
+.login-button:hover{
+	background-color: #555;
+    color: #fff; 
+}
+
+
+.dot {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.dot:hover,
+.dot.active {
+    background-color: #717171;
+}
+
+.fade {
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+.container1 {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+.container1 a {
+    flex: 1;
+    display: block;
+}
+
+.container1 img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.container1 img:hover {
+    transform: scale(1.05);
+}
+
+@media screen and (max-width: 768px) {
+    .header {
+        flex-direction: column; /* Layout a colonna per dispositivi mobili */
+        align-items: stretch;
+    }
+
+    .image {
+        margin-bottom: 10px; /* Spazio inferiore per l'immagine del logo */
+    }
+
+    .navbar {
+        margin-left: 0; /* Allinea la navbar a sinistra */
+        margin-top: 10px; /* Spazio superiore per la navbar */
+    }
+
+    .cerca-form {
+        margin-left: 0; /* Allinea la ricerca a sinistra */
+        margin-top: 10px; /* Spazio superiore per la ricerca */
+    }
+
+    .login-button {
+        margin-left: 0; /* Allinea il pulsante di login a sinistra */
+        margin-top: 10px; /* Spazio superiore per il pulsante di login */
+    }
+}
+
+
+   

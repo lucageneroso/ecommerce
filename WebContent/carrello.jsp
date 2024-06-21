@@ -260,7 +260,7 @@ table.cart-table {
                 <label for="pickup-option" class="radio-label option-label">Punto di Ritiro</label>
             </td>
             <td>
-                NewAgain Shop <br> Via Pantano Nghilino SNC Sarno
+                HomeDecore Shop <br> Via Pantano Nghilino SNC Sarno
             </td>
         </tr>
     </table>
