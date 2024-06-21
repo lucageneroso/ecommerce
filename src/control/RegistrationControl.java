@@ -116,7 +116,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
                     session.setAttribute("Iva", utente.getIVA());
                     session.setAttribute("IBAN", utente.getIBAN());
                     session.setAttribute("nome", utente.getNome()); 
-                    session.setAttribute("tipo_account", utente.getTipo_account()); 
+                    session.setAttribute("tipo_account", utente.getTipo_account());  
                     if(utente.getTipo_account()==0) {
                     	System.out.println("Stai a piedi 2");
                     	response.sendRedirect(request.getContextPath() + "/Home.jsp");
