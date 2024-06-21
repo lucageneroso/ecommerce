@@ -122,7 +122,7 @@ String mess3 = (String) request.getAttribute("errore3");
 				<%
 				if (mess2 != null) { %>
 					<p style="color: red;"><%=mess2%></p>
-					<% } %>
+					<% } %> 
 				 <button  type="submit" value="Crea" onclick="validatePassword()">Crea </button>
 				</div>
 			  </div>
