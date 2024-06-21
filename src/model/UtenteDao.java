@@ -119,6 +119,7 @@ public class UtenteDao {
 	            utente.setIBAN(rs.getString("Iban"));
 	            utente.setPass(rs.getString("PasswordCliente"));
 	            utente.setIVA(rs.getInt("IVA"));
+	            utente.setTipo_account(rs.getInt("Tipo_account"));
 	        }
 
 	    } finally {
@@ -230,6 +231,7 @@ public class UtenteDao {
 	            utente.setIBAN(rs.getString("Iban"));
 	            utente.setPass(rs.getString("PasswordCliente"));
 	            utente.setIVA(rs.getInt("IVA"));
+	            utente.setTipo_account(rs.getInt("Tipo_account"));
 
 	            utenti.add(utente);
 	        }

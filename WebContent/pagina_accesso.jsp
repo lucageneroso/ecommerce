@@ -90,7 +90,7 @@ String mess3 = (String) request.getAttribute("errore3");
 
 <div class="container">
     <h1>Accedi</h1>
-    <form action="login" method="post">
+    <form action="accedi" method="post">
         <input type="hidden" name="action" value="login">
         <% if (mess != null) { %>
             <p style="color: red;"><%=mess%></p>

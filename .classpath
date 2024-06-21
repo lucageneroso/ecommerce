@@ -14,8 +14,10 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/lucag/Downloads/gson-2.8.9.jar"/>
-	<classpathentry kind="lib" path="C:/Users/lucag/Downloads/commons-io-2.11.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/lucag/Downloads/mysql-connector-j-8.3.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/rical/Downloads/commons-io-2.11.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/rical/Downloads/mysql-connector-java-8.0.28.jar"/>
+	<classpathentry kind="lib" path="C:/Users/rical/Downloads/gson-2.8.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/rical/Downloads/servlet-api.jar"/>
+	<classpathentry kind="lib" path="C:/Users/rical/Downloads/javax.servlet-api-3.0.1.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

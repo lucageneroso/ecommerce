@@ -96,6 +96,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		
 			model.doSaveRistretto(bean);
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Home.jsp");
+			System.out.println("Stai a piedi 1");
 			dispatcher.forward(request, response);
 		}
 		if (action.equalsIgnoreCase("login")){
@@ -117,7 +118,8 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
                     session.setAttribute("nome", utente.getNome()); 
                     session.setAttribute("tipo_account", utente.getTipo_account());
                     if(utente.getTipo_account()==0) {
-                    response.sendRedirect(request.getContextPath() + "/Home.jsp");
+                    	System.out.println("Stai a piedi 2");
+                    	response.sendRedirect(request.getContextPath() + "/Home.jsp");
                     } 
                     else if (utente.getTipo_account() == 1) {
                         response.sendRedirect(request.getContextPath() + "/Amministratore.jsp");
