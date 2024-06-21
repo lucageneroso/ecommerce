@@ -265,12 +265,7 @@ public class ProductDao {
 				bean.setPrezzo(rs.getDouble("Prezzo"));
 				bean.setQuantita(rs.getInt("Quantita"));
 				bean.setCategoria(rs.getString("Categoria"));
-				bean.setImg(rs.getBytes("Foto"));
 				bean.setSconto(rs.getDouble("Sconto"));	
-				
-				Blob blob = rs.getBlob("foto");
-	            byte[] imageByte = blob.getBytes(1, (int) blob.length());
-	            bean.setImg(imageByte);
 	            
 	            products.add(bean);
 			}
@@ -342,12 +337,9 @@ public class ProductDao {
 				bean.setPrezzo(rs.getDouble("Prezzo"));
 				bean.setQuantita(rs.getInt("Quantita"));
 				bean.setCategoria(rs.getString("Categoria"));
-				bean.setImg(rs.getBytes("Foto"));
 				bean.setSconto(rs.getDouble("Sconto"));
 	            
-	            Blob blob = rs.getBlob("foto");
-	            byte[] imageByte = blob.getBytes(1, (int) blob.length());
-	            bean.setImg(imageByte);
+	           
 	            
 	            products.add(bean);
 	        }
@@ -387,12 +379,9 @@ public class ProductDao {
 				bean.setPrezzo(rs.getDouble("Prezzo"));
 				bean.setQuantita(rs.getInt("Quantita"));
 				bean.setCategoria(rs.getString("Categoria"));
-				bean.setImg(rs.getBytes("Foto"));
 				bean.setSconto(rs.getDouble("Sconto"));
 	            
-	            Blob blob = rs.getBlob("foto");
-	            byte[] imageByte = blob.getBytes(1, (int) blob.length());
-	            bean.setImg(imageByte);
+	           
 
 	            products.add(bean);
 	        }
@@ -446,9 +435,7 @@ public class ProductDao {
 				bean.setCategoria(rs.getString("Categoria"));
 				bean.setImg(rs.getBytes("Foto"));
 				bean.setSconto(rs.getDouble("Sconto"));
-				Blob blob = rs.getBlob("foto");
-				byte[] imageByte = blob.getBytes(1,(int) blob.length());
-				bean.setImg(imageByte);
+				
 				products.add(bean);
 			}
 

@@ -1,25 +1,38 @@
 package model;
 
+import java.sql.Date;
+
 public class Utente {
 	String email;
 	String nome;
 	String cognome;
-	String indirizzo;
-	String citta;
-	String provincia;
-	String cap;
+	String username;
+	String IBAN;
+	Date dataNascita;
 	String pass;
-	int tipo_account;
+	int IVA;
+	int Tipo_account;
 	
+	public int getTipo_account() {
+		return Tipo_account;
+	}
+	public void setTipo_account(int x) {
+		Tipo_account=x;
+	}
 	
-    public int getTipo_account() {
-        return tipo_account;
+	public void setIBAN(String x) {
+		this.IBAN=x;
+	}
+	public String getIBAN() {
+		return this.IBAN;
+	}
+	
+    public int getIVA() {
+        return IVA;
     }
-    //ue ue
-    public void setTipo_account(int tipo_account) {
-        this.tipo_account = tipo_account;
+    public void setIVA(int x) {
+    	IVA=x;
     }
-    
 	public String getEmail() {
 		return email;
 	}
@@ -38,30 +51,20 @@ public class Utente {
 	public void setCognome(String cognome) {
 		this.cognome = cognome;
 	}
-	public String getIndirizzo() {
-		return indirizzo;
+	public String getUsername() {
+		return username;
 	}
-	public void setIndirizzo(String indirizzo) {
-		this.indirizzo = indirizzo;
+	public void setUsername(String x) {
+		this.username=x;
 	}
-	public String getCitta() {
-		return citta;
+	public Date getData() {
+		return dataNascita;
 	}
-	public void setCitta(String citta) {
-		this.citta = citta;
+	public void setData(Date x) {
+		this.dataNascita=x;
 	}
-	public String getProvincia() {
-		return provincia;
-	}
-	public void setProvincia(String provincia) {
-		this.provincia = provincia;
-	}
-	public String getCap() {
-		return cap;
-	}
-	public void setCap(String cap) {
-		this.cap = cap;
-	}
+	
+
 	public String getPass() {
 		return pass;
 	}

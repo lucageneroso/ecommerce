@@ -379,10 +379,10 @@ input[type="file"]{
 			                <td><%= utente.getEmail() %></td>
 			                <td><%= utente.getNome() %></td>
 			                <td><%= utente.getCognome() %></td>
-			                <td><%= utente.getIndirizzo() %></td>
-			                <td><%= utente.getCitta() %></td>
-			                <td><%= utente.getProvincia() %></td>
-			                <td><%= utente.getCap() %></td>
+			                <td><%= utente.getUsername() %></td>
+			                <td><%= utente.getIBAN() %></td>
+			                <td><%= utente.getData() %></td>
+			                <td><%= utente.getIVA() %></td>
 			            </tr>
 			        <% }
 			    }

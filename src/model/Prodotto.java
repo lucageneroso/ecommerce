@@ -9,7 +9,7 @@ public class Prodotto {
 	String Descrizione;
 	double Prezzo;
 	String categoria;
-	private double sconto;
+	 double sconto;
 	
 	byte [] img;
 	ArrayList<immagine> allimg;

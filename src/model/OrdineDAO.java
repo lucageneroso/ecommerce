@@ -101,7 +101,59 @@ public class OrdineDAO {
 
     }
     
+    public List<Ordine> searchByEmail(String email) throws SQLException {
+	    Connection connection = null;
+	    PreparedStatement preparedStatement = null;
 
+	    List<Ordine> ordini = new ArrayList<>();
+	    String selectSQL = "SELECT * FROM ordine WHERE email LIKE ?";
+
+	    try {
+	        connection = ds.getConnection();
+	        preparedStatement = connection.prepareStatement(selectSQL);
+	        
+	        preparedStatement.setString(1, "%" + email + "%");
+
+	        ResultSet rs = preparedStatement.executeQuery();
+
+	        while (rs.next()) {
+	            Ordine ordine = new Ordine();
+	            int numeroOrdine = rs.getInt("numeroOrdine");
+                Date data = rs.getDate("data");
+                double totale = rs.getDouble("totale");
+                String stato = rs.getString("stato");
+                //String indirizzo = rs.getString("indirizzo");
+                //String cap = rs.getString("cap");
+                //String provincia = rs.getString("provincia");
+                //String citta = rs.getString("citta");
+                int numeroProdotti = rs.getInt("numero_prodotti");
+                int IVA = rs.getInt("IVA_cliente");
+
+	            //ordine.setCap(cap);
+                //ordine.setCitta(citta);
+                ordine.setData(data);
+                ordine.setIVA_cliente(IVA);
+                ordine.setNumeroProdotti(numeroProdotti);
+                //ordine.setProvincia(provincia);
+                ordine.setTotale(totale);
+                ordine.setNumeroOrdine(numeroOrdine);
+                ordine.setStato(stato);
+
+	            ordini.add(ordine);
+	        }
+
+	    } finally {
+	        try {
+	            if (preparedStatement != null)
+	                preparedStatement.close();
+	        } finally {
+	            if (connection != null)
+	                connection.close();
+	        }
+	    }
+
+	    return ordini;
+	}
     
     public Ordine getOrdineByNumero(int numeroOrdine) {
         for (Ordine ordine : ordini) {
@@ -197,7 +249,6 @@ public class OrdineDAO {
 	            //ordine.setCap(cap);
                 //ordine.setCitta(citta);
                 ordine.setData(data);
-                ordine.setIndirizzo(indirizzo);
                 ordine.setIVA_cliente(IVA);
                 ordine.setNumeroProdotti(numeroProdotti);
                 //ordine.setProvincia(provincia);

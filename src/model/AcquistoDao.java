@@ -20,7 +20,7 @@ public class AcquistoDao {
 				Context initCtx = new InitialContext();
 				Context envCtx = (Context) initCtx.lookup("java:comp/env");
 
-				ds = (DataSource) envCtx.lookup("jdbc/sito");
+				ds = (DataSource) envCtx.lookup("jdbc/ingrosso");
 
 			} catch (NamingException e) {
 				System.out.println("Error:" + e.getMessage());
@@ -38,7 +38,7 @@ public class AcquistoDao {
 
     	Connection connection = null;
 	    PreparedStatement preparedStatement = null;
-	    String sql1 = "INSERT INTO ordine (dataOrdine, totale, stato, email, indirizzo, citta, provincia, cap)"+
+	    String sql1 = "INSERT INTO Ordine (dataOrdine, totale, stato, email, indirizzo, citta, provincia, cap)"+
 	    		"VALUES (?, ?, 'In Preparazione',?, ?, ?, ?, ?)";
 	    String sql2 = "SELECT MAX(numeroOrdine) AS numeroOrdineMax FROM ordine";
 	    String sql3 = "INSERT INTO composizione(IVA,totale,codP,numeroO)"+
@@ -68,7 +68,6 @@ public class AcquistoDao {
                 }
             for(Prodotto p : cart.getProducts()) {
             	preparedStatement = connection.prepareStatement(sql3);
-            	preparedStatement.setDouble(1,p.getIva());
             	preparedStatement.setDouble(2,p.getPrezzo());
             	preparedStatement.setInt(3,p.getID());
             	preparedStatement.setInt(4,numeroOrdineMax);

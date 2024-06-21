@@ -22,7 +22,7 @@ public class UtenteDao {
 			Context initCtx = new InitialContext();
 			Context envCtx = (Context) initCtx.lookup("java:comp/env");
 
-			ds = (DataSource) envCtx.lookup("jdbc/sito");
+			ds = (DataSource) envCtx.lookup("jdbc/ingrosso");
 
 		} catch (NamingException e) {
 			System.out.println("Error:" + e.getMessage());
@@ -30,7 +30,7 @@ public class UtenteDao {
 	}
 
 
-	private static final String TABLE_NAME = "utente";
+	private static final String TABLE_NAME = "Cliente";
 			
 	public synchronized void doSave(Utente u) throws SQLException {
 
@@ -47,11 +47,10 @@ public class UtenteDao {
 			preparedStatement.setString(2, u.getPass());
 			preparedStatement.setString(3, u.getNome());
 			preparedStatement.setString(4, u.getCognome());
-			preparedStatement.setString(5, u.getIndirizzo());
-			preparedStatement.setString(6, u.getCitta());
-			preparedStatement.setString(7, u.getProvincia());
-			preparedStatement.setString(8, u.getCap());
-			preparedStatement.setInt(9, u.getTipo_account());
+			preparedStatement.setDate(5, u.getData());
+			preparedStatement.setString(6, u.getIBAN());
+			preparedStatement.setString(8, u.getUsername());
+			preparedStatement.setInt(9, u.getIVA());
 
 			preparedStatement.executeUpdate();
 
@@ -112,15 +111,14 @@ public class UtenteDao {
 
 	        if (rs.next()) {
 	            utente = new Utente();
-	            utente.setEmail(rs.getString("email"));
+	            utente.setEmail(rs.getString("Email"));
 	            utente.setNome(rs.getString("nome"));
 	            utente.setCognome(rs.getString("cognome"));
-	            utente.setIndirizzo(rs.getString("indirizzo"));
-	            utente.setCitta(rs.getString("citta"));
-	            utente.setProvincia(rs.getString("provincia"));
-	            utente.setCap(rs.getString("cap"));
-	            utente.setPass(rs.getString("pass"));
-	            utente.setTipo_account(rs.getInt("tipo_account"));
+	            utente.setUsername(rs.getString("username"));
+	            utente.setData(rs.getDate("data_di_nascita"));
+	            utente.setIBAN(rs.getString("Iban"));
+	            utente.setPass(rs.getString("PasswordCliente"));
+	            utente.setIVA(rs.getInt("IVA"));
 	        }
 
 	    } finally {
@@ -136,7 +134,7 @@ public class UtenteDao {
 	    return utente;
 	}
 	
-	public void doUpdate(Utente utente) throws SQLException {
+	public void doUpdate(Utente u) throws SQLException {
 	    Connection connection = null;
 	    PreparedStatement preparedStatement = null;
 
@@ -147,14 +145,14 @@ public class UtenteDao {
 	        
 	        preparedStatement = connection.prepareStatement(query);
 
-	        preparedStatement.setString(1, utente.getNome());
-	        preparedStatement.setString(2, utente.getCognome());
-	        preparedStatement.setString(3, utente.getIndirizzo());
-	        preparedStatement.setString(4, utente.getCitta());
-	        preparedStatement.setString(5, utente.getProvincia());
-	        preparedStatement.setString(6, utente.getCap());
-	        preparedStatement.setString(7, utente.getPass());
-	        preparedStatement.setString(8, utente.getEmail());
+			preparedStatement.setString(1, u.getEmail());
+			preparedStatement.setString(2, u.getPass());
+			preparedStatement.setString(3, u.getNome());
+			preparedStatement.setString(4, u.getCognome());
+			preparedStatement.setDate(5, u.getData());
+			preparedStatement.setString(6, u.getIBAN());
+			preparedStatement.setString(8, u.getUsername());
+			preparedStatement.setInt(9, u.getIVA());
 
 	        preparedStatement.executeUpdate();
 	    } finally {
@@ -182,14 +180,14 @@ public class UtenteDao {
 
             while (rs.next()) {
                 Utente utente = new Utente();
-                utente.setEmail(rs.getString("email"));
-                utente.setNome(rs.getString("nome"));
-                utente.setCognome(rs.getString("cognome"));
-                utente.setIndirizzo(rs.getString("indirizzo"));
-                utente.setCitta(rs.getString("citta"));
-                utente.setProvincia(rs.getString("provincia"));
-                utente.setCap(rs.getString("cap"));
-                utente.setPass(rs.getString("pass"));
+                utente.setEmail(rs.getString("Email"));
+	            utente.setNome(rs.getString("nome"));
+	            utente.setCognome(rs.getString("cognome"));
+	            utente.setUsername(rs.getString("username"));
+	            utente.setData(rs.getDate("data_di_nascita"));
+	            utente.setIBAN(rs.getString("Iban"));
+	            utente.setPass(rs.getString("PasswordCliente"));
+	            utente.setIVA(rs.getInt("IVA"));
 
                 utenti.add(utente);
             }
@@ -224,14 +222,14 @@ public class UtenteDao {
 
 	        while (rs.next()) {
 	            Utente utente = new Utente();
-	            utente.setEmail(rs.getString("email"));
+	            utente.setEmail(rs.getString("Email"));
 	            utente.setNome(rs.getString("nome"));
 	            utente.setCognome(rs.getString("cognome"));
-	            utente.setIndirizzo(rs.getString("indirizzo"));
-	            utente.setCitta(rs.getString("citta"));
-	            utente.setProvincia(rs.getString("provincia"));
-	            utente.setCap(rs.getString("cap"));
-	            utente.setPass(rs.getString("pass"));
+	            utente.setUsername(rs.getString("username"));
+	            utente.setData(rs.getDate("data_di_nascita"));
+	            utente.setIBAN(rs.getString("Iban"));
+	            utente.setPass(rs.getString("PasswordCliente"));
+	            utente.setIVA(rs.getInt("IVA"));
 
 	            utenti.add(utente);
 	        }

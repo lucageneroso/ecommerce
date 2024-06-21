@@ -18,6 +18,7 @@ import model.Utente;
 import model.UtenteDao;
 import model.Ordine;
 import model.OrdineDAO;
+import java.util.Date;
 
 /**
 
@@ -57,24 +58,21 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 	if (action != null) {
 		
 		if (action.equalsIgnoreCase("insert")) {
-			String email = request.getParameter("email");
-			String pass = request.getParameter("pass");
+			String email = request.getParameter("Email");
+			String pass = request.getParameter("PasswordCliente");
 			String nome = request.getParameter("nome");
 			String cognome = request.getParameter("cognome");
-			String citta = request.getParameter("citta");
-			String indirizzo = request.getParameter("indirizzo");
-			String provincia = request.getParameter("provincia");
-			String cap = request.getParameter("cap");
+			String IBAN = request.getParameter("Iban");
+			String username = request.getParameter("username");
 			
-			Utente bean = new Utente();
+			
+            Utente bean = new Utente();
 			bean.setEmail(email);
 			bean.setPass(pass);
-			bean.setCap(cap);
-			bean.setCitta(citta);
+			bean.setIBAN(IBAN);
+			bean.setUsername(username);
 			bean.setCognome(cognome);
 			bean.setNome(nome);
-			bean.setIndirizzo(indirizzo);
-			bean.setProvincia(provincia);
 			model.doSave(bean);
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Home.jsp");
 			dispatcher.forward(request, response);
@@ -111,12 +109,11 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
                 if (utente != null && utente.getPass().equals(pwd)) {
                     HttpSession session = request.getSession();
                     session.setAttribute("email", utente.getEmail());
-                    session.setAttribute("citta", utente.getCitta());
+                    session.setAttribute("username", utente.getUsername());
                     session.setAttribute("cognome", utente.getCognome());
                     session.setAttribute("pass", utente.getPass());
-                    session.setAttribute("indirizzo", utente.getIndirizzo());
-                    session.setAttribute("cap", utente.getCap());
-                    session.setAttribute("provincia", utente.getProvincia());
+                    session.setAttribute("Iva", utente.getIVA());
+                    session.setAttribute("IBAN", utente.getIBAN());
                     session.setAttribute("nome", utente.getNome()); 
                     session.setAttribute("tipo_account", utente.getTipo_account());
                     if(utente.getTipo_account()==0) {
@@ -161,20 +158,15 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             String email = request.getParameter("email");
             String nome = request.getParameter("nome");
             String cognome = request.getParameter("cognome");
-            String indirizzo = request.getParameter("indirizzo");
-            String citta = request.getParameter("citta");
-            String provincia = request.getParameter("provincia");
-            String cap = request.getParameter("cap");
+            String username = request.getParameter("username");
+            String IBAN = request.getParameter("IBAN");
             String pass = request.getParameter("pass");
             
             Utente utente = new Utente();
             utente.setEmail(email);
             utente.setNome(nome);
             utente.setCognome(cognome);
-            utente.setIndirizzo(indirizzo);
-            utente.setCitta(citta);
-            utente.setProvincia(provincia);
-            utente.setCap(cap);
+            utente.setIVA(0);
             utente.setPass(pass);
             
             OrdineDAO ordine = new OrdineDAO();
@@ -182,12 +174,13 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             utenteDao.doUpdate(utente);
             ArrayList<Ordine> ordini= (ArrayList<Ordine>) ordine.searchByEmail(email);
             HttpSession session = request.getSession();
-            session.setAttribute("nome", nome);
-            session.setAttribute("cognome", cognome);
-            session.setAttribute("indirizzo", indirizzo);
-            session.setAttribute("citta", citta);
-            session.setAttribute("provincia", provincia);
-            session.setAttribute("cap", cap);
+            session.setAttribute("email", utente.getEmail());
+            session.setAttribute("username", utente.getUsername());
+            session.setAttribute("cognome", utente.getCognome());
+            session.setAttribute("pass", utente.getPass());
+            session.setAttribute("Iva", utente.getIVA());
+            session.setAttribute("IBAN", utente.getIBAN());
+            session.setAttribute("nome", utente.getNome()); 
             request.setAttribute("ordini", ordini);
             
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Profilo.jsp");
