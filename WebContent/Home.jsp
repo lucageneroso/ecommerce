@@ -20,7 +20,7 @@ Collection<?> products = (Collection<?>) request.getAttribute("products");
 	  <a href="Home.jsp" class="image"><img src="images/loghi.png" id="image" alt="#"></a>
 	  
 	 
-	 <div class="navbar"> 
+	 <div class="navbar">  
 	      <nav>
 	      <ul class="nav-list">
                <li><a  href="index.jsp">Home</a></li>
