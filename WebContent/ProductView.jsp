@@ -372,12 +372,12 @@
                     <% }
                     Prodotto bean = (Prodotto) it.next();
                     byte[] imageB = bean.getImg();
-                    String base64img = Base64.getEncoder().encodeToString(imageB);
+                    String base64img = Base64.getEncoder().encodeToString(imageB); 
                     %>
                     <div class="product">
                     <div class="det">
     <a href="product?action=read&id=<%=bean.getID()%>">
-        <img src="data:image/jpg;base64, <%=base64img%>" width="300" height="300" alt="#">
+    <img src="data:image/jpg;base64, <%=base64img%>" width="300" height="300" alt="#">
         <p align="center"><%=bean.getNome()%></p>
         </div>
         <p align="center"><%=bean.getPrezzo()%>€</p>

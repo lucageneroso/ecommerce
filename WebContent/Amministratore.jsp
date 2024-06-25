@@ -216,8 +216,9 @@ input[type="file"]{
 	color:transparent;
 }	
 
-.user-table{
+table{
 	margin:auto !important;
+	margin-top:20px !important;
 	margin-top:5px;
 }
 
