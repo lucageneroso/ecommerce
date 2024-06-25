@@ -11,10 +11,11 @@ img{height: auto;}
 
 
 .header{
+  border:2px solid ;
   background-color:	#C0C0C0	;
   margin:0;
   align-items:center;
-  border-bottom:2px solid black;
+ 
   padding: 5px 10;
   width: 100%;
   display:flex;
@@ -25,10 +26,14 @@ img{height: auto;}
   }
   
  .image{
-  
-    margin: 0;
-    height: 100px; /* Imposta un'altezza appropriata */
-    margin-right: 20px;
+  background-image: url(loghi.png) no-repeat center center;
+    background-size: cover;
+    color: #fff;
+    
+    display: block;
+    padding: 25px;
+    margin-left: 2%;
+   
     
 
  }

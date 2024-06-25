@@ -17,7 +17,7 @@ Collection<?> products = (Collection<?>) request.getAttribute("products");
 </head>
 <body>
 	<div class="header">  
-	  <a href="Home.jsp" class="image"><img src="images/loghi.png" id="image" alt="#"></a>
+	  <a href="Home.jsp" class="image"></a>
 	  
 	 
 	 <div class="navbar">  
@@ -28,10 +28,10 @@ Collection<?> products = (Collection<?>) request.getAttribute("products");
                <li class="dropdown">
                 <a href="products.jsp" class="dropbtn">Prodotti</a>
                 <div class="dropdown-content">
-                    <a href="product?action=viewCategory&category=Cucina">Cucina</a>
-                    <a href="product?action=viewCategory&category=Uomo">Bagno</a>
-                    <a href="product?action=viewCategory&category=Accessori">Soggiorno</a>
-                    <a href="product?action=viewCategory&category=Tutti">Tutti i prodotti</a>
+                    <a href="product.jsp?categoria=Cucina">Cucina</a>
+                    <a href="product.jsp?categoria=Bagno">Bagno</a>
+                    <a href="product.jsp?categoria=Soggiorno">Soggiorno</a>
+                    <a href="product.jsp?categoria=Tuttiprodotti">Tutti i prodotti</a>
                 </div>
                         </li>
                        </ul>
@@ -45,15 +45,14 @@ Collection<?> products = (Collection<?>) request.getAttribute("products");
 	
 
     <% if (session.getAttribute("email") == null) { %>
-        <a href="#0" id="cercap"><img src="cerca.png" alt="#"></a>
+       
         		<div class="cerca-form">
 				<form action="product" method="GET">
 				    <input type="text" name="nome" id="searchInput" placeholder="Cerca prodotto">
 				    <button type="submit" onclick="submitSearch(event)">Cerca</button>
 				</form>
 				</div>
-        <a href="Accedi.jsp"><img src="utente.png" alt="#"></a>
-        <a href="product?action=viewC"><img src="cart.png" alt="#"></a>
+       
     <% } else { %>
                 <a href="#0" id="cercap"><img src="cerca.png" alt="#"></a>
         		<div class="cerca-form">
@@ -62,18 +61,12 @@ Collection<?> products = (Collection<?>) request.getAttribute("products");
 				    <button type="submit" onclick="submitSearch(event)">Cerca</button>
 				</form>
 				</div>
-        <a href="ordine?action=ViewOrdini&email=<%=session.getAttribute("email") %>"><img src="utente.png" alt="#"></a>
-        <a href="registration?action=logout"><img src="logout.png" alt="#"></a>
-        <a href="product?action=viewC"><img src="cart.png" alt="#"></a>
+       
+        
     <% } %>
 	</div>
 	
-	 <div class="carrello">
-	 
-	    <a href="/carrello.jsp" ><img src="images/carrello.png" alt="Carrello" class="carrello" >
-    </a>
-	 
-	 </div>
+
 	
 	 <div class="login">
 	     <a class="login-button" href="pagina_accesso.jsp" >login</a>

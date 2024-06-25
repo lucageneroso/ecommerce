@@ -344,7 +344,7 @@ input[type="file"]{
         if (count % 4 != 0) { %>
             <% for (int i = 0; i < 8 - (count % 8); i++) { %>
             <% } %>
-        </tr>
+      
         <% }
     } else { %>
         <tr>
