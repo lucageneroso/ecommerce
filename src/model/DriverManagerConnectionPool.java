@@ -19,7 +19,7 @@ public class DriverManagerConnectionPool  {
 		} 
 	}
 	
-	private static synchronized Connection createDBConnection() throws SQLException {
+	private static synchronized Connection createDBConnection() throws SQLException { 
 		Connection newConnection = null;
 		String ip = "localhost";
 		String port = "3306";
@@ -29,7 +29,7 @@ public class DriverManagerConnectionPool  {
 
 		newConnection = DriverManager.getConnection("jdbc:mysql://"+ ip+":"+ port+"/"+db+"?useUnicode=true&useSSL=false&requireSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", username, password);
 
-		newConnection.setAutoCommit(false);
+		newConnection.setAutoCommit(false); 
 		return newConnection;
 	}
 

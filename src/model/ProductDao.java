@@ -265,6 +265,7 @@ public class ProductDao {
 				bean.setPrezzo(rs.getDouble("Prezzo"));
 				bean.setQuantita(rs.getInt("Quantita"));
 				bean.setCategoria(rs.getString("Categoria"));
+				bean.setImg(rs.getBytes("Foto"));
 				bean.setSconto(rs.getDouble("Sconto"));	
 	            
 	            products.add(bean);
@@ -337,6 +338,7 @@ public class ProductDao {
 				bean.setPrezzo(rs.getDouble("Prezzo"));
 				bean.setQuantita(rs.getInt("Quantita"));
 				bean.setCategoria(rs.getString("Categoria"));
+				bean.setImg(rs.getBytes("Foto"));
 				bean.setSconto(rs.getDouble("Sconto"));
 	            
 	           
@@ -379,6 +381,7 @@ public class ProductDao {
 				bean.setPrezzo(rs.getDouble("Prezzo"));
 				bean.setQuantita(rs.getInt("Quantita"));
 				bean.setCategoria(rs.getString("Categoria"));
+				bean.setImg(rs.getBytes("Foto"));
 				bean.setSconto(rs.getDouble("Sconto"));
 	            
 	           

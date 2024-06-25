@@ -3,6 +3,7 @@ package model;
 public class immagine {
 	int id;
 	byte [] img;
+	
 	public int getId() {
 		return id;
 	}
@@ -15,6 +16,4 @@ public class immagine {
 	public void setImg(byte[] img) {
 		this.img = img;
 	}
-	
-
 }
