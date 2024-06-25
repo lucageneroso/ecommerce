@@ -8,7 +8,6 @@ CREATE TABLE IF NOT EXISTS Cliente (
     IVA INT PRIMARY KEY NOT NULL,
     nome VARCHAR(255) NOT NULL,
     cognome VARCHAR(255) NOT NULL,
-    username VARCHAR(50) NOT NULL UNIQUE,
     data_di_nascita DATE NOT NULL,
     Email VARCHAR(255) NOT NULL UNIQUE,
     PasswordCliente VARCHAR(255) NOT NULL,
@@ -17,11 +16,11 @@ CREATE TABLE IF NOT EXISTS Cliente (
     
 );
 
-INSERT INTO Cliente(IVA, nome, cognome, username, data_di_nascita, Email, PasswordCliente, Iban,Tipo_account)
-VALUES (1234567890, 'Giacomo', 'Rossi', 'Giak', '1990-04-30', 'giacomorossi@gmail.com', '12345', 'IT00001',0);
+INSERT INTO Cliente(IVA, nome, cognome, data_di_nascita, Email, PasswordCliente, Iban,Tipo_account)
+VALUES (1234567890, 'Giacomo', 'Rossi', '1990-04-30', 'giacomorossi@gmail.com', '12345', 'IT00001',0);
 
-INSERT INTO Cliente(IVA, nome, cognome, username, data_di_nascita, Email, PasswordCliente, Iban,Tipo_account)
-VALUES (12345, 'admin', 'admin', 'admin', '2003-10-18', 'admin@gmail.com', 'admin', 'IT00002',1);
+INSERT INTO Cliente(IVA, nome, cognome, data_di_nascita, Email, PasswordCliente, Iban,Tipo_account)
+VALUES (12345, 'admin', 'admin', '2003-10-18', 'admin@gmail.com', 'admin', 'IT00002',1);
 
 DROP TABLE IF EXISTS Ordine;
 CREATE TABLE IF NOT EXISTS Ordine (
@@ -62,7 +61,7 @@ CREATE TABLE IF NOT EXISTS Prodotto (
 );
 
 INSERT INTO Prodotto(idProdotto, Quantita, Fornitore_IVA, Prezzo, Nome, Descrizione, Categoria, Situato_in, Sconto, Foto)
-VALUES (1, 100, 13579, 9.90, 'Rotolone', 'Rotolone comodo per pulire', 'Cucina', 'Via Spennata', 0, LOAD_FILE('/WebContent/images/rotolone.png'));
+VALUES (1, 100, 13579, 9.90, 'Rotolone', 'Rotolone comodo per pulire', 'Cucina', 'Via Spennata', 0, LOAD_FILE('C:\Users\rical\OneDrive\Desktop\rotolone.jpg'));
 
 DROP TABLE IF EXISTS Acquista;
 CREATE TABLE IF NOT EXISTS Acquista (
