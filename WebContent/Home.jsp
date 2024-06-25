@@ -22,7 +22,7 @@ Collection<?> products = (Collection<?>) request.getAttribute("products");
 	 
 	 <div class="navbar">  
 	      <nav>
-	      <ul class="nav-list">
+	      <ul class="nav-list"> 
                <li><a  href="index.jsp">Home</a></li>
                <li><a  href="chi-siamo.jsp">Chi Siamo</a></li>
                <li class="dropdown">
