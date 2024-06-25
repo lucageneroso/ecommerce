@@ -143,7 +143,7 @@
                     <% } else if (cart != null && !cart.presente(product.getID())) { %>
                     <a href="product?action=addC&id=<%=product.getID()%>" class="custom-btn">Aggiungi al carrello<i class="fas fa-angle-right"></i></a>
                     <% } else { %>
-                    <p>Prodotto già nel carrello</p>
+                    <p>Prodotto già nel carrellof</p>
                     <% } %>
                     </div>
                 </div>
