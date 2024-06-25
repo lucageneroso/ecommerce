@@ -31,7 +31,7 @@ public class AggiuntaProdottoDatabase {
             fis = new FileInputStream(imageFile);
             statement.setBinaryStream(8, fis, (int) imageFile.length());
             statement.executeUpdate();
-            fis.close();
+            fis.close(); 
             
             
             
