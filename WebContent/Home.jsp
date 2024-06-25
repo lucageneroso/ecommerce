@@ -16,7 +16,7 @@ Collection<?> products = (Collection<?>) request.getAttribute("products");
 
 </head>
 <body>
-	<div class="header"> 
+	<div class="header">  
 	  <a href="Home.jsp" class="image"><img src="images/loghi.png" id="image" alt="#"></a>
 	  
 	 
