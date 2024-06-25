@@ -636,7 +636,7 @@ function aggiungiProdotto() {
         </td>
     `;
 
-    var table = document.getElementById("productTable");
+    var table = document.getElementById("productTable"); 
     table.appendChild(newRow);
 }
 
