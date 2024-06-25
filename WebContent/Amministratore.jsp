@@ -105,7 +105,11 @@ td a:hover {
     /* Order Form */
     .order-form {
          display: none;
+         /*
          margin-left:10vw;
+         margin-top: -70px;
+         margin-bottom: 20vw;
+         */
          margin-top: -70px;
          margin-bottom: 20vw;
          text-align:center;
@@ -211,6 +215,12 @@ input[type="text"], input[type="file"]{
 input[type="file"]{
 	color:transparent;
 }	
+
+.user-table{
+	margin:auto !important;
+	margin-top:5px;
+}
+
 </style>
 <link href="styleAreautente.css" rel="stylesheet" type="text/css">
 </head>
@@ -268,7 +278,6 @@ input[type="file"]{
         <th>Prezzo</th>
         <th>Disponibilità</th>
         <th>Foto</th>
-        <th>Sesso</th>
         <th>Azioni</th>
     </tr>
     <% 
@@ -298,11 +307,14 @@ input[type="file"]{
                     <input type="submit" value="Salva" style="display: none;" id="salvaButton<%= bean.getID() %>">
                 </form>
             </td>
+            <td><%= bean.getQuantita() %></td>
+            <!-- 
             <td>
                 <%if(bean.getQuantita()==0){ %><p>SI</p>
                 <%}else{ %> <p>NO</p>
                 <%} %>
             </td>
+             -->
             <% if (base64img != null) { %>
                 <td><img src="data:image/jpg;base64, <%= base64img %>" width="100" height="100" alt="#"></td>
             <% } %>
@@ -367,10 +379,9 @@ input[type="file"]{
 			        <th>Email</th>
 			        <th>Nome</th>
 			        <th>Cognome</th>
-			        <th>Indirizzo</th>
-			        <th>Città</th>
-			        <th>Provincia</th>
-			        <th>CAP</th>
+			        <th>Data di Nascita</th>
+			        <th>Iban</th>
+			        <th>IVA</th>
 			    </tr>
 			    <% 
 			    if (utenti != null && !utenti.isEmpty()) {
@@ -379,9 +390,8 @@ input[type="file"]{
 			                <td><%= utente.getEmail() %></td>
 			                <td><%= utente.getNome() %></td>
 			                <td><%= utente.getCognome() %></td>
-			                <td><%= utente.getUsername() %></td>
-			                <td><%= utente.getIBAN() %></td>
 			                <td><%= utente.getData() %></td>
+			                <td><%= utente.getIBAN() %></td>
 			                <td><%= utente.getIVA() %></td>
 			            </tr>
 			        <% }
@@ -618,7 +628,7 @@ function aggiungiProdotto() {
         <td><input type="text" name="nuovoProdottoPrezzo" placeholder="Prezzo"></td>
         <td><input type="text" name="nuovoProdottoDisponibilita" placeholder="Disponibilità"></td>
         <td><input type="file" name="nuovoProdottoFoto" accept="image/*" ></td>
-        <td><input type="text" name="nuovoProdottoSesso" placeholder="Sesso"></td>
+        <td><input type="text" name="nuovoProdottoSesso" placeholder="Quantità"></td>
         <td>
         <form action="product" method="post" enctype="multipart/form-data">
         <input type="submit" onclick="salvaNuovoProdotto()" value="Salva" id="salva">
