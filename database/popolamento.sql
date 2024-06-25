@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS Prodotto (
     Categoria VARCHAR(255),
     Situato_in VARCHAR(50) NOT NULL,
     Sconto DECIMAL(10, 2),
-    Foto BLOB,
+    Foto MEDIUMBLOB,
     FOREIGN KEY (Fornitore_IVA) REFERENCES Fornitore(IVA)
 );
 

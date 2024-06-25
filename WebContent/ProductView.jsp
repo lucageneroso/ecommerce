@@ -372,12 +372,12 @@
                     <% }
                     Prodotto bean = (Prodotto) it.next();
                     byte[] imageB = bean.getImg();
-                    String base64img = Base64.getEncoder().encodeToString(imageB);
+                    String base64img = Base64.getEncoder().encodeToString(imageB); 
                     %>
                     <div class="product">
                     <div class="det">
     <a href="product?action=read&id=<%=bean.getID()%>">
-        <img src="data:image/jpg;base64, <%=base64img%>" width="300" height="300" alt="#">
+    <img src="data:image/jpg;base64, <%=base64img%>" width="300" height="300" alt="#">
         <p align="center"><%=bean.getNome()%></p>
         </div>
         <p align="center"><%=bean.getPrezzo()%>€</p>
@@ -403,7 +403,7 @@ if (count % 4 != 0) { %>
     </div>
 <% }
 } else { %>
-    <p>Non ci sono prodotti disponibili</p>
+    <p>Non ci sono prodotti disponibili</p>    
 <% } %>
     </div>
   </div>
@@ -412,7 +412,7 @@ if (count % 4 != 0) { %>
 	    event.preventDefault(); // Previene il comportamento predefinito del form
 
 	    var searchInput = document.getElementById("searchInput");
-	    var nome = searchInput.value.trim();
+	    var nome = searchInput.value.trim();  
 
 	    if (nome !== "") {
 	        // Esegue la richiesta AJAX per la ricerca del prodotto
