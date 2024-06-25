@@ -332,7 +332,7 @@
 	</div>
 <nav>
   <div class="dropdown">
-    <a href="product?action=dettaglio&sesso=M" class="dropbtn">Uomo</a>
+    <a href="product?action=dettaglio&sesso=M" class="dropbtn">Uomog</a>
     <div class="dropdown-content">
       <a href="product?action=dettaglio&categoria=giacche&sesso=M">Giacche</a>
       <a href="product?action=dettaglio&categoria=felpe&sesso=M">Felpe</a>

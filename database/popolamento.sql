@@ -34,30 +34,16 @@ CREATE TABLE IF NOT EXISTS Ordine (
     FOREIGN KEY (IVA_cliente) REFERENCES Cliente(IVA)
 );
 
-DROP TABLE IF EXISTS Fornitore;
-CREATE TABLE IF NOT EXISTS Fornitore (
-    IVA INT PRIMARY KEY,
-    nome VARCHAR(255) NOT NULL,
-    cognome VARCHAR(255) NOT NULL,
-    Email VARCHAR(255) NOT NULL
-);
-
-INSERT INTO Fornitore(IVA, nome, cognome, Email)
-VALUES (13579, 'Luca', 'Grazioso', 'lucagrazioso@gmail.com');
-
 DROP TABLE IF EXISTS Prodotto;
 CREATE TABLE IF NOT EXISTS Prodotto (
     idProdotto INT PRIMARY KEY,
     Quantita INT NOT NULL,
-    Fornitore_IVA INT NOT NULL,
     Prezzo DECIMAL(10, 2) NOT NULL,
     Nome VARCHAR(255) NOT NULL,
     Descrizione VARCHAR(255),
     Categoria VARCHAR(255),
-    Situato_in VARCHAR(50) NOT NULL,
     Sconto DECIMAL(10, 2),
-    Foto mediumblob,
-    FOREIGN KEY (Fornitore_IVA) REFERENCES Fornitore(IVA)
+    Foto mediumblob
 );
 
 
