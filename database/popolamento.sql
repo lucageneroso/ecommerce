@@ -56,12 +56,10 @@ CREATE TABLE IF NOT EXISTS Prodotto (
     Categoria VARCHAR(255),
     Situato_in VARCHAR(50) NOT NULL,
     Sconto DECIMAL(10, 2),
-    Foto MEDIUMBLOB,
+    Foto mediumblob,
     FOREIGN KEY (Fornitore_IVA) REFERENCES Fornitore(IVA)
 );
 
-INSERT INTO Prodotto(idProdotto, Quantita, Fornitore_IVA, Prezzo, Nome, Descrizione, Categoria, Situato_in, Sconto, Foto)
-VALUES (1, 100, 13579, 9.90, 'Rotolone', 'Rotolone comodo per pulire', 'Cucina', 'Via Spennata', 0, LOAD_FILE('C:\Users\rical\OneDrive\Desktop\rotolone.jpg'));
 
 DROP TABLE IF EXISTS Acquista;
 CREATE TABLE IF NOT EXISTS Acquista (
@@ -84,6 +82,7 @@ CREATE TABLE Recensione (
     FOREIGN KEY (idProdotto) REFERENCES Prodotto(idProdotto),
     FOREIGN KEY (emailCliente) REFERENCES Cliente(Email)
 );
+
 
 /*
 DROP TABLE IF EXISTS Magazzino;
@@ -119,3 +118,4 @@ CREATE TABLE IF NOT EXISTS Applicato (
     FOREIGN KEY (CodiceProdotto) REFERENCES Prodotto(Codice)
 );
 */
+;

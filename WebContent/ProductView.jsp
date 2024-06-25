@@ -372,6 +372,7 @@
                     <% }
                     Prodotto bean = (Prodotto) it.next();
                     byte[] imageB = bean.getImg();
+                    System.out.print(imageB);
                     String base64img = Base64.getEncoder().encodeToString(imageB); 
                     %>
                     <div class="product">
