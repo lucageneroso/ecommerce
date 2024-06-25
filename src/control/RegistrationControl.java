@@ -51,6 +51,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 
 @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 */
+/*
 protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	String action = request.getParameter("action");
 	try {
@@ -196,4 +197,135 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 	dispatcher.forward(request, response);
 }
 	
-}}
+}
+*/
+
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    String action = request.getParameter("action");
+    
+    try {
+        if (action != null) {
+            
+            if (action.equalsIgnoreCase("insert")) {
+                String email = request.getParameter("Email");
+                String pass = request.getParameter("PasswordCliente");
+                String nome = request.getParameter("nome");
+                String cognome = request.getParameter("cognome");
+                String IBAN = request.getParameter("Iban");
+                
+                Utente bean = new Utente();
+                bean.setEmail(email);
+                bean.setPass(pass);
+                bean.setIBAN(IBAN);
+                bean.setCognome(cognome);
+                bean.setNome(nome);
+                
+                model.doSave(bean);
+                
+                HttpSession session = request.getSession();
+                session.setAttribute("email", bean.getEmail());
+                session.setAttribute("cognome", bean.getCognome());
+                session.setAttribute("nome", bean.getNome());
+                session.setAttribute("pass", bean.getPass());
+                
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Home.jsp");
+                dispatcher.forward(request, response);
+            }
+            
+            if (action.equalsIgnoreCase("login")) {
+                String email = request.getParameter("email");
+                String pwd = request.getParameter("pass");
+                
+                try {
+                    UtenteDao dao = new UtenteDao();
+                    Utente utente = dao.doRetrieveByEmail(email);
+                    
+                    System.out.println(utente);
+                    
+                    if (utente != null && utente.getPass().equals(pwd)) {
+                        HttpSession session = request.getSession();
+                        session.setAttribute("email", utente.getEmail());
+                        session.setAttribute("cognome", utente.getCognome());
+                        session.setAttribute("nome", utente.getNome());
+                        session.setAttribute("pass", utente.getPass());
+                        session.setAttribute("IVA", utente.getIVA());
+                        session.setAttribute("IBAN", utente.getIBAN());
+                        session.setAttribute("tipo_account", utente.getTipo_account());
+                        
+                        if (utente.getTipo_account() == 0) {
+                            response.sendRedirect(request.getContextPath() + "/Home.jsp");
+                        } else if (utente.getTipo_account() == 1) {
+                            response.sendRedirect(request.getContextPath() + "/Amministratore.jsp");
+                        }
+                    } else {
+                        request.setAttribute("errore", "Email o password non validi");
+                        request.getRequestDispatcher("/Accedi.jsp").forward(request, response);
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    request.setAttribute("errore", "Errore del database: " + e.getMessage());
+                    request.getRequestDispatcher("/Accedi.jsp").forward(request, response);
+                }
+            }
+            
+            if (action.equalsIgnoreCase("searchByEmail")) {
+                try {
+                    String email = request.getParameter("email");
+                    
+                    UtenteDao dao = new UtenteDao();
+                    List<Utente> utenti = dao.searchByEmail(email);
+                    
+                    Gson gson = new Gson();
+                    String json = gson.toJson(utenti);
+                    
+                    response.setContentType("application/json");
+                    response.setCharacterEncoding("UTF-8");
+                    response.getWriter().write(json);
+                    
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    request.setAttribute("errore", "Errore del database: " + e.getMessage());
+                }
+            }
+            
+            if (action.equalsIgnoreCase("modifica")) {
+            	String email = request.getParameter("email");
+                String nome = request.getParameter("nome");
+                String cognome = request.getParameter("cognome");
+                String IBAN = request.getParameter("IBAN");
+                String pass = request.getParameter("pass");
+                
+                Utente utente = new Utente();
+                utente.setEmail(email);
+                utente.setNome(nome);
+                utente.setCognome(cognome);
+                utente.setIVA(0);
+                utente.setPass(pass);
+                
+                OrdineDAO ordine = new OrdineDAO();
+                UtenteDao utenteDao = new UtenteDao();
+                utenteDao.doUpdate(utente);
+                ArrayList<Ordine> ordini= (ArrayList<Ordine>) ordine.searchByEmail(email);
+                HttpSession session = request.getSession();
+                session.setAttribute("email", utente.getEmail());
+                session.setAttribute("cognome", utente.getCognome());
+                session.setAttribute("pass", utente.getPass());
+                session.setAttribute("Iva", utente.getIVA());
+                session.setAttribute("IBAN", utente.getIBAN());
+                session.setAttribute("nome", utente.getNome()); 
+                request.setAttribute("ordini", ordini);
+                
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Profilo.jsp");
+                dispatcher.forward(request, response);
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+        request.setAttribute("errore2", "Mail già usata");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Accedi.jsp");
+        dispatcher.forward(request, response);
+    }
+}
+
+}
+

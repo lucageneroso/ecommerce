@@ -9,10 +9,10 @@ Collection<?> products = (Collection<?>) request.getAttribute("products");
 <!DOCTYPE html>
 <html lang="it">
 <head>
-	<title>Homepage</title>
+	<title>Homepage</title>  
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	 <link rel="stylesheet" href="css/home2.css">
+	 <link rel="stylesheet" href="css/home2.css"> 
 
 </head>
 <body>
@@ -20,9 +20,9 @@ Collection<?> products = (Collection<?>) request.getAttribute("products");
 	  <a href="Home.jsp" class="image"><img src="images/loghi.png" id="image" alt="#"></a>
 	  
 	 
-	 <div class="navbar"> 
+	 <div class="navbar">  
 	      <nav>
-	      <ul class="nav-list">
+	      <ul class="nav-list"> 
                <li><a  href="index.jsp">Home</a></li>
                <li><a  href="chi-siamo.jsp">Chi Siamo</a></li>
                <li class="dropdown">

@@ -49,7 +49,7 @@ public class UtenteDao {
 			preparedStatement.setString(4, u.getCognome());
 			preparedStatement.setDate(5, u.getData());
 			preparedStatement.setString(6, u.getIBAN());
-			preparedStatement.setString(8, u.getUsername());
+			//preparedStatement.setString(8, u.getUsername());
 			preparedStatement.setInt(9, u.getIVA());
 
 			preparedStatement.executeUpdate();
@@ -100,26 +100,35 @@ public class UtenteDao {
 	    PreparedStatement preparedStatement = null;
 
 	    Utente utente = null;
-	    String selectSQL = "SELECT * FROM " + TABLE_NAME + " WHERE email = ?";
+	    String selectSQL = "SELECT * FROM " + TABLE_NAME + " WHERE Email = ?";
 
 	    try {
 	        connection = ds.getConnection();
 	        preparedStatement = connection.prepareStatement(selectSQL);
 	        preparedStatement.setString(1, email);
+	        System.out.print(preparedStatement);
 
 	        ResultSet rs = preparedStatement.executeQuery();
-
+	        
 	        if (rs.next()) {
 	            utente = new Utente();
-	            utente.setEmail(rs.getString("Email"));
+	            utente.setEmail(rs.getString("email"));
+	            System.out.print(rs.getString("email"));
 	            utente.setNome(rs.getString("nome"));
+	            System.out.print(rs.getString("nome"));
 	            utente.setCognome(rs.getString("cognome"));
-	            utente.setUsername(rs.getString("username"));
+	            System.out.print(rs.getString("cognome"));
+	            //utente.setUsername(rs.getString("username"));
 	            utente.setData(rs.getDate("data_di_nascita"));
+	            System.out.print(rs.getString("data_di_nascita"));
 	            utente.setIBAN(rs.getString("Iban"));
+	            System.out.print(rs.getString("Iban"));
 	            utente.setPass(rs.getString("PasswordCliente"));
+	            System.out.print(rs.getString("PasswordCliente"));
 	            utente.setIVA(rs.getInt("IVA"));
+	            System.out.print(rs.getString("IVA"));
 	            utente.setTipo_account(rs.getInt("Tipo_account"));
+	            System.out.print(rs.getString("Tipo_account"));
 	        }
 
 	    } finally {
@@ -152,7 +161,7 @@ public class UtenteDao {
 			preparedStatement.setString(4, u.getCognome());
 			preparedStatement.setDate(5, u.getData());
 			preparedStatement.setString(6, u.getIBAN());
-			preparedStatement.setString(8, u.getUsername());
+			//preparedStatement.setString(8, u.getUsername());
 			preparedStatement.setInt(9, u.getIVA());
 
 	        preparedStatement.executeUpdate();
@@ -184,7 +193,7 @@ public class UtenteDao {
                 utente.setEmail(rs.getString("Email"));
 	            utente.setNome(rs.getString("nome"));
 	            utente.setCognome(rs.getString("cognome"));
-	            utente.setUsername(rs.getString("username"));
+	            //utente.setUsername(rs.getString("username"));
 	            utente.setData(rs.getDate("data_di_nascita"));
 	            utente.setIBAN(rs.getString("Iban"));
 	            utente.setPass(rs.getString("PasswordCliente"));
@@ -226,7 +235,7 @@ public class UtenteDao {
 	            utente.setEmail(rs.getString("Email"));
 	            utente.setNome(rs.getString("nome"));
 	            utente.setCognome(rs.getString("cognome"));
-	            utente.setUsername(rs.getString("username"));
+	            //utente.setUsername(rs.getString("username"));
 	            utente.setData(rs.getDate("data_di_nascita"));
 	            utente.setIBAN(rs.getString("Iban"));
 	            utente.setPass(rs.getString("PasswordCliente"));

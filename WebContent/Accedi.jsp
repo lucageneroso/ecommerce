@@ -132,7 +132,7 @@ String mess3 = (String) request.getAttribute("errore3");
 		<form action="registration" method="post">
 		<input type="hidden" name="action" value="login">
 			<h1>Accedi</h1>
-			<input type="email" name="username" required placeholder="Username">
+			<input type="email" name="email" required placeholder="Email">
 			<input type="password" name="pass" required placeholder="Password">
 			<%
 	if (mess != null) { %>
