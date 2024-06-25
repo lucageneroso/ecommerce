@@ -412,7 +412,7 @@ if (count % 4 != 0) { %>
 	    event.preventDefault(); // Previene il comportamento predefinito del form
 
 	    var searchInput = document.getElementById("searchInput");
-	    var nome = searchInput.value.trim();
+	    var nome = searchInput.value.trim(); 
 
 	    if (nome !== "") {
 	        // Esegue la richiesta AJAX per la ricerca del prodotto
