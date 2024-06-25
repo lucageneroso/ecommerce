@@ -403,7 +403,7 @@ if (count % 4 != 0) { %>
     </div>
 <% }
 } else { %>
-    <p>Non ci sono prodotti disponibili</p>  
+    <p>Non ci sono prodotti disponibili</p>    
 <% } %>
     </div>
   </div>
