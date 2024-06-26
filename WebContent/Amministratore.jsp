@@ -14,7 +14,7 @@
     UtenteDao utenteDao = new UtenteDao();
     List<Utente> utenti = utenteDao.doRetrieveAll();
     request.setAttribute("utenti", utenti);
-    if((int) session.getAttribute("tipo_account")== 1){
+    if((int) session.getAttribute("Tipo_account")== 1){
 %>
 
 <!DOCTYPE html>
@@ -247,7 +247,7 @@ table{
         <p><strong>Cognome:</strong> <%= session.getAttribute("cognome") %></p>
         <p><strong>Email:</strong> <%= session.getAttribute("Email") %></p>
         <p><strong>IBAN:</strong> <%= session.getAttribute("Iban") %></p>
-<!--  <p><strong>Tipo Account:</strong> <//%= session.getAttribute("Tipo_account").equals(0) ? "Standard" : "Amministratore" %></p> -->
+        <p><strong>Tipo Account:</strong> <%= session.getAttribute("Tipo_account").equals(0) ? "Standard" : "Amministratore" %></p> 
     </div>
 
 <div class="s-layout">

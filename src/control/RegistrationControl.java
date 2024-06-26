@@ -112,7 +112,7 @@ public class RegistrationControl extends HttpServlet {
                             session.setAttribute("PasswordCliente", utente.getPass());
                             
                             session.setAttribute("Iban", utente.getIBAN());
-                            //session.setAttribute("Tipo_account", utente.getTipo_account());
+                            session.setAttribute("Tipo_account", utente.getTipo_account());
                            
                             session.setAttribute("data_di_nascita", utente.getData());
                             
