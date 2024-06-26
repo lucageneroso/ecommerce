@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS Acquista (
 );
 
 DROP TABLE IF EXISTS Recensione;
-CREATE TABLE Recensione (
+CREATE TABLE Recensione ( 
     idRecensione INT NOT NULL AUTO_INCREMENT,
     idProdotto INT NOT NULL,
     emailCliente VARCHAR(50) NOT NULL,
