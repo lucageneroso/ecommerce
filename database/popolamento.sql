@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS Acquista (
     FOREIGN KEY (Codice_prodotto) REFERENCES Prodotto(idProdotto)
 );
 
-DROP TABLE IF EXISTS Recensione;
+DROP TABLE IF EXISTS Recensione; 
 CREATE TABLE Recensione ( 
     idRecensione INT NOT NULL AUTO_INCREMENT,
     idProdotto INT NOT NULL,
