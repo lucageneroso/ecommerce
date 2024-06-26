@@ -262,7 +262,7 @@ table{
                     <a class="s-sidebar__nav-link" href="#0" id="catalogoLink">
                         <i class="fa fa-home"></i><em>Prodotti</em>
                     </a>
-                </li>
+                </li> 
                 <li>
                     <a class="s-sidebar__nav-link" href="#0" id="utentiLink">
                         <i class="fa fa-user"></i><em>Utenti</em>
