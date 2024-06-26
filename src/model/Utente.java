@@ -6,7 +6,6 @@ public class Utente {
 	String email;
 	String nome;
 	String cognome;
-	String username;
 	String IBAN;
 	Date dataNascita;
 	String pass;
@@ -51,12 +50,7 @@ public class Utente {
 	public void setCognome(String cognome) {
 		this.cognome = cognome;
 	}
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String x) {
-		this.username=x;
-	}
+	
 	public Date getData() {
 		return dataNascita;
 	}

@@ -241,6 +241,15 @@ table{
     </div>
 </div>
 
+<div class="info-box">
+        <h2>Informazioni Amministratore</h2>
+        <p><strong>Nome:</strong> <%= session.getAttribute("nome") %></p>
+        <p><strong>Cognome:</strong> <%= session.getAttribute("cognome") %></p>
+        <p><strong>Email:</strong> <%= session.getAttribute("Email") %></p>
+        <p><strong>IBAN:</strong> <%= session.getAttribute("Iban") %></p>
+<!--  <p><strong>Tipo Account:</strong> <//%= session.getAttribute("Tipo_account").equals(0) ? "Standard" : "Amministratore" %></p> -->
+    </div>
+
 <div class="s-layout">
     <div class="s-layout__sidebar">
         <a class="s-sidebar__trigger" href="#0">

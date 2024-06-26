@@ -69,39 +69,4 @@ CREATE TABLE Recensione (
     FOREIGN KEY (emailCliente) REFERENCES Cliente(Email)
 );
 
-
-/*
-DROP TABLE IF EXISTS Magazzino;
-CREATE TABLE IF NOT EXISTS Magazzino (
-    Indirizzo VARCHAR(255) PRIMARY KEY,
-    QuantitaProdotti INT NOT NULL
-);
-
-DROP TABLE IF EXISTS Situato_in;
-CREATE TABLE IF NOT EXISTS Situato_in (
-    Indirizzo_magazzino VARCHAR(255),
-    Codice_prodotto INT,
-    PRIMARY KEY (Indirizzo_magazzino, Codice_prodotto),
-    FOREIGN KEY (Indirizzo_magazzino) REFERENCES Magazzino(Indirizzo),
-    FOREIGN KEY (Codice_prodotto) REFERENCES Prodotto(Codice)
-);
-*/
-
-/*
-DROP TABLE IF EXISTS Sconto;
-CREATE TABLE IF NOT EXISTS Sconto (
-    Codice INT PRIMARY KEY,
-    DataInizio DATE NOT NULL,
-    DataFine DATE NOT NULL,
-    Valore DECIMAL(5, 2) NOT NULL
-);
-
-DROP TABLE IF EXISTS Applicato;
-CREATE TABLE IF NOT EXISTS Applicato (
-    CodiceProdotto INT ,
-    CodiceSconto INT,
-    PRIMARY KEY (CodiceProdotto, CodiceSconto),
-    FOREIGN KEY (CodiceProdotto) REFERENCES Prodotto(Codice)
-);
-*/
 ;

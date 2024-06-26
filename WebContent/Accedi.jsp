@@ -96,10 +96,10 @@ String mess3 = (String) request.getAttribute("errore3");
 				  <input type="text" name="cognome" required placeholder="Cognome">
 				</div>
 				<div>
-				  <input type="email" name="email" required placeholder="Email">
+				  <input type="email" name="Email" required placeholder="Email">
 				</div>
 				<div>
-				  <input type="password" name="pass" id="pass" required placeholder="Password" onInput="check()" />
+				  <input type="password" name="PasswordCliente" id="pass" required placeholder="Password" onInput="check()" />
 					<div id="err">Password non valida</div>
 				</div>
 				<div class="container1">
@@ -132,8 +132,8 @@ String mess3 = (String) request.getAttribute("errore3");
 		<form action="registration" method="post">
 		<input type="hidden" name="action" value="login">
 			<h1>Accedi</h1>
-			<input type="email" name="email" required placeholder="Email">
-			<input type="password" name="pass" required placeholder="Password">
+			<input type="email" name="Email" required placeholder="Email">
+			<input type="password" name="PasswordCliente" required placeholder="Password">
 			<%
 	if (mess != null) { %>
 	<p style="color: red;"><%=mess%></p>
