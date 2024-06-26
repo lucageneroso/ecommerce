@@ -90,7 +90,7 @@ String mess3 = (String) request.getAttribute("errore3");
 
 <div class="container">
     <h1>Accedi</h1>
-    <form action="accedi" method="post">
+    <form action="registration" method="post">
         <input type="hidden" name="action" value="login">
         <% if (mess != null) { %>
             <p style="color: red;"><%=mess%></p>
@@ -98,8 +98,8 @@ String mess3 = (String) request.getAttribute("errore3");
         <% if (mess3 != null) { %>
             <p style="color: red;"><%=mess3%></p>
         <% } %>
-        <input type="email" name="username" placeholder="Username" required>
-        <input type="password" name="pass" placeholder="Password" required>
+        <input type="Email" name="Email" placeholder="Email" required>
+        <input type="password" name="PasswordCliente" placeholder="Password" required>
         <button type="submit">Accedi</button>
     </form>
     <div class="register-link">
