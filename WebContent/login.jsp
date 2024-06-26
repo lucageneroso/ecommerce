@@ -88,7 +88,7 @@ String mess3 = (String) request.getAttribute("errore3");
 <div class="container" id="container">
 	<div class="form-container sign-up-container">
 		<form action="registration" method="post" >
-		<input type="hidden" name="action" value="insertbreve">
+		<input type="hidden" name="action" value="insert">
 			<h1>Crea Account</h1>
 			<div class="form">
 				<div class="form-row">
@@ -96,10 +96,12 @@ String mess3 = (String) request.getAttribute("errore3");
 				  <input type="text" name="cognome" required placeholder="Cognome">
 				</div>
 				<div>
-				  <input type="email" name="email" required placeholder="Email">
+				  <input type="email" name="Email" required placeholder="Email">
+				  <input type="text" name="IBAN" required placeholder="IBAN">
+				  <input type="number" name="Tipo_account" required placeholder="TipoAccount">
 				</div>
 				<div>
-				  <input type="password" name="pass" id="pass" required placeholder="Password" onInput="check()" />
+				  <input type="password" name="PasswordCliente" id="pass" required placeholder="Password" onInput="check()" />
 					<div id="err">Password non valida</div>
 				</div>
 				<div class="container1">

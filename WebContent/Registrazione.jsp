@@ -45,7 +45,10 @@ String messaggio = (String) request.getAttribute("messaggio");
         }
         
         input[type="text"],
-        input[type="email"],
+        input[type="Email"],
+        input[type="IBAN"],
+        input[type="Cognome"],
+        input[type="Nome"]
         input[type="password"] {
             width: 100%;
             padding: 12px;
@@ -90,19 +93,26 @@ String messaggio = (String) request.getAttribute("messaggio");
 <div class="container">
     <h1>Crea un Account</h1>
     <form action="registration" method="post">
-        <input type="hidden" name="action" value="insertbreve">
+        <input type="hidden" name="action" value="insert">
         <% if (messaggio != null) { %>
             <p style="color: red;"><%= messaggio %></p>
         <% } %>
         <input type="text" name="nome" placeholder="Nome" required>
         <input type="text" name="cognome" placeholder="Cognome" required>
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="password" name="pass" placeholder="Password" required>
+        <input type="email" name="Email" placeholder="Email" required>
+        <input type="text" name="Iban" placeholder="IBAN" required>
+        <input type="number" name="IVA" placeholder="Iva" required>
+        
+        <!--  <input type="number" name="Tipo_account" placeholder="Tipo" required> -->
+        
+        
+        <input type="date" name="data_di_nascita" placeholder="Data di Nascita" required>
+        <input type="password" name="PasswordCliente" placeholder="Password" required>
         <button type="submit">Crea Account</button>
     </form>
     <div class="login-link">
         <p>Già registrato?</p>
-        <a href="pagina_accesso.jsp">Accedi</a>
+        <a href="login.jsp">Accedi</a>
     </div>
 </div>
 

@@ -14,7 +14,7 @@
     UtenteDao utenteDao = new UtenteDao();
     List<Utente> utenti = utenteDao.doRetrieveAll();
     request.setAttribute("utenti", utenti);
-    if((int) session.getAttribute("tipo_account")== 1){
+    if((int) session.getAttribute("Tipo_account")== 1){
 %>
 
 <!DOCTYPE html>
@@ -241,6 +241,15 @@ table{
     </div>
 </div>
 
+<div class="info-box">
+        <h2>Informazioni Amministratore</h2>
+        <p><strong>Nome:</strong> <%= session.getAttribute("nome") %></p>
+        <p><strong>Cognome:</strong> <%= session.getAttribute("cognome") %></p>
+        <p><strong>Email:</strong> <%= session.getAttribute("Email") %></p>
+        <p><strong>IBAN:</strong> <%= session.getAttribute("Iban") %></p>
+        <p><strong>Tipo Account:</strong> <%= session.getAttribute("Tipo_account").equals(0) ? "Standard" : "Amministratore" %></p> 
+    </div>
+
 <div class="s-layout">
     <div class="s-layout__sidebar">
         <a class="s-sidebar__trigger" href="#0">
@@ -253,7 +262,7 @@ table{
                     <a class="s-sidebar__nav-link" href="#0" id="catalogoLink">
                         <i class="fa fa-home"></i><em>Prodotti</em>
                     </a>
-                </li>
+                </li> 
                 <li>
                     <a class="s-sidebar__nav-link" href="#0" id="utentiLink">
                         <i class="fa fa-user"></i><em>Utenti</em>
