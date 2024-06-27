@@ -115,12 +115,13 @@ public class RegistrationControl extends HttpServlet {
                             //session.setAttribute("Tipo_account", utente.getTipo_account());
                            
                             session.setAttribute("data_di_nascita", utente.getData());
-                            
-                            if (utente.getTipo_account() == 0) {
+                            response.sendRedirect(request.getContextPath() + "/Profilo.jsp");
+
+                            /*if (utente.getTipo_account() == 0) {
                                 response.sendRedirect(request.getContextPath() + "/Profilo.jsp");
                             } else if (utente.getTipo_account() == 1) {
                                 response.sendRedirect(request.getContextPath() + "/Amministratore.jsp");
-                            }
+                            }*/
                         } else {
                             request.setAttribute("errore", "Email o password non validi");
                             request.getRequestDispatcher("/Accedi.jsp").forward(request, response);
