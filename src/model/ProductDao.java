@@ -226,7 +226,7 @@ public class ProductDao {
 
 		int result = 0;
 
-		String deleteSQL = "UPDATE " + ProductDao.TABLE_NAME + " SET Quantita = 1 WHERE idProdotto = ?";
+		String deleteSQL = "DELETE FROM " + ProductDao.TABLE_NAME + " WHERE idProdotto = ?";
 
 
 		try {

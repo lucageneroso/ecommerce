@@ -633,6 +633,8 @@ if (searchFormOrders) {
 			function deleteItem() {
 			    var id = document.getElementById('deleteId').value;
 			    window.location.href = 'doDelete?id=' + encodeURIComponent(id);
+
+			    System.out.println("da eliminare");
 			  }
 		
 </script>
