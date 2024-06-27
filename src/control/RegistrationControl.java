@@ -132,7 +132,7 @@ public class RegistrationControl extends HttpServlet {
                     }
                 }
                 
-           /*    if (action.equalsIgnoreCase("searchByEmail")) {
+           /*    if (action.equalsIgnoreCase("searchByEmail")) { 
                     try {
                         String email = request.getParameter("Email");
                         
