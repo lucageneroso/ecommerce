@@ -188,9 +188,11 @@ body {
 </style>
   
 <div class="header">
+	
      <a href="Home.jsp" class="logo-link">
         <img src="images/logohome.png" alt="Logo" class="logo-img">
     </a>
+    
     <div class="navbar">
         <nav>
             <ul class="nav-list">
@@ -217,7 +219,10 @@ body {
         </div>
     </div>
     <div class="login">
-        <a class="login-button" href="pagina_accesso.jsp">login</a>
+        <a class="login-button" href="pagina_accesso.jsp">Login</a>
+    </div>
+    <div class="carrello">
+        <a class="login-button" href="carrello.jsp">Carrello</a>
     </div>
 </div>
 <br>
