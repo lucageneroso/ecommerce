@@ -34,6 +34,7 @@ if (prodotti.isEmpty()) {
 </head>
 <body>
     <%@ include file="fragments/header.jsp" %>
+    <br>
     
     <div class="content">
         <h1>Prodotti della Categoria: <%= categoria %></h1>

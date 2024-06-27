@@ -43,6 +43,8 @@ public class ProductControl extends HttpServlet {
         try {
             if (action != null) {
                 if (action.equalsIgnoreCase("addC")) {
+                	
+                	
                     int id = Integer.parseInt(request.getParameter("id"));
                     cart.addProduct(model.doRetrieveByKey(id));
                     request.setAttribute("cart", cart);
@@ -52,6 +54,9 @@ public class ProductControl extends HttpServlet {
 
                     // Reindirizza la richiesta alla pagina precedente
                     response.sendRedirect(referer);
+                    
+                    
+                    
                 } else if (action.equalsIgnoreCase("svuotaC")) {
                     cart.deleteAllProduct();
                     request.setAttribute("cart", cart);
@@ -173,6 +178,7 @@ public class ProductControl extends HttpServlet {
 
         request.getSession().setAttribute("cart", cart);
         request.setAttribute("cart", cart);
+        System.out.println("Aggiunto nella sessione");
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

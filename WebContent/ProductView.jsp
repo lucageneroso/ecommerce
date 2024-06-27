@@ -8,6 +8,7 @@
 <%
 // Recupera il parametro "nome" dalla query string e sanifica il valore
 String nomeProdotto = request.getParameter("nome");
+System.out.println(nomeProdotto);
 if (nomeProdotto != null) {
     nomeProdotto = nomeProdotto.trim();
 }
@@ -88,6 +89,7 @@ Cart cart = (Cart) session.getAttribute("cart");
 <body>
     
     <jsp:include page="fragments/header.jsp" />
+    <br>
 
     <div class="container">
         <h2>Visualizzazione Prodotto</h2>
@@ -102,6 +104,7 @@ Cart cart = (Cart) session.getAttribute("cart");
                     String base64Image = Base64.getEncoder().encodeToString(imageBytes);
             %>
             <div class="product">
+            
                 <img src="data:image/jpg;base64, <%= base64Image %>" alt="Immagine Prodotto">
                 <h3><%= prodotto.getNome() %></h3>
                 <p>Prezzo: <%= prodotto.getPrezzo() %>€</p>
@@ -125,6 +128,7 @@ Cart cart = (Cart) session.getAttribute("cart");
         <% } else { %>
             <p>Nessun prodotto trovato con il nome "<%= nomeProdotto %>".</p>
         <% } %>
+        
     </div>
 
     <%-- Includi il footer comune --%>

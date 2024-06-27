@@ -123,6 +123,7 @@ img{height: auto;}
     background-color: #555;
     color: #fff;
 }
+
 @media screen and (max-width: 768px) {
     .header {
         flex-direction: column; /* Layout a colonna per dispositivi mobili */

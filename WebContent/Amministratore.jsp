@@ -227,7 +227,7 @@ table{
 </head>
 
 <body>
-<jsp:include page="fragments/header.jsp"/>
+<!--<jsp:include page="fragments/header.jsp"/>-->
 
 <div class="info-box">
         <h2>Informazioni Amministratore</h2>
