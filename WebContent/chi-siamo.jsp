@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <title>Chi Siamo</title>
     <link rel="stylesheet" href="css/Chi-siamo.css">
-     <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/header.css">
 </head>
 <body>
  <jsp:include page="fragments/header.jsp"/>

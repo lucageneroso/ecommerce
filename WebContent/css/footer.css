@@ -22,7 +22,7 @@
 			flex-direction: column; 
 			flex-wrap: wrap;
 			height: auto;
-  
+  			bottom: 0px; 
 		}
 		
 		.container{
@@ -316,3 +316,9 @@
 			#items{
 				margin-top: -3vw;
 			}
+			
+			
+			
+			
+			
+		
