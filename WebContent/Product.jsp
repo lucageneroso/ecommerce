@@ -2,6 +2,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="model.ProductDao" %>
 <%@ page import="model.Prodotto" %>
+<%@ page contentType="text/html; charset=UTF-8" import="java.util.*, control.*, model.*" %>
 
 
 <%
@@ -40,7 +41,15 @@ if (prodotti.isEmpty()) {
             <%
                 if (prodotti != null && !prodotti.isEmpty()) {
                     for (Prodotto product : prodotti) {
-                        out.println("<li><a href='ProductDetails.jsp?id=" + product.getID() + "'>" + product.getNome() + "</a></li>");
+                    	
+                    	byte[] imageBytes = product.getImg();
+                        String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+                        
+                        out.println("<li><a href='ProductDetails.jsp?id=" + product.getID() + "'>" +
+                                product.getNome() + "<br>" +
+                                "<img src='data:image/jpg;base64," + base64Image + "' alt='Immagine Prodotto' style='max-width:100px;'>"+
+                                "</a></li>");
+                    	
                     }
                 } else {
                     out.println("<li>Nessun prodotto disponibile</li>");

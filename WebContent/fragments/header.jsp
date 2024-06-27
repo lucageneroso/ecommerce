@@ -16,7 +16,7 @@
                         <a href="Product.jsp?categoria=Cucina">Cucina</a>
                         <a href="Product.jsp?categoria=Bagno">Bagno</a>
                         <a href="Product.jsp?categoria=Soggiorno">Soggiorno</a>
-                        
+                        <a href="tuttiProdotti.jsp">All</a>
                     </div>
                 </li>
             </ul>

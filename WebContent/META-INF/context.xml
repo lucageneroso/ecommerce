@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <Context>
-    <!-- Altre configurazioni specifiche dell'applicazione -->
-    
-    <Resource name="jdbc/ingrosso"
-              auth="Container"
-              type="javax.sql.DataSource"
-              driverClassName="com.mysql.cj.jdbc.Driver"
-              url="jdbc:mysql://localhost:3306/ingrosso?useSSL=false"
-              username="root"
-              password="root"
-              maxTotal="20"
-              maxIdle="10"
-              maxWaitMillis="-1"/>
+    <Resource name="jdbc/ingrosso" auth="Container" type="javax.sql.DataSource"
+    maxActive="100" maxIdle="30" maxWait="10000"
+    username="root" password="root"
+    driverClassName="com.mysql.cj.jdbc.Driver"
+    url="jdbc:mysql://localhost:3306/ingrosso?allowPublicKeyRetrieval=true&amp;useSSL=false"/>
 </Context>
