@@ -58,7 +58,7 @@ public class RegistrationControl extends HttpServlet {
         try {
             if (action != null) {
                 
-                if (action.equalsIgnoreCase("insert")) {
+                if (action.equalsIgnoreCase("insert")) { 
                     String email = request.getParameter("Email");
                     String pass = request.getParameter("PasswordCliente");
                     String nome = request.getParameter("nome");
