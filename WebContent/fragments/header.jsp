@@ -218,9 +218,16 @@ body {
             </form>
         </div>
     </div>
+    
     <div class="login">
+    <% if (session.getAttribute("Email") == null) { %>
         <a class="login-button" href="pagina_accesso.jsp">Login</a>
-    </div>
+    <% } else { %>
+        <a class="login-button" href="logout">LogOut</a>
+        <a class="login-button" href="Profilo.jsp">Profilo</a>
+    <% } %>
+	</div>
+    
     <div class="carrello">
         <a class="login-button" href="carrello.jsp">Carrello</a>
     </div>

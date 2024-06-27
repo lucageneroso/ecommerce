@@ -117,7 +117,7 @@ public class RegistrationControl extends HttpServlet {
                             session.setAttribute("data_di_nascita", utente.getData());
                             
                             if (utente.getTipo_account() == 0) {
-                                response.sendRedirect(request.getContextPath() + "/Profilo.jsp");
+                                response.sendRedirect(request.getContextPath() + "/Home.jsp");
                             } else if (utente.getTipo_account() == 1) {
                                 response.sendRedirect(request.getContextPath() + "/Amministratore.jsp");
                             }
