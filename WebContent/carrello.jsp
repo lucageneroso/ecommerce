@@ -361,7 +361,7 @@ table.cart-table {
 <%}} %>	
 	</div></div>	
 	<br><br><br>
-	<jsp:include page="footer.jsp"/>
+	<jsp:include page="fragments/footer.jsp"/>
     <script>
 
     document.addEventListener('DOMContentLoaded', function() {

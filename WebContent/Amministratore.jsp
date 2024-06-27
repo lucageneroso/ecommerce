@@ -227,19 +227,7 @@ table{
 </head>
 
 <body>
-<div class="banner">
-    <a href="Home.jsp"><img src="./nuovologo.png" id="image" alt="#"></a>
-    <div class="dx">
-        <% if (session.getAttribute("email") == null) { %>
-            <a href="Accedi.jsp"><img src="utente.png" alt="#"></a>
-            <a href="product?action=viewC"><img src="cart.png" alt="#"></a>
-        <% } else { %>
-            <a href="ordine?action=ViewOrdini&email=<%=session.getAttribute("email") %>"><img src="utente.png" alt="#"></a>
-            <a href="registration?action=logout"><img src="logout.png" alt="#"></a>
-            <a href="product?action=viewC"><img src="cart.png" alt="#"></a>
-        <% } %>
-    </div>
-</div>
+<jsp:include page="fragments/header.jsp"/>
 
 <div class="info-box">
         <h2>Informazioni Amministratore</h2>
@@ -458,7 +446,7 @@ table{
     </main>
 </div>
 
-<jsp:include page="footer.jsp"/>
+<jsp:include page="fragments/footer.jsp"/>
 
 <script>
 var searchForm = document.getElementById("search-form");

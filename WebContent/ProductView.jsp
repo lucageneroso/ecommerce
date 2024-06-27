@@ -1,468 +1,133 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.Base64" %>
-<%@ page import="model.Prodotto" %>
+<%@ page import="model.*" %>
 <%@ page import="model.Cart" %>
-<%@ page import="java.util.Collection" %>
+<%@ page import="java.util.List" %>
 <%@ page import="java.util.Iterator" %>
 
 <%
-    Collection<?> products = (Collection<?>) request.getAttribute("products");
-    if (products == null) {
-        response.sendRedirect("./product");
-        return;
-    }
+// Recupera il parametro "nome" dalla query string e sanifica il valore
+String nomeProdotto = request.getParameter("nome");
+if (nomeProdotto != null) {
+    nomeProdotto = nomeProdotto.trim();
+}
+ProductDao productDAO = new ProductDao();
+// Inizializza una lista vuota di prodotti
+List<Prodotto> products = null;
 
-    Cart cart = (Cart) session.getAttribute("cart");
+// Se il nome del prodotto è fornito e non è vuoto, cerca i prodotti corrispondenti nel database
+if (nomeProdotto != null && !nomeProdotto.isEmpty()) {
+    // Esempio di chiamata a un metodo del DAO per cercare prodotti per nome
+    products = productDAO.searchProducts(nomeProdotto); 
+}
+System.out.println("Nome del prodotto cercato: " + nomeProdotto);
+// Recupera il carrello dalla sessione
+Cart cart = (Cart) session.getAttribute("cart");
 %>
 
 <!DOCTYPE html>
 <html lang="it">
-
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <title>New Again</title>
-<style>
-			body {
-			  font-family: Arial, sans-serif;
-			  background-color: #F5F5F7;
-			  margin: 0;
-			  }
-			  
-			  h1 {
-				  text-align: center;
-				  font-size: 36px;
-				  color: #1a202c;
-				}
-				
-		.banner {
-			background-color: rgba(235, 235, 240, 0.66);
-			position: relative;
-			height: 90px;
-			width: 100%;
-		}
-		
-		#image {
-			position: absolute;
-			top: -18px;
-			left: 10px;
-			z-index: 1;
-			width: 125px;
-			height: auto;
-		}
-		
-		.dx {
-		    display: flex;
-		    justify-content: center; /* Centra orizzontalmente gli elementi */
-		    align-items: center;
-			position: absolute;
-			width: auto;
-			top: 20px;
-			right: 5px;
-			z-index: 1;
-		 
-		}
-		
-		.dx img {
-			width: 40px;
-			height: 40px;
-			margin-left: 15px;
-			margin-right: 15px;
-		}
-		
-		.cerca {
-		    display: none;
-		}
-		
-		#searchInput{
-		border: 2px solid black;
-		border-radius: 5px;
-		}
-		/* Stile per la visualizzazione dei prodotti */
-
-	  .product.hover {
-	    transform: translateY(-5px);
-	    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-	  }
-		
-		.product h3 {
-		  margin-top: 10px;
-		  margin-bottom: 5px;
-		  font-size: 24px;
-		  font-weight: bold;
-		  color: #000;
-		  text-decoration: none;
-		}
-		
-		.product button {
-		  background-color: #ffa500;
-		  color: #fff;
-		  padding: 10px 20px;
-		  border: none;
-		  border-radius: 4px;
-		  cursor: pointer;
-		  font-size: 16px;
-		  transition: all 0.3s ease-in-out;
-		}
-		
-		.product button:hover {
-		  background-color: #ff8c00;
-		}
-		
-		.product p {
-			margin-bottom: 10px;
-			font-size: 18px;
-		  	color: #666;
-		  	text-decoration: none;
-		}
-		
-		.product a {
-			margin-right: 10px;
-			text-decoration: none;
-		}
-		
-		.product-container {
-		  display: flex;
-		  flex-direction: column; 
-		  align-items: center; 
-		  margin: 20px;
-		}
-		
-		.product-row {
-		  display: flex;
-		  justify-content: center;
-		  margin-bottom: 20px;
-		  width: 100%;
-		  flex-wrap: wrap;
-		}
-		
-		.product {
-		  margin-right: 20px;
-		  margin-bottom: 20px;
-		  transition: all 0.3s ease-in-out;
-		  width: 250px;
-		  padding: 10px;
-		  background-color: #F5F5F7;
-		  border: 1px solid #ccc;
-		  border-radius: 5px;
-		  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-		}
-
-		.product img {
-		  display: block;
-		  margin: auto;
-		  width: 100%;
-		  height: 200px;
-		  object-fit: contain;
-		  margin-bottom: 10px;
-		  border-radius: 5px;
-		}
-		
-			
-		nav {
-		  text-align: center;
-		  background-color: #ff6848;
-		  display: flex;
-  		justify-content: center;
-		}
-		
-		nav a {
-		  display: inline-block;
-		  color: #f2f2f2;
-		  text-align: center;
-		  padding: 14px 16px;
-		  font-size: 17px;
-		  text-decoration: none;
-		  margin: 0 10px;
-		}
-		
-		nav a:hover {
-		  background-color: rgba(235, 235, 240, 0.66);
-		  color: #1d1d1f;
-		}
-		
-		input[type="submit"] {
-		  background-color: #333;
-		  color: #fff;
-		  border: none;
-		  margin: 27px;
-		  padding: 10px 20px;
-		  cursor: pointer;
-		  transition: all 0.3s ease-in-out;
-		}
-		
-		input[type="submit"]:hover {
-		  background-color: #FF6848;
-		  border-radius: 14px;
-		}
-		
-		.dropdown {
-		  float: left;
-		  overflow: hidden;
-		}
-		
-		.dropdown .dropbtn {
-		  font-size: 16px;
-		  border: none;
-		  outline: none;
-		  color: black;
-		  padding: 14px 16px;
-		  background-color: inherit;
-		  font-family: inherit;
-		  margin: 0;
-		}
-		
-		nav a:hover,
-		.dropdown:hover .dropbtn {
-		  background-color: #ddd;
-		}
-		
-		.dropdown-content {
-		  display: none;
-		  position: absolute;
-		  background-color: #f9f9f9;
-		  min-width: 160px;
-		  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-		  z-index: 1;
-		}
-		
-		.dropdown-content a {
-		  float: none;
-		  color: black;
-		  padding: 12px 16px;
-		  text-decoration: none;
-		  display: block;
-		  text-align: left;
-		}
-		
-		.dropdown-content a:hover {
-		  background-color: #ddd;
-		}
-		
-		.dropdown:hover .dropdown-content {
-		  display: block;
-		}
-		
-		/* Tabella dei dettagli del prodotto */
-		table {
-		  width: 100%;
-		  margin-top: 20px;
-		  border-collapse: collapse;
-		}
-		
-		table th,
-		table td {
-		  padding: 8px;
-		  border: 1px solid #ccc;
-		}
-		
-		table th {
-		  background-color: #f2f2f2;
-		  text-align: left;
-		}
-		
-		h2 {
-		  text-align: center;
-		  margin:0;
-		  padding:0;
-		}
-		a{
-			margin-left: 10px;
-		}
-		
-		a:link {
-		  color: #1d1d1f;
-		  font-weight: bold;
-		}
-		
-		
-		a:visited {
-		  color: #1d1d1f;
-		  font-weight: bold;
-		}
-		
-		
-		a:hover {
-		  color: #e7e7e7;
-		  font-weight: bold;
-		}
-		
-		a:active {
-		  color: #1d1d1f;
-		  font-weight: bold;
-		}
-		.product-list{
-			justify-content: center;
-			align-items: center;
-		}
-                .det{
-		height: 300px;
-		}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="css/header.css">
+    <title>Prodotto Cercato</title>
+    <style>
+        /* Stili per la visualizzazione dei prodotti */
+        .product-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .product {
+            width: 250px;
+            padding: 10px;
+            margin: 10px;
+            background-color: #f5f5f7;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        .product img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        
+        .product h3 {
+            text-align: center;
+            margin-top: 10px;
+            margin-bottom: 5px;
+            font-size: 20px;
+            color: #333;
+        }
+        .product p {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: #666;
+        }
+        .product button {
+            display: block;
+            margin: 0 auto;
+            background-color: #ffa500;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .product button:hover {
+            background-color: #ff8c00;
+        }
+  
+    </style>
 </head>
 <body>
-<div id="content">
-	<div class="banner"> 
-	<a href="Home.jsp"><img src="./nuovologo.png" id="image" alt="#"></a>
-	<div class="dx">
-    <% if (session.getAttribute("email") == null) { %>
-        <a href="#0" id="cercap"><img src="cerca.png" alt="#"></a>
-<div class="cerca" style="display: none;">
-    <form onsubmit="submitSearch(event)">
-        <input type="text" name="nome" id="searchInput" placeholder="Cerca prodotto">
-        <button type="submit">Cerca</button>
-    </form>
-</div>
-        <a href="Accedi.jsp"><img src="utente.png" alt="#"></a>
-        <a href="product?action=viewC"><img src="cart.png" alt="#"></a>
-    <% } else { %>
-        <a href="#0" id="cercap"><img src="cerca.png" alt="#"></a>
-<div class="cerca">
-    <form onsubmit="submitSearch(event)">
-        <input type="text" name="nome" id="searchInput" placeholder="Cerca prodotto">
-        <button type="submit">Cerca</button>
-    </form>
-</div>
-        <a href="ordine?action=ViewOrdini&email=<%=session.getAttribute("email") %>"><img src="utente.png" alt="#"></a>
-        <a href="registration?action=logout"><img src="logout.png" alt="#"></a>
-        <a href="product?action=viewC"><img src="cart.png" alt="#"></a>
-    <% } %>
-	</div>
-	 
-	</div>
-<nav>
-  <div class="dropdown">
-    <a href="product?action=dettaglio&sesso=M" class="dropbtn">Uomog</a>
-    <div class="dropdown-content">
-      <a href="product?action=dettaglio&categoria=giacche&sesso=M">Giacche</a>
-      <a href="product?action=dettaglio&categoria=felpe&sesso=M">Felpe</a>
-      <a href="product?action=dettaglio&categoria=maglie&sesso=M">Maglie</a>
-      <a href="product?action=dettaglio&categoria=pantaloni&sesso=M">Pantaloni</a>
-    </div>
-  </div>
-  <div class="dropdown">
-    <a href="product?action=dettaglio&sesso=F" class="dropbtn">Donna</a>
-    <div class="dropdown-content">
-      <a href="product?action=dettaglio&categoria=giacche&sesso=F">Giacche</a>
-      <a href="product?action=dettaglio&categoria=felpe&sesso=F">Felpe</a>
-      <a href="product?action=dettaglio&categoria=maglie&sesso=F">Maglie</a>
-      <a href="product?action=dettaglio&categoria=pantaloni&sesso=F">Pantaloni</a>
-    </div>
-  </div>
-  <div class="dropdown">
-    <a href="product?action=dettaglio&categoria=accessori&sesso=M" class="dropbtn">Accessori</a>
-    <div class="dropdown-content">
-      <a href="product?action=dettaglio&categoria=accessori&sesso=M">Cappelli</a>
-    </div>
-  </div>
-  <a href="product?action=all">All</a>
-</nav>
+    
+    <jsp:include page="fragments/header.jsp" />
 
-  <br><br>
-  <h2>Prodotti</h2>
-<div>
-    <div class="product-container">
-        <div class="product-list">
-            <% if (products != null && products.size() != 0) {
-                Iterator<?> it = products.iterator();
-                int count = 0;
+    <div class="container">
+        <h2>Visualizzazione Prodotto</h2>
+        
+        <%-- Se la lista dei prodotti non è vuota, mostra i prodotti --%>
+        <div class="product-container">
+            <% if (products != null && !products.isEmpty()) {
+                Iterator<Prodotto> it = products.iterator();
                 while (it.hasNext()) {
-                    if (count % 4 == 0) { %>
-                        <div class="product-row">
-                    <% }
-                    Prodotto bean = (Prodotto) it.next();
-                    byte[] imageB = bean.getImg();
-                    System.out.print(imageB);
-                    String base64img = Base64.getEncoder().encodeToString(imageB); 
-                    %>
-                    <div class="product">
-                    <div class="det">
-    <a href="product?action=read&id=<%=bean.getID()%>">
-    <img src="data:image/jpg;base64, <%=base64img%>" width="300" height="300" alt="#">
-        <p align="center"><%=bean.getNome()%></p>
+                    Prodotto prodotto = it.next();
+                    byte[] imageBytes = prodotto.getImg();
+                    String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+            %>
+            <div class="product">
+                <img src="data:image/jpg;base64, <%= base64Image %>" alt="Immagine Prodotto">
+                <h3><%= prodotto.getNome() %></h3>
+                <p>Prezzo: <%= prodotto.getPrezzo() %>€</p>
+                <% if (prodotto.getQuantita() <= 0) { %>
+                    <p style="color: red;">Non disponibile</p>
+                <% } else { %>
+                    <form action="product" method="post">
+                        <input type="hidden" name="action" value="addC">
+                        <input type="hidden" name="id" value="<%= prodotto.getID() %>">
+                        <%-- Controlla se il prodotto è già nel carrello --%>
+                        <% if (cart != null && cart.presente(prodotto.getID())) { %>
+                            <button type="button">Prodotto nel carrello</button>
+                        <% } else { %>
+                            <button type="submit">Aggiungi al carrello</button>
+                        <% } %>
+                    </form>
+                <% } %>
+            </div>
+            <% } %>
         </div>
-        <p align="center"><%=bean.getPrezzo()%>€</p>
-        <% if (bean.getQuantita() == 1) { %>
-        	<br>
-            <p style="text-align: center;">Non disponibile</p>
-        <% } else if (cart != null && !cart.presente(bean.getID())) { %>
-            <a href="product?action=addC&id=<%=bean.getID()%>" id="carrello">
-                <input type="submit" value="Aggiungi al carrello">
-            </a>
         <% } else { %>
-        	<br>
-            <p style="text-align: center;">Prodotto già nel carrello</p>
+            <p>Nessun prodotto trovato con il nome "<%= nomeProdotto %>".</p>
         <% } %>
-    </a>
-</div>
-<% count++;
-if (count % 4 == 0) { %>
     </div>
-<% }
-}
-if (count % 4 != 0) { %>
-    </div>
-<% }
-} else { %>
-    <p>Non ci sono prodotti disponibili</p>    
-<% } %>
-    </div>
-  </div>
-  <script>
-  function submitSearch(event) {
-	    event.preventDefault(); // Previene il comportamento predefinito del form
 
-	    var searchInput = document.getElementById("searchInput");
-	    var nome = searchInput.value.trim();  
-
-	    if (nome !== "") {
-	        // Esegue la richiesta AJAX per la ricerca del prodotto
-	        $.ajax({
-	            url: "product",
-	            type: "GET",
-	            data: {
-	                action: "search",
-	                nome: nome
-	            },
-	            dataType: "html",
-	            success: function(response) {
-	                // Aggiorna il contenuto della pagina con i risultati della ricerca
-	                $("#content").html(response);
-	            },
-	            error: function(xhr, status, error) {
-	                // Gestione degli errori
-	                console.error(error);
-	            }
-	        });
-	    }
-	}
-
-  var cercaLink = document.getElementById("cercap");
-	var cercaSection = document.querySelector(".cerca");
-		 
-			cercaLink.addEventListener("click", function(event) {
-			event.preventDefault();
-		if (cercaSection.style.display === "flex") {
-			cercaSection.style.display = "none"; // Se la barra di ricerca è già visibile, nascondila
-		} else {
-			cercaSection.style.display = "flex"; // Altrimenti, mostra la barra di ricerca
-		}
-		});
-  </script>
-  
-  <script>
-  $(document).ready(function() {
-    $(".product").hover(
-      function() {
-        $(this).addClass("hover");
-      },
-      function() {
-        $(this).removeClass("hover");
-      }
-    );
-  });
-</script>
-  
-  </div>
+    <%-- Includi il footer comune --%>
+    <jsp:include page="fragments/footer.jsp" />
 </body>
 </html>

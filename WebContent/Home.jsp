@@ -13,96 +13,28 @@ Collection<?> products = (Collection<?>) request.getAttribute("products");
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	 <link rel="stylesheet" href="css/home2.css"> 
+	 <link rel="stylesheet" href="css/header.css">
 
 </head>
 <body>
-	<div class="header">  
-	  <a href="Home.jsp" class="image"></a>
-	  
-	 
-	 <div class="navbar">  
-	      <nav>
-	      <ul class="nav-list"> 
-               <li><a  href="index.jsp">Home</a></li>
-               <li><a  href="chi-siamo.jsp">Chi Siamo</a></li>
-               <li class="dropdown">
-                <a href="products.jsp" class="dropbtn">Prodotti</a>
-                <div class="dropdown-content">
-                    <a href="product.jsp?categoria=Cucina">Cucina</a>
-                    <a href="product.jsp?categoria=Bagno">Bagno</a>
-                    <a href="product.jsp?categoria=Soggiorno">Soggiorno</a>
-                    <a href="product.jsp?categoria=Tuttiprodotti">Tutti i prodotti</a>
-                </div>
-                        </li>
-                       </ul>
-	      
-	      </nav>
 	
-	 
-	 </div>
-	 
-	<div class="dx">
-	
-
-    <% if (session.getAttribute("email") == null) { %>
-       
-        		<div class="cerca-form">
-				<form action="product" method="GET">
-				    <input type="text" name="nome" id="searchInput" placeholder="Cerca prodotto">
-				    <button type="submit" onclick="submitSearch(event)">Cerca</button>
-				</form>
-				</div>
-       
-    <% } else { %>
-                <a href="#0" id="cercap"><img src="cerca.png" alt="#"></a>
-        		<div class="cerca-form">
-				<form action="product" method="GET">
-				    <input type="text" name="nome" id="searchInput" placeholder="Cerca prodotto">
-				    <button type="submit" onclick="submitSearch(event)">Cerca</button>
-				</form>
-				</div>
-       
-        
-    <% } %>
-	</div>
-	
-
-	
-	 <div class="login">
-	     <a class="login-button" href="pagina_accesso.jsp" >login</a>
-	
-	
-	
-	</div>
-	</div>
-
+    <jsp:include page="fragments/header.jsp"/>
 	  <br>
 	
 
 	<br><br><br>
-	<div style="text-align:center">
-		<span class="dot" onclick="currentSlide(1)"></span>
-		<span class="dot" onclick="currentSlide(2)"></span>
-		<span class="dot" onclick="currentSlide(3)"></span>
-		<span class="dot" onclick="currentSlide(4)"></span>
-	</div>
-	
-	<div class="slideshow-container">
-        <div class="mySlides fade">
-            <img src="images/Cucina.webp" style="width:50%">
+	<section id="hero">
+    <div class="container">
+        <h1>
+            Scopri tutti i nostri prodotti di qualità!
+        </h1>
+        <div class="hero-image">
+            <img src="images/casa.jpg" alt="Immagine prodotti Casa">
         </div>
-        <div class="mySlides fade">
-            <img src="images/bagno.jpg" style="width:50%">
-        </div>
-        <div class="mySlides fade">
-            <img src="soggiorno.jpg" style="width:100%">
-        </div>
-        <div class="mySlides fade">
-            <img src="casa.jpg" style="width:100%">
-        </div>
+        <a href="tuttiProdotti.jsp" class="btn btn-primary">Scopri di più</a>
     </div>
-
-	
+</section>
+    
 
 	<!-- Script per lo slideshow automatico -->
 	<script>
@@ -173,14 +105,8 @@ Collection<?> products = (Collection<?>) request.getAttribute("products");
 
 </script>
 
-	<div class="container1">
-		<a href=""><img src="images/Cucina.webp" alt="Immagine 1" alt="#"></a>
-		<a href="product?action=dettaglio&sesso=M"><img src="images/bagno.jpg" alt="Immagine 2" alt="#"></a>
-		<a href="product?action=dettaglio&categoria=accessori&sesso=M"><img src="images/soggiorno.jpg" alt="Immagine 3"></a>
-		<a href="product?action=all"><img src="images/casa.jpg" alt="Immagine 4"></a>
-	</div>
 <br><br><br>
-<jsp:include page="footer.jsp"/>
+<jsp:include page="fragments/footer.jsp"/>
 
 </body>
 </html>

@@ -30,6 +30,9 @@ public class Prodotto {
 	public void setID(int id) {
 		this.id = id;
 	}
+	
+	
+	
 	public int getQuantita() {
 		return Quantita;
 	}
