@@ -160,7 +160,7 @@ public class AcquistoControl extends HttpServlet {
 					try {
 						dettagliordinedao.doSave(id, p.getID());
 					} catch (SQLException e) {
-						e.printStackTrace();
+						e.printStackTrace(); 
 					}
 				}
 				
