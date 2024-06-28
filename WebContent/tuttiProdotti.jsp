@@ -24,6 +24,7 @@ if (prodotti.isEmpty()) {
 </head>
 <body>
     <jsp:include page="fragments/header.jsp" />
+    <br><br>
 
     <div class="content">
         <h1>Prodotti</h1>

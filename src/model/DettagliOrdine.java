@@ -1,6 +1,4 @@
 package model;
-
-
 public class DettagliOrdine {
     private int idOrdine;
     private int idProdotto;

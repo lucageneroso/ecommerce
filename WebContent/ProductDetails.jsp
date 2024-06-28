@@ -48,6 +48,7 @@
 <body>
 
 <jsp:include page="fragments/header.jsp"/>
+<br><br><br>
 
 <div class="cart">
     <div class="row">
@@ -118,6 +119,7 @@
     </div>
 </div>
 
+<br>
 <jsp:include page="fragments/footer.jsp"/>
 
 <script src="https://cdn.jsdelivr.net/npm/zooming/build/zooming.min.js"></script>

@@ -44,7 +44,7 @@ public class OrdineControl extends HttpServlet {
 				request.setAttribute("ordini",ordine.getOrdini(email));
 				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Profilo.jsp");
 				dispatcher.forward(request, response);
-			} 
+			}  
 			
 			else if(action.equalsIgnoreCase("Dettagli")) {
 				String email = request.getParameter("Email");
@@ -55,7 +55,7 @@ public class OrdineControl extends HttpServlet {
 		        request.setAttribute("ordini", ordini); // Imposta l'attributo "ordini" sulla richiesta
 		        request.setAttribute("prodotti", prodotti); // Imposta l'attributo "prodotti" sulla richiesta
 
-		        request.getRequestDispatcher("Profilo.jsp").forward(request, response);
+		        request.getRequestDispatcher("Profilo.jsp").forward(request, response);  
 		    }
 			
 		}

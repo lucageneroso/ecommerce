@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <title>Chi Siamo</title>
     <link rel="stylesheet" href="css/Chi-siamo.css">
-     <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/header.css">
 </head>
 <body>
  <jsp:include page="fragments/header.jsp"/>
@@ -22,7 +22,7 @@
     <p>Il nostro team è composto da professionisti con esperienza in...</p>
     <h2>Contattaci</h2>
     <p>Per ulteriori informazioni, potete contattarci a: info@example.com</p>
-    <a href="../Home.jsp">Torna alla Home</a>
+    <a href="../Home.jsp">Torna alla Home</a> 
     </div>
 </body>
 </html>

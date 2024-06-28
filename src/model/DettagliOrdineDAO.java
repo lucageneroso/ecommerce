@@ -2,36 +2,38 @@ package model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
-import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 public class DettagliOrdineDAO {
-    private DataSource dataSource;
 
-    public DettagliOrdineDAO(DataSource dataSource) {
-        this.dataSource = dataSource;
+    private static DataSource ds;
+
+    static {
+        try {
+            InitialContext initialContext = new InitialContext();
+            ds = (DataSource) initialContext.lookup("java:comp/env/jdbc/ingrosso");
+        } catch (NamingException e) {
+            System.out.println("Error:" + e.getMessage());
+        }
     }
+    
 
-    public void doSave(DettagliOrdine dettaglioOrdine) throws SQLException {
+    public void doSave(int idOrdine, int idProdotto) throws SQLException {
         Connection conn = null;
         PreparedStatement preparedStatement = null;
 
         try {
-            conn = dataSource.getConnection();
-            String insertSQL = "INSERT INTO DettagliOrdine (idOrdine, idProdotto, quantita) VALUES (?, ?, ?)";
+            conn = ds.getConnection();
+            String insertSQL = "INSERT INTO DettagliOrdine (id_ordine, idProdotto, quantita) VALUES (?, ?, ?)";
 
             preparedStatement = conn.prepareStatement(insertSQL);
-            preparedStatement.setInt(1, dettaglioOrdine.getIdOrdine());
-            preparedStatement.setInt(2, dettaglioOrdine.getIdProdotto());
-            preparedStatement.setInt(3, dettaglioOrdine.getQuantita());
+            preparedStatement.setInt(1, idOrdine);
+            preparedStatement.setInt(2, idProdotto);
+            preparedStatement.setInt(3,1);
 
             preparedStatement.executeUpdate();
         } finally {

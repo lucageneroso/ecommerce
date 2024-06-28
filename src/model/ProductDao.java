@@ -65,6 +65,40 @@ public class ProductDao {
 	    }
 	}
 	
+	public synchronized void doSaveAmministratore(Prodotto product) throws SQLException {
+	    Connection connection = null;
+	    PreparedStatement preparedStatement = null;
+	    String insertSQL = "INSERT INTO " + ProductDao.TABLE_NAME + " (idProdotto, Quantita, Prezzo, Nome ,Descrizione, Categoria, Sconto, Foto) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+	    try {
+	        connection = ds.getConnection();
+	        preparedStatement = connection.prepareStatement(insertSQL);
+	        preparedStatement.setInt(1, product.getID());
+	        preparedStatement.setInt(2, product.getQuantita());
+	        preparedStatement.setDouble(3, product.getPrezzo());
+	        
+	        preparedStatement.setString(4, product.getNome());
+	        preparedStatement.setString(5, product.getDescrizione());
+	        preparedStatement.setString(6, product.getCategoria());
+	        preparedStatement.setDouble(7, product.getSconto());
+	        
+	        InputStream inputStream = new ByteArrayInputStream(product.getImg());
+	        preparedStatement.setBinaryStream(8, inputStream, product.getImg().length);
+	        
+	        preparedStatement.executeUpdate();
+	    } finally {
+	        try {
+	            if (preparedStatement != null) {
+	                preparedStatement.close();
+	            }
+	        } finally {
+	            if (connection != null) {
+	                connection.close();
+	            }
+	        }
+	    }
+	}
+	
 	/*public synchronized Prodotto Cambiafoto(int codef, int codp) throws SQLException{
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -192,7 +226,7 @@ public class ProductDao {
 
 		int result = 0;
 
-		String deleteSQL = "UPDATE " + ProductDao.TABLE_NAME + " SET Quantita = 1 WHERE idProdotto = ?";
+		String deleteSQL = "DELETE FROM " + ProductDao.TABLE_NAME + " WHERE idProdotto = ?";
 
 
 		try {
@@ -214,19 +248,26 @@ public class ProductDao {
 		return (result != 0);
 	}
 
-	public synchronized boolean doupdateq(int code) throws SQLException {
+	public synchronized boolean doupdateq(String code, String quantita) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
+		
 		int result = 0;
 
-		String deleteSQL = "UPDATE " + ProductDao.TABLE_NAME + " SET Quantita = 0 WHERE idProdotto = ?";
-
+		String deleteSQL = "UPDATE " + ProductDao.TABLE_NAME + " SET Quantita = ? WHERE idProdotto = ?";
+		
+		
 
 		try {
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(deleteSQL);
-			preparedStatement.setInt(1, code);
+			
+			int quantitaInt=Integer.parseInt(quantita);
+			int codeInt=Integer.parseInt(code);
+			
+			preparedStatement.setInt(1, quantitaInt);
+			preparedStatement.setInt(2, codeInt);
 
 			result = preparedStatement.executeUpdate();
 
@@ -519,9 +560,13 @@ public class ProductDao {
 		        String sql = "UPDATE Prodotto SET Prezzo = ? WHERE idProdotto = ?";
 		        stmt = conn.prepareStatement(sql);
 		        
+		        prezzo = prezzo.replaceAll("[€]", "");
+		        double prezzoDouble = Double.parseDouble(prezzo);
+
+		        
 		        // Imposta i parametri nella query
-		        stmt.setString(1, prezzo);
-		        stmt.setString(2, id);
+		        stmt.setDouble(1, prezzoDouble);
+		        stmt.setInt(2, Integer.parseInt(id)); // Converte l'id da stringa a int
 		        
 		        // Esegui la query di aggiornamento
 		        stmt.executeUpdate();

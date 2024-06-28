@@ -1,6 +1,6 @@
 <%@ page import = "java.util.Base64" %>
 <%
-	Cart cart = (Cart) request.getAttribute("cart");
+	Cart cart = (Cart) session.getAttribute("cart");
 	String mess = (String) request.getAttribute("errore"); 
 %>
 <!DOCTYPE html>
@@ -173,7 +173,7 @@ input[type="submit"]:hover {
 }
 
 table.cart-table {
-  border: none !important;
+  //border: none !important;
   width: 100%;
 }
 
@@ -190,16 +190,18 @@ table.cart-table {
         display: inline-block;
         width: 120px;
     }
-    
+  
 #table1 {
-    margin-top: 140px;	
-    border-collapse: unset;
     border: unset;
     background-color: unset;
     color: unset;
     border-radius: unset;
     box-shadow: unset;
+    border-collapse: separate;
+    border-spacing: 0 10px;
   }
+  
+  
 
   #table1 th, #table1 td {
     padding: unset;
@@ -211,7 +213,9 @@ table.cart-table {
   #table1 th {
     background-color: unset;
     color: unset;
+    border-radius:5px;
   }
+  
 	</style>
 </head>
 
@@ -219,13 +223,15 @@ table.cart-table {
 <div class="cont">
 <div class="left-column">
     <div class="logo-container">
+    <!--  
         <a href="Home.jsp"><img src="nuovologo.png" width="130px" alt="#"></a>
+       -->
     </div>
-<form action="acquista" method="post">
+<form action="acquista" method="post" style="border-radius:10px">
     <input type="hidden" name="action" value="visualizza">	
     <h2>Tipo di Consegna</h2>
 
-    <table>
+    <table style="border-radius:15px">
         <% if((session.getAttribute("indirizzo") != null) &&
             (session.getAttribute("citta") != null) &&
             (session.getAttribute("provincia") != null) &&
@@ -248,12 +254,13 @@ table.cart-table {
             <td>
                 <input type="radio" name="delivery-option" id="delivery-option" value="Altro indirizzo"
                     onclick="showAddressForm()">
-                <label for="delivery-option" class="radio-label option-label">Altro indirizzo</label>
+                <label for="delivery-option" class="radio-label option-label">Indirizzo</label>
             </td>
             <td>
-                Seleziona questa opzione se desideri ricevere la consegna ad un altro indirizzo
+                Inserire l'indirizzo per effettuara la consegna
             </td>
         </tr>
+        <!--  
         <tr>
             <td>
                 <input type="radio" name="delivery-option" id="pickup-option" value="Punto di Ritiro" onclick="hideAddressForm()">
@@ -263,6 +270,7 @@ table.cart-table {
                 HomeDecore Shop <br> Via Pantano Nghilino SNC Sarno
             </td>
         </tr>
+        -->
     </table>
 
     <div id="address-form" style="display: none;">
@@ -274,7 +282,7 @@ table.cart-table {
     </div>
 
     <h2>Metodo di Pagamento</h2>
-    <table>
+    <table style="border-radius:15px">
         <tr>
             <td>
                 <input type="radio" name="Pagamento" id="Pagamento" value="Carta di credito" onclick="showCartaForm()">
@@ -317,7 +325,7 @@ table.cart-table {
     </div>
 
     <br><br><br>
-    <input type="submit" value="Conferma">
+    <input type="submit" value="Conferma" style="border-radius:5px">
 </form>
 </div>
   
@@ -339,7 +347,7 @@ table.cart-table {
        int quantity = 1;
        int maxQuantity = p.getQuantita(); // Ottieni il valore massimo
   %>
-  <tr data-product-id="<%=p.getID()%>">
+  <tr data-product-id="<%=p.getID()%>" style="background-color:white;padding: 10px 20px;">
     <td><img src="data:image/jpg;base64, <%=base64img%>"  width="100" height="100" alt="#"></td>
     <td><%= p.getNome() %></td>
 	<td><span id="totalPrice_<%=p.getID()%>"><%=p.getPrezzo()%></span></td>

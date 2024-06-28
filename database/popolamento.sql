@@ -1,4 +1,3 @@
-
 DROP DATABASE IF EXISTS ingrosso;
 CREATE DATABASE ingrosso;
 USE ingrosso;
@@ -34,9 +33,15 @@ CREATE TABLE IF NOT EXISTS Ordine (
     stato ENUM('In Preparazione', 'In Consegna', 'Consegnato'),
     numero_prodotti INT NOT NULL,
     IVA_cliente INT NOT NULL,
+<<<<<<< HEAD
     FOREIGN KEY (IVA_cliente) REFERENCES Cliente(IVA),
     EmailCliente VARCHAR(255) NOT NULL,
     FOREIGN KEY(Email_cliente) REFERENCES Cliente(Email)
+=======
+    Email_cliente VARCHAR(255) NOT NULL,
+    FOREIGN KEY (IVA_cliente) REFERENCES Cliente(IVA),
+    FOREIGN KEY (Email_cliente) REFERENCES Cliente(Email)
+>>>>>>> branch 'masterL' of https://github.com/lucageneroso/ecommerce.git
 );
 
 DROP TABLE IF EXISTS Prodotto;
@@ -51,11 +56,19 @@ CREATE TABLE IF NOT EXISTS Prodotto (
     Foto mediumblob
 );
 
+<<<<<<< HEAD
 CREATE TABLE IF NOT EXISTS DettagliOrdine (
     id_ordine INT NOT NULL,
     idProdotto INT NOT NULL,
     quantita INT NOT NULL,
     prezzo DECIMAL(10, 2) NOT NULL,
+=======
+DROP TABLE IF EXISTS DettagliOrdine;
+CREATE TABLE IF NOT EXISTS DettagliOrdine (
+    id_ordine INT NOT NULL,
+    idProdotto INT NOT NULL,
+    quantita INT NOT NULL,
+>>>>>>> branch 'masterL' of https://github.com/lucageneroso/ecommerce.git
     FOREIGN KEY (id_ordine) REFERENCES Ordine(id_ordine),
     FOREIGN KEY (idProdotto) REFERENCES Prodotto(idProdotto)
 );

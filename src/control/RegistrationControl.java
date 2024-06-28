@@ -58,7 +58,7 @@ public class RegistrationControl extends HttpServlet {
         try {
             if (action != null) {
                 
-                if (action.equalsIgnoreCase("insert")) {
+                if (action.equalsIgnoreCase("insert")) { 
                     String email = request.getParameter("Email");
                     String pass = request.getParameter("PasswordCliente");
                     String nome = request.getParameter("nome");
@@ -81,6 +81,7 @@ public class RegistrationControl extends HttpServlet {
                     model.doSave(bean);
                     
                     HttpSession session = request.getSession();
+                    
                     session.setAttribute("Email", bean.getEmail());
                     session.setAttribute("cognome", bean.getCognome());
                     session.setAttribute("nome", bean.getNome());
@@ -106,6 +107,7 @@ public class RegistrationControl extends HttpServlet {
                         
                         if (utente != null && utente.getPass().equals(pwd)) {
                             HttpSession session = request.getSession();
+                            session.setAttribute("IVA", utente.getIVA() );
                             session.setAttribute("Email", utente.getEmail());
                             session.setAttribute("cognome", utente.getCognome());
                             session.setAttribute("nome", utente.getNome());
@@ -115,10 +117,16 @@ public class RegistrationControl extends HttpServlet {
                             session.setAttribute("Tipo_account", utente.getTipo_account());
                            
                             session.setAttribute("data_di_nascita", utente.getData());
+<<<<<<< HEAD
                             response.sendRedirect(request.getContextPath() + "/Profilo.jsp");
 
                             /*if (utente.getTipo_account() == 0) {
                                 response.sendRedirect(request.getContextPath() + "/Profilo.jsp");
+=======
+                            
+                            if (utente.getTipo_account() == 0) {
+                                response.sendRedirect(request.getContextPath() + "/Home.jsp");
+>>>>>>> branch 'masterL' of https://github.com/lucageneroso/ecommerce.git
                             } else if (utente.getTipo_account() == 1) {
                                 response.sendRedirect(request.getContextPath() + "/Amministratore.jsp");
                             }*/
@@ -133,7 +141,7 @@ public class RegistrationControl extends HttpServlet {
                     }
                 }
                 
-           /*    if (action.equalsIgnoreCase("searchByEmail")) {
+           /*    if (action.equalsIgnoreCase("searchByEmail")) { 
                     try {
                         String email = request.getParameter("Email");
                         

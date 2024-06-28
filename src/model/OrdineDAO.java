@@ -180,7 +180,11 @@ public class OrdineDAO {
 
              while (rs.next()) {
             Prodotto prodotto = new Prodotto();
+<<<<<<< HEAD
             prodotto.setIdProdotto(rs.getInt("idProdotto"));
+=======
+            prodotto.setID(rs.getInt("idProdotto"));
+>>>>>>> branch 'masterL' of https://github.com/lucageneroso/ecommerce.git
             prodotto.setQuantita(rs.getInt("Quantita"));
             prodotto.setPrezzo(rs.getDouble("Prezzo"));
             prodotto.setNome(rs.getString("Nome"));
@@ -212,6 +216,7 @@ public class OrdineDAO {
         return prodotti;
     }
    
+<<<<<<< HEAD
    public void doSave(Ordine ordine) throws SQLException {
        Connection connection = null;
        PreparedStatement preparedStatement = null;
@@ -244,6 +249,55 @@ public class OrdineDAO {
                    connection.close();
            }
        }
+=======
+   public int doSave(String indirizzo, double totale, String stato, int numProdotti, int Iva, String Email, String citta, int CAP, String provincia ) throws SQLException {
+	   int idOrdineGenerato = -1;
+       Connection connection = null;
+       PreparedStatement preparedStatement = null;
+
+       String insertSQL = "INSERT INTO Ordine (indirizzo, data, totale, stato, numero_prodotti, IVA_cliente, Email_cliente, citta, CAP, provincia) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+       try {
+           connection = ds.getConnection();
+           preparedStatement = connection.prepareStatement(insertSQL);
+
+           preparedStatement.setString(1, indirizzo);
+           
+           Date utilDate = new Date(); // ottieni la data corrente in java.util.Date
+           java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime()); // converti in java.sql.Date
+           preparedStatement.setDate(2, sqlDate);
+           
+           preparedStatement.setDouble(3, totale);
+           preparedStatement.setString(4, stato);
+           preparedStatement.setInt(5, numProdotti);
+           preparedStatement.setInt(6, Iva);
+           preparedStatement.setString(7,Email);
+           preparedStatement.setString(8,citta);
+           preparedStatement.setInt(9,CAP);
+           preparedStatement.setString(10,provincia);
+
+           int rowsInserted = preparedStatement.executeUpdate();
+           System.out.println("righe "+rowsInserted);
+           
+           
+           ResultSet rs = preparedStatement.executeQuery("SELECT LAST_INSERT_ID()");
+           if (rs.next()) {
+               idOrdineGenerato = rs.getInt(1);
+               System.out.println("Ultimo ID inserito: " + idOrdineGenerato);
+           }
+           
+       } finally {
+           try {
+               if (preparedStatement != null)
+                   preparedStatement.close();
+           } finally {
+               if (connection != null)
+                   connection.close();
+           }
+       }
+       
+       return idOrdineGenerato;
+>>>>>>> branch 'masterL' of https://github.com/lucageneroso/ecommerce.git
    }
 
     public List<Ordine> getAllOrdini() throws SQLException {

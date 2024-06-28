@@ -227,7 +227,7 @@ table{
 </head>
 
 <body>
-<jsp:include page="fragments/header.jsp"/>
+<!--<jsp:include page="fragments/header.jsp"/>-->
 
 <div class="info-box">
         <h2>Informazioni Amministratore</h2>
@@ -265,7 +265,7 @@ table{
         </nav>
     </div>
 
-    <main class="s-layout__content">
+    <main class="s-layout__content" >
         <div class="profile-form">
           <h2>Catalogo </h2>
 			<table class="product-table" id="productTable">
@@ -274,7 +274,8 @@ table{
         <th>Nome</th>
         <th>Descrizione</th>
         <th>Prezzo</th>
-        <th>Disponibilità</th>
+        <th>Categoria</th>
+        <th>Quantità</th>
         <th>Foto</th>
         <th>Azioni</th>
     </tr>
@@ -305,7 +306,16 @@ table{
                     <input type="submit" value="Salva" style="display: none;" id="salvaButton<%= bean.getID() %>">
                 </form>
             </td>
-            <td><%= bean.getQuantita() %></td>
+            <td><%= bean.getCategoria() %></td>
+            <td>
+                <form action="product" method="GET">
+                    <input type="hidden" name="action" value="updateq">
+                    <input type="hidden" name="id" value="<%= bean.getID() %>">
+                    <span id="spanQuantita<%= bean.getID() %>"><%= bean.getQuantita() %></span>
+                    <br>
+                    <input type="submit" value="Salva" style="display: none;" id="salvaButtonQuantita<%= bean.getID() %>">
+                </form>
+            </td>
             <!-- 
             <td>
                 <%if(bean.getQuantita()==0){ %><p>SI</p>
@@ -321,19 +331,18 @@ table{
                 <a href="#" onclick="mostraInputPrezzo('<%= bean.getID() %>'); return false;">
                     <input type="submit" value="Modifica">
                 </a>
-                <%if(bean.getQuantita()==0){ %>
-                    <br>
+                
+                <br>
                     <input type="hidden" id="deleteId" value="<%= bean.getID() %>">
                     <a href="product?action=delete&id=<%=bean.getID()%>">
                         <input type="submit" value="Cancella" id="deleteButton">
-                    </a>
-                <%}else{ %>
-                    <br>
-                    <input type="hidden" id="updateId" value="<%= bean.getID() %>">
-                    <a href="product?action=updateq&id=<%=bean.getID()%>">
-                        <input type="submit" value="Aggiungi" id="updateq">
-                    </a>
-                <%} %>
+                   	</a>
+                  
+                 <br>
+                    <a href="#" onclick="mostraInputQuantita('<%= bean.getID() %>'); return false;">
+                    <input type="submit" value="Aggiungi">
+                	</a>
+                
             </td>
             </tr>
             <% 
@@ -349,13 +358,38 @@ table{
             <td colspan="8">Nessun prodotto disponibile</td>
         </tr>
     <% } %>
+    
+    
+    <!-- 
     <tr id="addProductRow">
     <td colspan="8">
         <button onclick="aggiungiProdotto()">+</button>
     </td>
+     -->
 </tr>
     
 </table>
+<br>
+<table>
+	<tr><td>Aggiungi Prodotto</td></tr>
+	
+	<tr>
+		<td>
+    	<form action="product" method="post" enctype="multipart/form-data">
+    	<input type="hidden" name="action" value="insert">
+        <input type="text" name="id" placeholder="ID">
+        <input type="text" name="nome" placeholder="Nome">
+        <input type="text" name="descrizione" placeholder="Descrizione">
+        <input type="text" name="prezzo" placeholder="Prezzo">
+        <input type="text" name="categoria" placeholder="Categoria">
+        <input type="text" name="quantita" placeholder="Quantità">
+        <input type="file" name="foto" accept="image/*">
+        <button type="submit">Salva</button>
+    	</form>
+    	</td>
+	</tr>
+</table>
+
 <br>
 </div>
 
@@ -599,6 +633,8 @@ if (searchFormOrders) {
 			function deleteItem() {
 			    var id = document.getElementById('deleteId').value;
 			    window.location.href = 'doDelete?id=' + encodeURIComponent(id);
+
+			    System.out.println("da eliminare");
 			  }
 		
 </script>
@@ -616,45 +652,80 @@ function mostraInputPrezzo(id) {
     salvaButton.style.display = 'block';
 }
 
+function mostraInputQuantita(id) {
+    var spanQuantita = document.getElementById('spanQuantita' + id);
+    var inputQuantita = document.createElement('input');
+    inputQuantita.type = 'text';
+    inputQuantita.name = 'quantita';
+    inputQuantita.value = spanQuantita.textContent.trim();
+    spanQuantita.textContent = '';
+    spanQuantita.appendChild(inputQuantita);
+    
+    var salvaButton = document.getElementById('salvaButtonQuantita' + id);
+    salvaButton.style.display = 'block';
+}
+
 function aggiungiProdotto() {
     var newRow = document.createElement("tr");
+    
+    
 
     newRow.innerHTML = `
-        <td><input type="text" name="nuovoProdottoID" placeholder="ID"></td>
-        <td><input type="text" name="nuovoProdottoNome" placeholder="Nome"></td>
-        <td><input type="text" name="nuovoProdottoDescrizione" placeholder="Descrizione"></td>
-        <td><input type="text" name="nuovoProdottoPrezzo" placeholder="Prezzo"></td>
-        <td><input type="text" name="nuovoProdottoDisponibilita" placeholder="Disponibilità"></td>
-        <td><input type="file" name="nuovoProdottoFoto" accept="image/*" ></td>
-        <td><input type="text" name="nuovoProdottoSesso" placeholder="Quantità"></td>
-        <td>
-        <form action="product" method="post" enctype="multipart/form-data">
-        <input type="submit" onclick="salvaNuovoProdotto()" value="Salva" id="salva">
+    <td>
+    	<form action="product" method="post" enctype="multipart/form-data">
+        <input type="text" name="nuovoProdottoID" placeholder="ID">
+        <input type="text" name="nuovoProdottoNome" placeholder="Nome">
+        <input type="text" name="nuovoProdottoDescrizione" placeholder="Descrizione">
+        <input type="text" name="nuovoProdottoPrezzo" placeholder="Prezzo">
+        <input type="text" name="nuovoProdottoCategoria" placeholder="Categoria">
+        <input type="text" name="nuovoProdottoDisponibilita" placeholder="Quantità">
+        <input type="file" name="nuovoProdottoFoto" accept="image/*">
+        <button type="submit" name="action" value="insert">Salva</button>
     	</form>
-        </td>
+    </td>
     `;
 
     var table = document.getElementById("productTable"); 
     table.appendChild(newRow);
+    System.out.println("Qui1");
 }
 
+/*
+ <td>
+    	<input type="text" name="nuovoProdottoID" placeholder="ID"></td>
+        <td><input type="text" name="nuovoProdottoNome" placeholder="Nome"></td>
+        <td><input type="text" name="nuovoProdottoDescrizione" placeholder="Descrizione"></td>
+        <td><input type="text" name="nuovoProdottoPrezzo" placeholder="Prezzo"></td>
+        <td><input type="text" name="nuovoProdottoCategoria" placeholder="Categoria"></td>
+        <td><input type="text" name="nuovoProdottoDisponibilita" placeholder="Quantità"></td>
+        <td><input type="file" name="nuovoProdottoFoto" accept="image/*" ></td>
+        <td>
+        	<form action="product" method="post" enctype="multipart/form-data">
+        		<input type="hidden" name="action" value="insert">
+        		<input type="submit" onclick="salvaNuovoProdotto()" value="Salva" id="salva">
+    		</form>
+        </td>
+ */
+
 function salvaNuovoProdotto() {
+	System.out.println("Qui1");
+	var id = document.querySelector('input[name="nuovoProdottoID"]').value;
     var nome = document.querySelector('input[name="nuovoProdottoNome"]').value;
     var quantita = document.querySelector('input[name="nuovoProdottoDisponibilita"]').value;
     var descrizione = document.querySelector('input[name="nuovoProdottoDescrizione"]').value;
+    var categoria = document.querySelector('input[name="nuovoProdottoCategoria"]').value;
     var prezzo = document.querySelector('input[name="nuovoProdottoPrezzo"]').value;
-    var sesso = document.querySelector('input[name="nuovoProdottoSesso"]').value;
     var foto = document.querySelector('input[name="nuovoProdottoFoto"]').files[0];
 
     var disponibilitaInt = disponibilita === "1" ? 1 : 0;
-    
+    System.out.println("Qui2");
     var formData = new FormData();
     formData.append("action", "insert");
+    formData.append("id", id);
     formData.append("nome", nome);
     formData.append("quantita", quantita);
     formData.append("descrizione", descrizione);
     formData.append("prezzo", prezzo);
-    formData.append("sesso", sesso);
     formData.append("foto", foto);
 
     var xhr = new XMLHttpRequest();

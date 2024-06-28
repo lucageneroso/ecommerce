@@ -23,17 +23,18 @@
             margin: auto;
             padding: 20px;
         }
-        .header {
+        .header-profilo {
             background-color: orange;
             color: #fff;
             padding: 10px;
             text-align: center;
             margin-bottom: 20px;
+            border-radius:10px;
         }
         .info-box {
             background-color: #fff;
             border: 1px solid #ddd;
-            border-radius: 5px;
+            border-radius: 10px;
             padding: 20px;
             margin-bottom: 20px;
         }
@@ -59,12 +60,23 @@
         .order-item p {
             margin: 5px 0;
         }
+        
+        .button-home{
+        	margin:10px;
+        	background-color:white;
+        	border-color:orange;
+        	border-radius:5px;
+        	display: inline-block;
+        	padding:5px;
+        	border: 1px solid #ddd;
+        }
     </style>
 </head>
 <body>
 
+
 <div class="container">
-    <div class="header">
+    <div class="header-profilo">
         <h1>Profilo Utente</h1>
     </div>
     
@@ -77,7 +89,7 @@
         <p><strong>IBAN:</strong> <%= session.getAttribute("Iban") %></p>
   <p><strong>Tipo Account:</strong> <%= session.getAttribute("Tipo_account").equals(0) ? "Standard" : "Amministratore" %></p> 
     </div>
-     <div class="button-container">
+     <div class="button-home">
         				<a href="Home.jsp">Torna alla Home</a>
     					</div>
     <div class="info-box">
