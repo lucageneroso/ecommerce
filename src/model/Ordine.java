@@ -10,6 +10,35 @@ public class Ordine {
     private double totale;
     private String stato;
     private int numeroProdotti;
+    private String EmailCliente;
+    private String citta;
+    private int CAP;
+    private String provincia;
+    
+    public void setCitta(String x) {
+    	this.citta=x;
+    }
+    public String getCitta() {
+    	return this.citta;
+    }
+    public void setCAP(int x) {
+    	this.CAP=x;
+    }
+    public int getCAP() {
+    	return this.CAP;
+    }
+    public void setProvincia(String x) {
+    	this.provincia=x;
+    }
+    public String getProvincia() {
+    	return this.provincia;
+    }
+    public String getEmailCliente() {
+    	return this.EmailCliente;
+    }
+    public void setEmailCliente(String x) {
+    	this.EmailCliente=x;
+    }
     
     public int getNumeroProdotti() {
     	return this.numeroProdotti;

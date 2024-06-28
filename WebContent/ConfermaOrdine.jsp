@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%
 	Cart cart = (Cart) request.getAttribute("cart");
+	double totale=0;
+	int numProdotti=0;
 %>
 <%@ page contentType="text/html; charset=UTF-8" import="java.util.*,model.*"%>
 <!DOCTYPE html>
@@ -181,6 +183,10 @@
 		<% if (cart != null) { %>
 			<table class="cart-table" border="1" id="table1">
 				<% for (Prodotto p : cart.getProducts()) {
+					
+					totale+=p.getPrezzo();
+					numProdotti++;
+					
 					byte[] imageB = p.getImg();
 					String base64img = "";
 					if (imageB != null) {
@@ -195,6 +201,9 @@
 				<% } %>
 			</table>
 		<% } %>
+						<p> Totale: <%= Math.round(totale * 100.0) / 100.0 %> € </p>
+						<input type="hidden" name="totale" id="totalHidden" value="<%= Math.round(totale * 100.0) / 100.0 %>">
+						<input type="hidden" name="numProdotti" id="totalHidden" value="<%= numProdotti %>">
 						<input type="submit" value="Acquista Ora">
 			</form>
 			

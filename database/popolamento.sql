@@ -1,4 +1,3 @@
-
 DROP DATABASE IF EXISTS ingrosso;
 CREATE DATABASE ingrosso;
 USE ingrosso;
@@ -24,14 +23,19 @@ VALUES (12345, 'admin', 'admin', '2003-10-18', 'admin@gmail.com', 'admin', 'IT00
 
 DROP TABLE IF EXISTS Ordine;
 CREATE TABLE IF NOT EXISTS Ordine (
-    id_ordine INT PRIMARY KEY NOT NULL,
+    id_ordine INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     indirizzo VARCHAR(255) NOT NULL,
+    citta VARCHAR(255) NOT NULL,
+    CAP INT NOT NULL,
+    provincia VARCHAR(255) NOT NULL,
     data DATE NOT NULL,
     totale DECIMAL(10, 2) NOT NULL,
-    stato VARCHAR(50) NOT NULL,
+    stato ENUM('In Preparazione', 'In Consegna', 'Consegnato'),
     numero_prodotti INT NOT NULL,
     IVA_cliente INT NOT NULL,
-    FOREIGN KEY (IVA_cliente) REFERENCES Cliente(IVA)
+    Email_cliente VARCHAR(255) NOT NULL,
+    FOREIGN KEY (IVA_cliente) REFERENCES Cliente(IVA),
+    FOREIGN KEY (Email_cliente) REFERENCES Cliente(Email)
 );
 
 DROP TABLE IF EXISTS Prodotto;
@@ -44,6 +48,15 @@ CREATE TABLE IF NOT EXISTS Prodotto (
     Categoria VARCHAR(255),
     Sconto DECIMAL(10, 2),
     Foto mediumblob
+);
+
+DROP TABLE IF EXISTS DettagliOrdine;
+CREATE TABLE IF NOT EXISTS DettagliOrdine (
+    id_ordine INT NOT NULL,
+    idProdotto INT NOT NULL,
+    quantita INT NOT NULL,
+    FOREIGN KEY (id_ordine) REFERENCES Ordine(id_ordine),
+    FOREIGN KEY (idProdotto) REFERENCES Prodotto(idProdotto)
 );
 
 

@@ -254,12 +254,13 @@ table.cart-table {
             <td>
                 <input type="radio" name="delivery-option" id="delivery-option" value="Altro indirizzo"
                     onclick="showAddressForm()">
-                <label for="delivery-option" class="radio-label option-label">Altro indirizzo</label>
+                <label for="delivery-option" class="radio-label option-label">Indirizzo</label>
             </td>
             <td>
-                Seleziona questa opzione se desideri ricevere la consegna ad un altro indirizzo
+                Inserire l'indirizzo per effettuara la consegna
             </td>
         </tr>
+        <!--  
         <tr>
             <td>
                 <input type="radio" name="delivery-option" id="pickup-option" value="Punto di Ritiro" onclick="hideAddressForm()">
@@ -269,6 +270,7 @@ table.cart-table {
                 HomeDecore Shop <br> Via Pantano Nghilino SNC Sarno
             </td>
         </tr>
+        -->
     </table>
 
     <div id="address-form" style="display: none;">
