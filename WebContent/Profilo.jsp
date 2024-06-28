@@ -75,7 +75,7 @@
         <p><strong>Email:</strong> <%= session.getAttribute("Email") %></p>
         <p><strong>Data di Nascita:</strong> <%= new SimpleDateFormat("dd/MM/yyyy").format(session.getAttribute("data_di_nascita")) %></p>
         <p><strong>IBAN:</strong> <%= session.getAttribute("Iban") %></p>
-<!--  <p><strong>Tipo Account:</strong> -->
+  <p><strong>Tipo Account:</strong> <%= session.getAttribute("Tipo_account").equals(0) ? "Standard" : "Amministratore" %></p> 
     </div>
      <div class="button-container">
         				<a href="Home.jsp">Torna alla Home</a>

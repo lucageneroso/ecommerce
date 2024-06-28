@@ -52,7 +52,7 @@ public class AcquistoControl extends HttpServlet {
 					RequestDispatcher dispatcher = request.getRequestDispatcher("/product?action=viewC");
 					dispatcher.forward(request, response);
 				}
-				if(request.getSession().getAttribute("email")!= null) {
+				if(request.getSession().getAttribute("Email")!= null) {
 				String pagamento = request.getParameter("Pagamento");
 				String numeroCarta = request.getParameter("card-number");
 				String titolareCarta = request.getParameter("card-holder");

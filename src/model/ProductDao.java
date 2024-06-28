@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -242,11 +243,11 @@ public class ProductDao {
 	}
 	
 	
-	public synchronized Collection<Prodotto> doRetrieveAll() throws SQLException {
+	public synchronized List<Prodotto> doRetrieveAll() throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
-		Collection<Prodotto> products = new LinkedList<Prodotto>();
+		List<Prodotto> products = new LinkedList<Prodotto>();
 
 		String selectSQL = "SELECT * FROM " + ProductDao.TABLE_NAME;
 
@@ -265,6 +266,7 @@ public class ProductDao {
 				bean.setPrezzo(rs.getDouble("Prezzo"));
 				bean.setQuantita(rs.getInt("Quantita"));
 				bean.setCategoria(rs.getString("Categoria"));
+				bean.setImg(rs.getBytes("Foto"));
 				bean.setSconto(rs.getDouble("Sconto"));	
 	            
 	            products.add(bean);
@@ -311,11 +313,11 @@ public class ProductDao {
 	    }
 	}
 	
-	public synchronized Collection<Prodotto> searchProducts(String nome) throws SQLException {
+	public synchronized List<Prodotto> searchProducts(String nome) throws SQLException {
 	    Connection connection = null;
 	    PreparedStatement preparedStatement = null;
 
-	    Collection<Prodotto> products = new LinkedList<Prodotto>();
+	    List<Prodotto> products = new LinkedList<Prodotto>();
 
 
 	    String selectSQL = "SELECT * FROM " + ProductDao.TABLE_NAME + " WHERE Nome LIKE ?";
@@ -337,6 +339,7 @@ public class ProductDao {
 				bean.setPrezzo(rs.getDouble("Prezzo"));
 				bean.setQuantita(rs.getInt("Quantita"));
 				bean.setCategoria(rs.getString("Categoria"));
+				bean.setImg(rs.getBytes("Foto"));
 				bean.setSconto(rs.getDouble("Sconto"));
 	            
 	           
@@ -379,6 +382,7 @@ public class ProductDao {
 				bean.setPrezzo(rs.getDouble("Prezzo"));
 				bean.setQuantita(rs.getInt("Quantita"));
 				bean.setCategoria(rs.getString("Categoria"));
+				bean.setImg(rs.getBytes("Foto"));
 				bean.setSconto(rs.getDouble("Sconto"));
 	            
 	           
@@ -410,11 +414,12 @@ public class ProductDao {
 	    }
 	}
 	
-	public synchronized Collection<Prodotto> doRetrieveByCategoria(String s1) throws SQLException {
+	public synchronized List<Prodotto> doRetrieveByCategoria(String s1) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
-		Collection<Prodotto> products = new LinkedList<Prodotto>();
+		List<Prodotto> products = new LinkedList<Prodotto>();
+		
 
 		String selectSQL = "SELECT * FROM " + ProductDao.TABLE_NAME + " WHERE Categoria = ?";
 

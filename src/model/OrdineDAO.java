@@ -33,7 +33,7 @@ public class OrdineDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         List<Ordine> ordini = new ArrayList<>();
-        String selectSQL = "SELECT * FROM " + TABLE_NAME + " WHERE indirizzo = ?";
+        String selectSQL = "SELECT * FROM " + TABLE_NAME + " WHERE EmailCliente = ?";
 
         try {
             connection = ds.getConnection();
@@ -49,7 +49,7 @@ public class OrdineDAO {
                 String stato = rs.getString("stato");
                 int numeroProdotti = rs.getInt("numero_prodotti");
                 int IVA_cliente = rs.getInt("IVA_cliente");
-
+                String EmailCliente=rs.getString("EmailCliente");
                 Ordine ordine = new Ordine();
                 ordine.setNumeroOrdine(numeroOrdine);
                 ordine.setData(data);
@@ -57,7 +57,9 @@ public class OrdineDAO {
                 ordine.setStato(stato);
                 ordine.setNumeroProdotti(numeroProdotti);
                 ordine.setIVA_cliente(IVA_cliente);
+                ordine.setEmailCliente(EmailCliente);
                 ordini.add(ordine);
+                
             }
 
         } catch (SQLException e) {
@@ -81,58 +83,12 @@ public class OrdineDAO {
         return ordini;
     }
 
-   /* public List<Ordine> searchByEmail(String email) throws SQLException {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-
-        List<Ordine> ordini = new ArrayList<>();
-        String selectSQL = "SELECT * FROM " + TABLE_NAME + " WHERE email LIKE ?";
-
-        try {
-            connection = ds.getConnection();
-            preparedStatement = connection.prepareStatement(selectSQL);
-
-            preparedStatement.setString(1, "%" + email + "%");
-
-            ResultSet rs = preparedStatement.executeQuery();
-
-            while (rs.next()) {
-                int numeroOrdine = rs.getInt("id_ordine");
-                Date data = rs.getDate("data");
-                double totale = rs.getDouble("totale");
-                String stato = rs.getString("stato");
-                int numeroProdotti = rs.getInt("numero_rodotti");
-                int IVA_cliente = rs.getInt("IVA_cliente");
-
-                Ordine ordine = new Ordine();
-                ordine.setNumeroOrdine(numeroOrdine);
-                ordine.setData(data);
-                ordine.setTotale(totale);
-                ordine.setStato(stato);
-                ordine.setNumeroProdotti(numeroProdotti);
-                ordine.setIVA_cliente(IVA_cliente);
-                ordini.add(ordine);
-            }
-
-        } finally {
-            try {
-                if (preparedStatement != null)
-                    preparedStatement.close();
-            } finally {
-                if (connection != null)
-                    connection.close();
-            }
-        }
-
-        return ordini;
-    }*/
-
     public Ordine getOrdineByNumero(int numeroOrdine) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
         String selectSQL = "SELECT * FROM " + TABLE_NAME + " WHERE id_ordine = ?";
-        Ordine ordine = null;
+        Ordine ordine = new Ordine();
 
         try {
             connection = ds.getConnection();
@@ -149,6 +105,7 @@ public class OrdineDAO {
                 ordine.setStato(rs.getString("stato"));
                 ordine.setNumeroProdotti(rs.getInt("numero_prodotti"));
                 ordine.setIVA_cliente(rs.getInt("IVA_cliente"));
+                ordine.setEmailCliente(rs.getString("EmailCliente"));
             }
 
         } catch (SQLException e) {
@@ -205,11 +162,14 @@ public class OrdineDAO {
         }
     }
 
-   /* public List<Prodotto> getProdotti(int idO) {
+   public List<Prodotto> getProdotti(int idO) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         List<Prodotto> prodotti = new ArrayList<>();
-        String selectSQL = "SELECT p.id, p.nome, p.foto FROM Prodotto p JOIN DettagliOrdine d ON p.id = d.codP WHERE d.idO = ?";
+        String selectSQL = "SELECT p.idProdotto, p.Quantita, p.Prezzo, p.Nome, p.Descrizione, p.Categoria, p.Sconto, p.Foto " +
+             "FROM Prodotto p " +
+             "JOIN DettagliOrdine d ON p.idProdotto = d.idProdotto " +
+             "WHERE d.idOrdine = ?";
 
         try {
             connection = ds.getConnection();
@@ -218,18 +178,19 @@ public class OrdineDAO {
 
             ResultSet rs = preparedStatement.executeQuery();
 
-            while (rs.next()) {
-                int id = rs.getInt("p.id");
-                String nome = rs.getString("p.nome");
-                byte[] foto = rs.getBytes("p.foto");
+             while (rs.next()) {
+            Prodotto prodotto = new Prodotto();
+            prodotto.setIdProdotto(rs.getInt("idProdotto"));
+            prodotto.setQuantita(rs.getInt("Quantita"));
+            prodotto.setPrezzo(rs.getDouble("Prezzo"));
+            prodotto.setNome(rs.getString("Nome"));
+            prodotto.setDescrizione(rs.getString("Descrizione"));
+            prodotto.setCategoria(rs.getString("Categoria"));
+            prodotto.setSconto(rs.getDouble("Sconto"));
+            prodotto.setImg(rs.getBytes("Foto"));
 
-                Prodotto bean = new Prodotto();
-                bean.setID(id);
-                bean.setNome(nome);
-                bean.setImg(foto);
-                prodotti.add(bean);
-            }
-
+            prodotti.add(prodotto);
+        }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -249,7 +210,41 @@ public class OrdineDAO {
         }
 
         return prodotti;
-    }*/
+    }
+   
+   public void doSave(Ordine ordine) throws SQLException {
+       Connection connection = null;
+       PreparedStatement preparedStatement = null;
+
+       String insertSQL = "INSERT INTO Ordine (id_ordine, indirizzo, data, totale, stato, numero_prodotti, IVA_cliente, EmailCliente, citta, CAP, provincia) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+       try {
+           connection = ds.getConnection();
+           preparedStatement = connection.prepareStatement(insertSQL);
+
+           preparedStatement.setInt(1, ordine.getNumeroOrdine());
+           preparedStatement.setString(2, ordine.getIndirizzo());
+           preparedStatement.setDate(3, new java.sql.Date(ordine.getData().getTime()));
+           preparedStatement.setDouble(4, ordine.getTotale());
+           preparedStatement.setString(5, ordine.getStato());
+           preparedStatement.setInt(6, ordine.getNumeroProdotti());
+           preparedStatement.setInt(7, ordine.getIVA_cliente());
+           preparedStatement.setString(8, ordine.getEmailCliente());
+           preparedStatement.setString(9, ordine.getCitta());
+           preparedStatement.setInt(10, ordine.getCAP());
+           preparedStatement.setString(11, ordine.getProvincia());
+
+           preparedStatement.executeUpdate();
+       } finally {
+           try {
+               if (preparedStatement != null)
+                   preparedStatement.close();
+           } finally {
+               if (connection != null)
+                   connection.close();
+           }
+       }
+   }
 
     public List<Ordine> getAllOrdini() throws SQLException {
         Connection connection = null;

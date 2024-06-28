@@ -14,7 +14,7 @@
     UtenteDao utenteDao = new UtenteDao();
     List<Utente> utenti = utenteDao.doRetrieveAll();
     request.setAttribute("utenti", utenti);
-    if((int) session.getAttribute("tipo_account")== 1){
+    if((int) session.getAttribute("Tipo_account")== 1){
 %>
 
 <!DOCTYPE html>
@@ -216,8 +216,9 @@ input[type="file"]{
 	color:transparent;
 }	
 
-.user-table{
+table{
 	margin:auto !important;
+	margin-top:20px !important;
 	margin-top:5px;
 }
 
@@ -226,19 +227,16 @@ input[type="file"]{
 </head>
 
 <body>
-<div class="banner">
-    <a href="Home.jsp"><img src="./nuovologo.png" id="image" alt="#"></a>
-    <div class="dx">
-        <% if (session.getAttribute("email") == null) { %>
-            <a href="Accedi.jsp"><img src="utente.png" alt="#"></a>
-            <a href="product?action=viewC"><img src="cart.png" alt="#"></a>
-        <% } else { %>
-            <a href="ordine?action=ViewOrdini&email=<%=session.getAttribute("email") %>"><img src="utente.png" alt="#"></a>
-            <a href="registration?action=logout"><img src="logout.png" alt="#"></a>
-            <a href="product?action=viewC"><img src="cart.png" alt="#"></a>
-        <% } %>
+<jsp:include page="fragments/header.jsp"/>
+
+<div class="info-box">
+        <h2>Informazioni Amministratore</h2>
+        <p><strong>Nome:</strong> <%= session.getAttribute("nome") %></p>
+        <p><strong>Cognome:</strong> <%= session.getAttribute("cognome") %></p>
+        <p><strong>Email:</strong> <%= session.getAttribute("Email") %></p>
+        <p><strong>IBAN:</strong> <%= session.getAttribute("Iban") %></p>
+        <p><strong>Tipo Account:</strong> <%= session.getAttribute("Tipo_account").equals(0) ? "Standard" : "Amministratore" %></p> 
     </div>
-</div>
 
 <div class="s-layout">
     <div class="s-layout__sidebar">
@@ -252,7 +250,7 @@ input[type="file"]{
                     <a class="s-sidebar__nav-link" href="#0" id="catalogoLink">
                         <i class="fa fa-home"></i><em>Prodotti</em>
                     </a>
-                </li>
+                </li> 
                 <li>
                     <a class="s-sidebar__nav-link" href="#0" id="utentiLink">
                         <i class="fa fa-user"></i><em>Utenti</em>
@@ -344,7 +342,7 @@ input[type="file"]{
         if (count % 4 != 0) { %>
             <% for (int i = 0; i < 8 - (count % 8); i++) { %>
             <% } %>
-        </tr>
+      
         <% }
     } else { %>
         <tr>
@@ -448,7 +446,7 @@ input[type="file"]{
     </main>
 </div>
 
-<jsp:include page="footer.jsp"/>
+<jsp:include page="fragments/footer.jsp"/>
 
 <script>
 var searchForm = document.getElementById("search-form");

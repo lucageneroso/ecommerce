@@ -24,44 +24,42 @@ VALUES (12345, 'admin', 'admin', '2003-10-18', 'admin@gmail.com', 'admin', 'IT00
 
 DROP TABLE IF EXISTS Ordine;
 CREATE TABLE IF NOT EXISTS Ordine (
-    id_ordine INT PRIMARY KEY NOT NULL,
+    id_ordine INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     indirizzo VARCHAR(255) NOT NULL,
+    citta VARCHAR(255) NOT NULL,
+    CAP INT NOT NULL,
+    provincia VARCHAR(255) NOT NULL,
     data DATE NOT NULL,
     totale DECIMAL(10, 2) NOT NULL,
-    stato VARCHAR(50) NOT NULL,
+    stato ENUM('In Preparazione', 'In Consegna', 'Consegnato'),
     numero_prodotti INT NOT NULL,
     IVA_cliente INT NOT NULL,
-    FOREIGN KEY (IVA_cliente) REFERENCES Cliente(IVA)
+    FOREIGN KEY (IVA_cliente) REFERENCES Cliente(IVA),
+    EmailCliente VARCHAR(255) NOT NULL,
+    FOREIGN KEY(Email_cliente) REFERENCES Cliente(Email)
 );
-
-DROP TABLE IF EXISTS Fornitore;
-CREATE TABLE IF NOT EXISTS Fornitore (
-    IVA INT PRIMARY KEY,
-    nome VARCHAR(255) NOT NULL,
-    cognome VARCHAR(255) NOT NULL,
-    Email VARCHAR(255) NOT NULL
-);
-
-INSERT INTO Fornitore(IVA, nome, cognome, Email)
-VALUES (13579, 'Luca', 'Grazioso', 'lucagrazioso@gmail.com');
 
 DROP TABLE IF EXISTS Prodotto;
 CREATE TABLE IF NOT EXISTS Prodotto (
     idProdotto INT PRIMARY KEY,
     Quantita INT NOT NULL,
-    Fornitore_IVA INT NOT NULL,
     Prezzo DECIMAL(10, 2) NOT NULL,
     Nome VARCHAR(255) NOT NULL,
     Descrizione VARCHAR(255),
     Categoria VARCHAR(255),
-    Situato_in VARCHAR(50) NOT NULL,
     Sconto DECIMAL(10, 2),
-    Foto BLOB,
-    FOREIGN KEY (Fornitore_IVA) REFERENCES Fornitore(IVA)
+    Foto mediumblob
 );
 
-INSERT INTO Prodotto(idProdotto, Quantita, Fornitore_IVA, Prezzo, Nome, Descrizione, Categoria, Situato_in, Sconto, Foto)
-VALUES (1, 100, 13579, 9.90, 'Rotolone', 'Rotolone comodo per pulire', 'Cucina', 'Via Spennata', 0, LOAD_FILE('C:\Users\rical\OneDrive\Desktop\rotolone.jpg'));
+CREATE TABLE IF NOT EXISTS DettagliOrdine (
+    id_ordine INT NOT NULL,
+    idProdotto INT NOT NULL,
+    quantita INT NOT NULL,
+    prezzo DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (id_ordine) REFERENCES Ordine(id_ordine),
+    FOREIGN KEY (idProdotto) REFERENCES Prodotto(idProdotto)
+);
+
 
 DROP TABLE IF EXISTS Acquista;
 CREATE TABLE IF NOT EXISTS Acquista (
@@ -72,8 +70,8 @@ CREATE TABLE IF NOT EXISTS Acquista (
     FOREIGN KEY (Codice_prodotto) REFERENCES Prodotto(idProdotto)
 );
 
-DROP TABLE IF EXISTS Recensione;
-CREATE TABLE Recensione (
+DROP TABLE IF EXISTS Recensione; 
+CREATE TABLE Recensione ( 
     idRecensione INT NOT NULL AUTO_INCREMENT,
     idProdotto INT NOT NULL,
     emailCliente VARCHAR(50) NOT NULL,
@@ -85,37 +83,4 @@ CREATE TABLE Recensione (
     FOREIGN KEY (emailCliente) REFERENCES Cliente(Email)
 );
 
-/*
-DROP TABLE IF EXISTS Magazzino;
-CREATE TABLE IF NOT EXISTS Magazzino (
-    Indirizzo VARCHAR(255) PRIMARY KEY,
-    QuantitaProdotti INT NOT NULL
-);
-
-DROP TABLE IF EXISTS Situato_in;
-CREATE TABLE IF NOT EXISTS Situato_in (
-    Indirizzo_magazzino VARCHAR(255),
-    Codice_prodotto INT,
-    PRIMARY KEY (Indirizzo_magazzino, Codice_prodotto),
-    FOREIGN KEY (Indirizzo_magazzino) REFERENCES Magazzino(Indirizzo),
-    FOREIGN KEY (Codice_prodotto) REFERENCES Prodotto(Codice)
-);
-*/
-
-/*
-DROP TABLE IF EXISTS Sconto;
-CREATE TABLE IF NOT EXISTS Sconto (
-    Codice INT PRIMARY KEY,
-    DataInizio DATE NOT NULL,
-    DataFine DATE NOT NULL,
-    Valore DECIMAL(5, 2) NOT NULL
-);
-
-DROP TABLE IF EXISTS Applicato;
-CREATE TABLE IF NOT EXISTS Applicato (
-    CodiceProdotto INT ,
-    CodiceSconto INT,
-    PRIMARY KEY (CodiceProdotto, CodiceSconto),
-    FOREIGN KEY (CodiceProdotto) REFERENCES Prodotto(Codice)
-);
-*/
+;

@@ -30,6 +30,9 @@ public class Prodotto {
 	public void setID(int id) {
 		this.id = id;
 	}
+	
+	
+	
 	public int getQuantita() {
 		return Quantita;
 	}
@@ -83,4 +86,8 @@ public class Prodotto {
         this.sconto = sconto;
     }
 
+    public void setIdProdotto(int x) {
+    	this.id=x;
+    }
+    
 }
