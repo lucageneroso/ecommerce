@@ -40,16 +40,16 @@ public class OrdineControl extends HttpServlet {
 		if (action != null) {
 			
 			if (action.equalsIgnoreCase("ViewOrdini")) {
-				String email = request.getParameter("email");
+				String email = request.getParameter("Email");
 				request.setAttribute("ordini",ordine.getOrdini(email));
 				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Profilo.jsp");
 				dispatcher.forward(request, response);
 			}  
 			
 			else if(action.equalsIgnoreCase("Dettagli")) {
-				String email = request.getParameter("email");
+				String email = request.getParameter("Email");
 		        List<Ordine> ordini = ordine.getOrdini(email); // Recupera gli ordini dal database
-		        int numeroOrdine = Integer.parseInt(request.getParameter("id_ORDINE"));
+		        int numeroOrdine = Integer.parseInt(request.getParameter("id_ordine"));
 		        List<Prodotto> prodotti = ordine.getProdotti(numeroOrdine); // Recupera i prodotti associati a un ordine dal database
 
 		        request.setAttribute("ordini", ordini); // Imposta l'attributo "ordini" sulla richiesta

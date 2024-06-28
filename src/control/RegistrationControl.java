@@ -81,6 +81,7 @@ public class RegistrationControl extends HttpServlet {
                     model.doSave(bean);
                     
                     HttpSession session = request.getSession();
+                    
                     session.setAttribute("Email", bean.getEmail());
                     session.setAttribute("cognome", bean.getCognome());
                     session.setAttribute("nome", bean.getNome());
@@ -106,6 +107,7 @@ public class RegistrationControl extends HttpServlet {
                         
                         if (utente != null && utente.getPass().equals(pwd)) {
                             HttpSession session = request.getSession();
+                            session.setAttribute("IVA", utente.getIVA() );
                             session.setAttribute("Email", utente.getEmail());
                             session.setAttribute("cognome", utente.getCognome());
                             session.setAttribute("nome", utente.getNome());
