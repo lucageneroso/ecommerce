@@ -100,12 +100,12 @@ Cart cart = (Cart) session.getAttribute("cart");
                 Iterator<Prodotto> it = products.iterator();
                 while (it.hasNext()) {
                     Prodotto prodotto = it.next();
-                    byte[] imageBytes = prodotto.getImg();
-                    String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+                    //byte[] imageBytes = prodotto.getImg();
+                    //String base64Image = Base64.getEncoder().encodeToString(imageBytes);
             %>
             <div class="product">
             
-                <img src="data:image/jpg;base64, <%= base64Image %>" alt="Immagine Prodotto">
+                <!--  <img src="data:image/jpg;base64, <%= base64Image %>" alt="Immagine Prodotto"> -->
                 <h3><%= prodotto.getNome() %></h3>
                 <p>Prezzo: <%= prodotto.getPrezzo() %>€</p>
                 <% if (prodotto.getQuantita() <= 0) { %>

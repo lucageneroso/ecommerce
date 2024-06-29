@@ -180,11 +180,8 @@ public class OrdineDAO {
 
              while (rs.next()) {
             Prodotto prodotto = new Prodotto();
-<<<<<<< HEAD
             prodotto.setIdProdotto(rs.getInt("idProdotto"));
-=======
             prodotto.setID(rs.getInt("idProdotto"));
->>>>>>> branch 'masterL' of https://github.com/lucageneroso/ecommerce.git
             prodotto.setQuantita(rs.getInt("Quantita"));
             prodotto.setPrezzo(rs.getDouble("Prezzo"));
             prodotto.setNome(rs.getString("Nome"));
@@ -216,7 +213,6 @@ public class OrdineDAO {
         return prodotti;
     }
    
-<<<<<<< HEAD
    public void doSave(Ordine ordine) throws SQLException {
        Connection connection = null;
        PreparedStatement preparedStatement = null;
@@ -249,8 +245,9 @@ public class OrdineDAO {
                    connection.close();
            }
        }
-=======
-   public int doSave(String indirizzo, double totale, String stato, int numProdotti, int Iva, String Email, String citta, int CAP, String provincia ) throws SQLException {
+   }
+
+       public int doSave(String indirizzo, double totale, String stato, int numProdotti, int Iva, String Email, String citta, int CAP, String provincia ) throws SQLException {
 	   int idOrdineGenerato = -1;
        Connection connection = null;
        PreparedStatement preparedStatement = null;
@@ -297,7 +294,6 @@ public class OrdineDAO {
        }
        
        return idOrdineGenerato;
->>>>>>> branch 'masterL' of https://github.com/lucageneroso/ecommerce.git
    }
 
     public List<Ordine> getAllOrdini() throws SQLException {
