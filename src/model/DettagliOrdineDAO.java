@@ -2,7 +2,12 @@ package model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import model.ProductDao;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -45,4 +50,43 @@ public class DettagliOrdineDAO {
             }
         }
     }
+    
+    public List<Prodotto> getProdotti(int idOrdine){
+    	Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        List<Prodotto> prodotti = new ArrayList<>();
+    	String selectSql = "SELECT idProdotto FROM DettagliOrdine WHERE id_ordine ="+idOrdine;
+    	
+    	
+    	try {
+    		
+    		ProductDao pDAO= new ProductDao();
+    		
+            connection = ds.getConnection();
+            preparedStatement = connection.prepareStatement(selectSql);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+            	int id = rs.getInt("idProdotto");           	
+            	prodotti.add(pDAO.doRetrieveByKey(id));
+            	
+            }
+
+        } catch(Exception e) {
+        	e.printStackTrace();
+        } finally {
+            if (connection != null)
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+        }
+        return prodotti;
+    }
+    	
+    	
+    	
+    
 }

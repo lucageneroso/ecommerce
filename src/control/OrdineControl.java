@@ -35,16 +35,24 @@ public class OrdineControl extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("Qui: ");
 		String action = request.getParameter("action");
+		System.out.println("Qui: "+action);
+		OrdineDAO ordineDao= new OrdineDAO();
 
 		if (action != null) {
 			
 			if (action.equalsIgnoreCase("ViewOrdini")) {
-				String email = request.getParameter("Email");
-				request.setAttribute("ordini",ordine.getOrdini(email));
-				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Profilo.jsp");
-				dispatcher.forward(request, response);
-			} 
+			    String email = request.getParameter("email");
+			    if (email == null || email.isEmpty()) {
+			        email = (String) request.getSession().getAttribute("Email");
+			    }
+			    System.out.println("Email utilizzata: " + email);
+			    request.setAttribute("email", email); // Usa "email" per consistenza
+			    request.setAttribute("ordini", ordineDao.getOrdini(email)); // Passa gli ordini recuperati con l'email specificata
+			    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Profilo.jsp");
+			    dispatcher.forward(request, response);
+			}
 			
 			else if(action.equalsIgnoreCase("Dettagli")) {
 				String email = request.getParameter("Email");
