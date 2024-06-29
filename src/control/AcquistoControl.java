@@ -95,7 +95,7 @@ public class AcquistoControl extends HttpServlet {
 				}
 				else {
 					request.setAttribute("errore3", "Per completare la procedura devi accedere");
-                    request.getRequestDispatcher("/Accedi.jsp").forward(request, response);
+                    request.getRequestDispatcher("/pagina_accesso.jsp").forward(request, response);
 				}
 			}
 			if (action.equalsIgnoreCase("completa")) {

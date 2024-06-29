@@ -33,67 +33,91 @@ Cart cart = (Cart) session.getAttribute("cart");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <link rel="stylesheet" href="css/header.css">
     <title>Prodotto Cercato</title>
-    <style>
-        /* Stili per la visualizzazione dei prodotti */
-        .product-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 20px;
-        }
-        .product {
-            width: 250px;
-            padding: 10px;
-            margin: 10px;
-            background-color: #f5f5f7;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        }
-        .product img {
-            width: 100%;
-            height: auto;
-            border-radius: 5px;
-        }
-        
-        .product h3 {
-            text-align: center;
-            margin-top: 10px;
-            margin-bottom: 5px;
-            font-size: 20px;
-            color: #333;
-        }
-        .product p {
-            text-align: center;
-            margin-bottom: 10px;
-            font-size: 18px;
-            color: #666;
-        }
-        .product button {
-            display: block;
-            margin: 0 auto;
-            background-color: #ffa500;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .product button:hover {
-            background-color: #ff8c00;
-        }
-  
-    </style>
-</head>
-<body>
     
-    <jsp:include page="fragments/header.jsp" />
-    <br>
+    <style>
+    .container-view {
+        max-width: 85%;
+        margin: 100px auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
 
-    <div class="container">
-        <h2>Visualizzazione Prodotto</h2>
-        
+    .title {
+        text-align: center;
+        margin-bottom: 20px; /* Spazio inferiore per separare il titolo dalla lista */
+    }
+
+    .product-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .product {
+        width: 250px;
+        padding: 10px;
+        margin: 10px;
+        background-color: #f5f5f7;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .product img {
+        width: 100%;
+        height: auto;
+        border-radius: 5px;
+    }
+
+    .product h3 {
+        text-align: center;
+        margin-top: 10px;
+        margin-bottom: 5px;
+        font-size: 20px;
+        color: #333;
+    }
+
+    .product p {
+        text-align: center;
+        margin-bottom: 10px;
+        font-size: 18px;
+        color: #666;
+    }
+
+    .product button {
+        display: block;
+        margin: 0 auto;
+        background-color: #ffa500;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .product button:hover {
+        background-color: #ff8c00;
+    }
+</style>
+    
+    
+    
+</head>
+
+
+
+<body>
+    <jsp:include page="fragments/header.jsp" />
+    <div class="container-view">
+        <div class="title">
+            <h2>Visualizzazione Prodotto</h2>
+        </div>
+        <br>
+
         <%-- Se la lista dei prodotti non è vuota, mostra i prodotti --%>
         <div class="product-container">
             <% if (products != null && !products.isEmpty()) {
@@ -104,6 +128,9 @@ Cart cart = (Cart) session.getAttribute("cart");
                     String base64Image = Base64.getEncoder().encodeToString(imageBytes);
             %>
             <div class="product">
+            
+            <a href='ProductDetails.jsp?id=<%= prodotto.getID() %>'>
+            
             
                 <img src="data:image/jpg;base64, <%= base64Image %>" alt="Immagine Prodotto">
                 <h3><%= prodotto.getNome() %></h3>
@@ -122,6 +149,7 @@ Cart cart = (Cart) session.getAttribute("cart");
                         <% } %>
                     </form>
                 <% } %>
+               </a>
             </div>
             <% } %>
         </div>
@@ -130,8 +158,13 @@ Cart cart = (Cart) session.getAttribute("cart");
         <% } %>
         
     </div>
-
-    <%-- Includi il footer comune --%>
     <jsp:include page="fragments/footer.jsp" />
 </body>
+
+
+
+
+
+
+
 </html>

@@ -81,15 +81,13 @@ public class RegistrationControl extends HttpServlet {
                     model.doSave(bean);
                     
                     HttpSession session = request.getSession();
-                    
+                    session.setAttribute("IVA", bean.getIVA() );
                     session.setAttribute("Email", bean.getEmail());
                     session.setAttribute("cognome", bean.getCognome());
                     session.setAttribute("nome", bean.getNome());
                     session.setAttribute("PasswordCliente", bean.getPass());
-                    session.setAttribute("IVA", bean.getIVA());
                     session.setAttribute("Iban", bean.getIBAN());
-                    //session.setAttribute("Tipo_account", bean.getTipo_account());
-                    
+                    session.setAttribute("Tipo_account", 0);
                     session.setAttribute("data_di_nascita", bean.getData());
                     //response.sendRedirect(request.getContextPath() + "/registrazione-conferma.jsp");
 
@@ -112,10 +110,8 @@ public class RegistrationControl extends HttpServlet {
                             session.setAttribute("cognome", utente.getCognome());
                             session.setAttribute("nome", utente.getNome());
                             session.setAttribute("PasswordCliente", utente.getPass());
-                            
                             session.setAttribute("Iban", utente.getIBAN());
                             session.setAttribute("Tipo_account", utente.getTipo_account());
-                           
                             session.setAttribute("data_di_nascita", utente.getData());
                             
                             if (utente.getTipo_account() == 0) {
@@ -125,12 +121,12 @@ public class RegistrationControl extends HttpServlet {
                             }
                         } else {
                             request.setAttribute("errore", "Email o password non validi");
-                            request.getRequestDispatcher("/Accedi.jsp").forward(request, response);
+                            request.getRequestDispatcher("/pagina_accesso.jsp").forward(request, response);
                         }
                     } catch (SQLException e) {
                         e.printStackTrace();
                         request.setAttribute("errore", "Errore del database: " + e.getMessage());
-                        request.getRequestDispatcher("/Accedi.jsp").forward(request, response);
+                        request.getRequestDispatcher("/pagina_accesso.jsp").forward(request, response);
                     }
                 }
                 
@@ -198,7 +194,7 @@ public class RegistrationControl extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
             request.setAttribute("errore2", "Mail già usata");
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Accedi.jsp");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/pagina_accesso.jsp");
             dispatcher.forward(request, response);
         }
     }

@@ -26,14 +26,15 @@
 		            align-items: center;
 					text-align: center;
 					justify-content: center;
-		            width: 30vw;
-					min-width: 400px;
+		            width: 60vw;
 		            margin: 0 auto;
 		            padding: 20px;
 		            background-color: #ff6848;
 		            border: 1px solid #ddd;
 		            border-radius: 5px;
 					font-family: Arial, Sans-Serif;
+					
+					font-size:100%;
 		        }
 		
 		#tab{
@@ -59,8 +60,8 @@
 		    width: 100%;
 		    text-align:center;
 		    vertical-align: middle;
-		    border-color: #f6f5f7; 
-		    border-collapse: collapse;
+		    border-color: white 3px; 
+		    border-radius:5px;
 		    margin-top: 20px;
 		    transition: transform 0.3s ease-in-out;
 		}
@@ -72,6 +73,7 @@
 		align-items: center; 
 		justify-content: center; 
 		vertical-align:middle;
+		border:none;
 		}
 		
 		input[type="submit"]:hover {
@@ -95,12 +97,22 @@
 	       min-width:150px;
 	       min-height: 150px;
 	       }
+	       
+	    
+		@media (max-width: 600px) {
+			#conf{
+				width:85%;
+				font-size:2.5vw;
+			}
+}
+	    
     </style>
 </head>
 
 <body>
-<img src="./nuovologo.png" id="image" alt="#">
+<br><br><br>
 <div id="conf">
+
 	<form action="acquista" method="post">
 		<input type="hidden" name="action" value="completa">
 		<input type="hidden" name="email" value="<%= session.getAttribute("email") %>">

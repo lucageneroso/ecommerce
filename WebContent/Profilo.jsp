@@ -197,7 +197,7 @@ if (request.getAttribute("email") == null) { // Usa "email" per consistenza
                     		byte[] imageBytes = product.getImg();
                         	String base64Image = Base64.getEncoder().encodeToString(imageBytes);
                         
-                        	out.println("<li><a href='ProductDetails.jsp?id=" + product.getID() + "'>" +
+                        	out.println("<li>" +
                                 product.getNome() + "<br>" +
                                 "<img src='data:image/jpg;base64," + base64Image + "' alt='Immagine Prodotto' style='max-width:100px;'>"+
                                 "</a></li>");

@@ -51,12 +51,15 @@ margin-top: 0;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  background-color: #FF6848;
+  background-color: #f6f5f7;
   height: 130vh;
   padding: 20px;
   border: none;
   height: auto;
 }
+
+
+
 
 .logo-container {
   display: flex;
@@ -157,11 +160,11 @@ input[type="submit"]:hover {
 }
 
 .total-price h3 {
-  color: #fff;
+  color: black;
   font-size: 18px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
   .cont {
     flex-direction: column;
   }
@@ -191,6 +194,28 @@ table.cart-table {
         width: 120px;
     }
   
+  .right-column .cart-table {
+    width: 100%;
+    border-collapse: separate; /* Cambiato da 'collapse' a 'separate' */
+    border-spacing: 10px; /* Spazio tra le righe */
+    margin-bottom: 20px;
+    table-layout: fixed;
+    
+    border-width: 5px;
+    border-color: orange;
+    border-radius: 5px;
+}
+
+    .right-column td,
+.right-column th {
+    padding: 10px; /* Spazio interno delle celle */
+    text-align: left;
+    margin: 10px;
+    border: none; /* Rimuove il bordo interno */
+}
+  
+  
+  /*
 #table1 {
     border: unset;
     background-color: unset;
@@ -215,6 +240,7 @@ table.cart-table {
     color: unset;
     border-radius:5px;
   }
+  */
   
 	</style>
 </head>
@@ -222,11 +248,6 @@ table.cart-table {
 <body>
 <div class="cont">
 <div class="left-column">
-    <div class="logo-container">
-    <!--  
-        <a href="Home.jsp"><img src="nuovologo.png" width="130px" alt="#"></a>
-       -->
-    </div>
 <form action="acquista" method="post" style="border-radius:10px">
     <input type="hidden" name="action" value="visualizza">	
     <h2>Tipo di Consegna</h2>
@@ -336,7 +357,7 @@ table.cart-table {
 					<% } %>
 	<%if(cart != null) { %>
 		
-		<table class="cart-table" border="1" id="table1">
+		<table class="cart-table"  id="table1">
   <%  	
      for(Prodotto p: cart.getProducts()){
        byte[] imageB = p.getImg();
@@ -347,7 +368,7 @@ table.cart-table {
        int quantity = 1;
        int maxQuantity = p.getQuantita(); // Ottieni il valore massimo
   %>
-  <tr data-product-id="<%=p.getID()%>" style="background-color:white;padding: 10px 20px;">
+  <tr data-product-id="<%=p.getID()%>">
     <td><img src="data:image/jpg;base64, <%=base64img%>"  width="100" height="100" alt="#"></td>
     <td><%= p.getNome() %></td>
 	<td><span id="totalPrice_<%=p.getID()%>"><%=p.getPrezzo()%></span></td>
