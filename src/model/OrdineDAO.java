@@ -29,35 +29,47 @@ public class OrdineDAO {
         }
     }
 
-    public List<Ordine> getOrdini(String indirizzo) {
+    public List<Ordine> getOrdini(String email) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         List<Ordine> ordini = new ArrayList<>();
-        String selectSQL = "SELECT * FROM " + TABLE_NAME + " WHERE EmailCliente = ?";
+        String selectSQL = "SELECT * FROM " + TABLE_NAME + " WHERE Email_cliente = ?";
 
         try {
             connection = ds.getConnection();
             preparedStatement = connection.prepareStatement(selectSQL);
-            preparedStatement.setString(1, indirizzo);
+            preparedStatement.setString(1, email);
 
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
-                int numeroOrdine = rs.getInt("id_ordine");
-                Date data = rs.getDate("data");
-                double totale = rs.getDouble("totale");
+            	
+                int id = rs.getInt("id_ordine");
+                String indirizzo= rs.getString("indirizzo");   
+                String citta= rs.getString("citta");   
+                String provincia= rs.getString("provincia");   
+                int cap = rs.getInt("CAP");
+                double totale= rs.getDouble("totale");
                 String stato = rs.getString("stato");
                 int numeroProdotti = rs.getInt("numero_prodotti");
                 int IVA_cliente = rs.getInt("IVA_cliente");
-                String EmailCliente=rs.getString("EmailCliente");
+                String EmailCliente=rs.getString("Email_cliente");
+                Date data = rs.getDate("data");
+                
+                
                 Ordine ordine = new Ordine();
-                ordine.setNumeroOrdine(numeroOrdine);
+                ordine.setNumeroOrdine(id);
+                ordine.setIndirizzo(indirizzo);
+                ordine.setProvincia(provincia);
+                ordine.setCAP(cap);
+                ordine.setCitta(citta);
                 ordine.setData(data);
                 ordine.setTotale(totale);
                 ordine.setStato(stato);
                 ordine.setNumeroProdotti(numeroProdotti);
                 ordine.setIVA_cliente(IVA_cliente);
                 ordine.setEmailCliente(EmailCliente);
+                
                 ordini.add(ordine);
                 
             }
@@ -105,7 +117,7 @@ public class OrdineDAO {
                 ordine.setStato(rs.getString("stato"));
                 ordine.setNumeroProdotti(rs.getInt("numero_prodotti"));
                 ordine.setIVA_cliente(rs.getInt("IVA_cliente"));
-                ordine.setEmailCliente(rs.getString("EmailCliente"));
+                ordine.setEmailCliente(rs.getString("Email_cliente"));
             }
 
         } catch (SQLException e) {
@@ -274,20 +286,32 @@ public class OrdineDAO {
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
-                int numeroOrdine = rs.getInt("id_ordine");
-                Date data = rs.getDate("data");
-                double totale = rs.getDouble("totale");
+            	int id = rs.getInt("id_ordine");
+                String indirizzo= rs.getString("indirizzo");   
+                String citta= rs.getString("citta");   
+                String provincia= rs.getString("provincia");   
+                int cap = rs.getInt("CAP");
+                double totale= rs.getDouble("totale");
                 String stato = rs.getString("stato");
                 int numeroProdotti = rs.getInt("numero_prodotti");
                 int IVA_cliente = rs.getInt("IVA_cliente");
-
+                String EmailCliente=rs.getString("Email_cliente");
+                Date data = rs.getDate("data");
+                
+                
                 Ordine ordine = new Ordine();
-                ordine.setNumeroOrdine(numeroOrdine);
+                ordine.setNumeroOrdine(id);
+                ordine.setIndirizzo(indirizzo);
+                ordine.setProvincia(provincia);
+                ordine.setCAP(cap);
+                ordine.setCitta(citta);
                 ordine.setData(data);
                 ordine.setTotale(totale);
                 ordine.setStato(stato);
                 ordine.setNumeroProdotti(numeroProdotti);
                 ordine.setIVA_cliente(IVA_cliente);
+                ordine.setEmailCliente(EmailCliente);
+                
                 ordini.add(ordine);
             }
 

@@ -442,6 +442,7 @@ table{
 		    <h3>Ricerca Cliente</h3>
 			<div class="search">
 			    <form id="search" action="ordine" method="GET">
+			    	<input type="hidden" name="action" value="ViewOrdini">
 			        <input type="text" id="user-email-input-orders" name="email" placeholder="Inserisci l'email del cliente">
 			        <button type="submit" id="search-button">Cerca</button>
 			        <button type="button" id="reset-button-orders">Reset</button>
@@ -451,8 +452,8 @@ table{
 		<div id="ordiniSection">
 		<table class="order-table" id="orderTable">
 		    <tr>
+		    	<th>Numero Ordine</th>
 		        <th>Email</th>
-		        <th>Numero Ordine</th>
 		        <th id="dataOrdineHeader" data-ordine="asc" onclick="sortOrdiniPerData()">Data</th>
 		        <th>Totale</th>
 		        <th>Stato Ordine</th>
@@ -466,10 +467,14 @@ table{
 		        for (Ordine ordine : ordini) { %>
 		            <tr data-email="<%= ordine.getIndirizzo() %>">
 		                <td><%= ordine.getNumeroOrdine() %></td>
+		                <td><%= ordine.getEmailCliente() %></td>
 		                <td><%= ordine.getData() %></td>
-		                <td><%= ordine.getTotale() %>€</td>
+		                <td><%= ordine.getTotale() %></td>
 		                <td><%= ordine.getStato() %></td>
 		                <td><%= ordine.getIndirizzo() %></td>
+		                <td><%= ordine.getCitta() %></td>
+		                <td><%= ordine.getProvincia() %></td>
+		                <td><%= ordine.getCAP() %></td>
 		            </tr>
 		        <% }
 		    }
@@ -519,10 +524,12 @@ if (resetButton) {
   
 var searchFormOrders = document.getElementById("search");
 if (searchFormOrders) {
+	System.out.println("Qui");
   searchFormOrders.addEventListener("submit", function(e) {
     e.preventDefault();
 
     var email = document.getElementById("user-email-input-orders").value;
+    
     var table = document.getElementById("orderTable");
 
     var rows = table.getElementsByTagName("tr");
@@ -537,6 +544,7 @@ if (searchFormOrders) {
 
     document.getElementById("user-email-input-orders").value = "";
   });
+  
 }
 
   
