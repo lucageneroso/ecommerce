@@ -59,27 +59,3 @@ CREATE TABLE IF NOT EXISTS DettagliOrdine (
     FOREIGN KEY (idProdotto) REFERENCES Prodotto(idProdotto)
 );
 
-
-DROP TABLE IF EXISTS Acquista;
-CREATE TABLE IF NOT EXISTS Acquista (
-    IVA_cliente INT,
-    Codice_prodotto INT,
-    PRIMARY KEY (IVA_cliente, Codice_prodotto),
-    FOREIGN KEY (IVA_cliente) REFERENCES Cliente(IVA),
-    FOREIGN KEY (Codice_prodotto) REFERENCES Prodotto(idProdotto)
-);
-
-DROP TABLE IF EXISTS Recensione; 
-CREATE TABLE Recensione ( 
-    idRecensione INT NOT NULL AUTO_INCREMENT,
-    idProdotto INT NOT NULL,
-    emailCliente VARCHAR(50) NOT NULL,
-    votazione INT NOT NULL,
-    testo VARCHAR(50),
-    dataRecensione DATE NOT NULL,
-    PRIMARY KEY (idRecensione),
-    FOREIGN KEY (idProdotto) REFERENCES Prodotto(idProdotto),
-    FOREIGN KEY (emailCliente) REFERENCES Cliente(Email)
-);
-
-;

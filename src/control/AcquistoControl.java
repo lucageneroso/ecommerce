@@ -182,8 +182,7 @@ public class AcquistoControl extends HttpServlet {
 				
 				
 				
-				cart.deleteAllProduct();
-				request.setAttribute("cart", cart);
+				request.getSession().removeAttribute("cart");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/Home.jsp");
 				dispatcher.forward(request, response);
 				

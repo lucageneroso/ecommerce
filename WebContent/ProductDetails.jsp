@@ -74,21 +74,10 @@
         </div>
         <div class="col-md-6">
             <h1 class="product-title"><%= product.getNome() %></h1>
-            <div class="reviews">
-                <% int wholeStars = (int) media; // Numero di stelle intere
-                   double fraction = media - wholeStars; // Parte frazionaria della valutazione
-                   boolean halfStar = fraction >= 0.5; // Indica se c'è mezza stella
-                   for (int i = 0; i < 5; i++) {
-                       if (i < wholeStars) { %>
-                           <i class="fas fa-star filled-star"></i>
-                       <% } else if (i == wholeStars && halfStar) { %>
-                           <i class="fas fa-star-half-alt filled-star"></i>
-                       <% } else { %>
-                           <i class="fas fa-star"></i>
-                       <% }
-                   } %>
-                <p>stelle</p>
-            </div>
+            
+           
+            
+            
             <div class="price">
                 € <%= product.getPrezzo() %>
             </div>

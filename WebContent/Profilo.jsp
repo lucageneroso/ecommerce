@@ -173,6 +173,10 @@ if (request.getAttribute("email") == null) { // Usa "email" per consistenza
      	<div class="button-home">
         	<a href="Home.jsp">Torna alla Home</a>
     	</div>
+    <%} else{%>
+    <div class="button-home">
+        	<a href="Amministratore.jsp">Torna ad Amministratore</a>
+    	</div>
     <%} %>
     <div class="info-box">
         <h2>Ordini Effettuati</h2>
