@@ -114,7 +114,8 @@
 }
 
 .category-box {
-    width: 22%; /* Larghezza del box delle categorie, adattabile */
+    width: 22%; /* Larghezza del box delle categorie */
+    height: 300px; /* Altezza fissa per uniformare tutti i box */
     margin: 10px; /* Margine tra i box */
     background-color: #fff; /* Colore di sfondo */
     border: 1px solid #ccc; /* Bordo */
@@ -122,12 +123,17 @@
     padding: 20px; /* Spazio interno */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombra */
     text-align: center; /* Allinea il testo al centro */
-    vertical-align: top; /* Allinea il box in cima */
-    height: 100%; /* Altezza del box, prende lo spazio rimanente */
     display: flex; /* Usa un layout flessibile */
     flex-direction: column; /* Direzione dei contenuti: verticale */
     justify-content: space-between; /* Distribuisci uniformemente i contenuti all'interno */
     box-sizing: border-box; /* Assicura che il padding e il bordo non aumentino la dimensione del box */
+}
+
+.category-box img {
+    max-width: 100%; /* Larghezza massima dell'immagine */
+    height: 65%; /* Mantieni le proporzioni dell'immagine */
+    border-radius: 5px; /* Angoli arrotondati dell'immagine */
+    margin-bottom: 10px; /* Margine inferiore */
 }
 
 .category-box h2 {
@@ -136,11 +142,6 @@
     margin-bottom: 10px; /* Margine inferiore */
 }
 
-.category-box img {
-    max-width: 100%; /* Larghezza massima dell'immagine */
-    border-radius: 5px; /* Angoli arrotondati dell'immagine */
-    margin-bottom: 10px; /* Margine inferiore */
-}
 
 /* Media queries */
 @media screen and (max-width: 1024px) {
@@ -149,7 +150,7 @@
     }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 600px) {
     .category-box {
         width: 90%; /* Un box per riga su telefono */
     }
@@ -178,25 +179,26 @@
     width: 100%; /* Imposta la larghezza al 100% per adattarsi al contenitore padre */
     margin-left: auto;
     margin-right: auto;
+    z-index: 3;
 }
 
 .ekw_content_container {
     display: flex;
     transition: transform 0.5s ease;
-    width: 100%; /* Imposta la larghezza al 100% per adattarsi al contenitore */
+    width: 400%; /* Imposta la larghezza al 100% per adattarsi al contenitore */
     overflow: hidden; /* Nasconde eventuali overflow orizzontali */
 }
 
 .ekw_content_container div {
-    flex: 0 0 100%; /* Ogni div occupa inizialmente il 100% della larghezza */
+	flex: 0 0 25%; /* Ogni slide occupa il 33.33% della larghezza quando la larghezza del dispositivo è inferiore a 768px */
     max-width: 100%; /* Massima larghezza di ogni slide */
 }
 
 .ekw_content_container img {
-    width: 100%;
-    height: auto; /* Lascia che l'altezza sia adattata proporzionalmente */
-    object-fit: cover;
-    max-height: 500px; /* Imposta un'altezza massima per le immagini */
+    width: 100%; /* Assicurati che tutte le immagini abbiano lo stesso width */
+    height: auto;
+    object-fit: contain;
+    max-height: 500px;
 }
 
 .ekw_control_container {
@@ -212,27 +214,6 @@
     cursor: pointer;
     font-size: 30px;
     color: #FF8C00;
-}
-
-@media (max-width: 768px) {
-    .ekw_content_container {
-        width: 300%; /* Aumenta la larghezza del contenitore quando la larghezza del dispositivo è inferiore a 768px */
-    }
-    
-    .ekw_content_container div {
-        flex: 0 0 33.33%; /* Ogni slide occupa il 33.33% della larghezza quando la larghezza del dispositivo è inferiore a 768px */
-    }
-    
-    .ekw_content_container img {
-        width: 100%;
-        height: auto;
-        object-fit: cover;
-        max-height: 500px;
-    }
-    
-    .container-home{
-    	margin-top:20px;
-    }
 }
 
 
@@ -299,21 +280,23 @@
        <!-- Carosello -->
         <div class="ekw_carousel_container">
             <div class="ekw_content_container">
-                <div><img src="images/slide1.jpg" alt="Image 1"></div>
-                <div><img src="images/slide2.jpg" alt="Image 2"></div>
+                <div><img src="images/slide1.jpeg" alt="Image 1"></div>
+                <div><img src="images/slide2.jpeg" alt="Image 2"></div>
+                <div><img src="images/slide3.jpeg" alt="Image 3"></div>
+                <div><img src="images/slide4.jpeg" alt="Image 4"></div>
             </div>
         </div>
 
         <div class="category-container">
     <div class="category-box">
         <a href="Product.jsp?categoria=Bagno">
-            <img src="images/bagno.jpg" alt="Categoria Bagno">
+            <img src="images/bagno.jpeg" alt="Categoria Bagno">
             <h2>Bagno</h2>
         </a>
     </div>
     <div class="category-box">
         <a href="Product.jsp?categoria=Cucina">
-            <img src="images/cucina.png" alt="Categoria Cucina">
+            <img src="images/cucina.jpeg" alt="Categoria Cucina">
             	<h2>Cucina</h2>
         </a>
     </div>
@@ -325,7 +308,7 @@
     </div>
     <div class="category-box">
         <a href="tuttiProdotti.jsp">
-            <img src="images/tutti.jpg" alt="Tutti i prodotti">
+            <img src="images/tutti.jpeg" alt="Tutti i prodotti">
             <h2>Tutti i prodotti</h2>
         </a>
     </div>
@@ -335,7 +318,7 @@
         
     </div>
     
-
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js"></script>
     <script>
         // Funzione per gestire il menu hamburger
         $(document).ready(function() {
@@ -344,7 +327,25 @@
             });
         });
 
-        // Funzione per scorrere automaticamente il carosello
+        
+        
+
+        
+        
+        // Funzione per la ricerca
+        function submitSearch(event) {
+            event.preventDefault(); // Previeni il comportamento predefinito del link
+
+            var searchInput = document.getElementById("searchInput");
+            var nome = searchInput.value.trim();
+
+            if (nome !== "") {
+                var url = "product?action=search&nome=" + encodeURIComponent(nome);
+                window.location.href = url;
+            }
+        }
+        
+     // Funzione per scorrere automaticamente il carosello
         $(document).ready(function() {
             var currentPosition = 0;
             var slides = $('.ekw_content_container div');
@@ -426,6 +427,16 @@
                 goToSlide(currentIndex);
             }, 3000);
         });
+        
+        
+        
+        
+        
+        
+        
+        
+       	
+       	
     </script>
     
     <jsp:include page="/fragments/footer.jsp" />
