@@ -144,7 +144,7 @@
 
 
 /* Media queries */
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1024px) { 
     .category-box {
         width: 45%; /* Due box per riga su tablet */
     }
