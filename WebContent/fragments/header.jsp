@@ -412,35 +412,35 @@
          searchResults.innerHTML = '';
 
          if (results.length > 0) {
-        	    results.forEach(function(result) {
-        	    	
-        	    	
-        	    	
-        	        var resultDiv = document.createElement("div");
+             results.forEach(function(result) {
+                 var resultDiv = document.createElement("div");
 
-        	        // Crea un link <a> all'interno del div
-        	        var resultLink = document.createElement("a");
-        	        resultLink.textContent = result;
-        	        resultLink.setAttribute("href", 'product?action=search&nome=' + encodeURIComponent(result));
-        	        resultLink.style.textDecoration = "none"; // Rimuovi la sottolineatura se desiderato
+                 // Crea un link <a> all'interno del div
+                 var resultLink = document.createElement("a");
+                 resultLink.textContent = result;
+                 resultLink.setAttribute("href", 'product?action=search&nome=' + encodeURIComponent(result));
+                 resultLink.style.textDecoration = "none"; // Rimuovi la sottolineatura se desiderato
 
-        	        // Aggiungi il link come figlio del div
-        	        resultDiv.appendChild(resultLink);
+                 // Aggiungi l'evento click al link
+                 resultLink.addEventListener("click", function(event) {
+                     // Impedisci il comportamento predefinito del link (facoltativo, a seconda delle necessità)
+                     // event.preventDefault();
 
-        	        // Aggiungi l'evento click al div, se necessario
-        	        resultDiv.addEventListener("click", function() {
-        	            // Gestisci il click su risultato (es. reindirizza alla pagina del prodotto)
-        	            window.location.href = 'Product.jsp?nome=' + encodeURIComponent(result);
-        	        });
+                     // Reindirizza alla pagina del prodotto
+                     window.location.href = 'Product.jsp?nome=' + encodeURIComponent(result);
+                 });
 
-        	        // Aggiungi il div al contenitore dei risultati di ricerca
-        	        searchResults.appendChild(resultDiv);
-        	    });
+                 // Aggiungi il link come figlio del div
+                 resultDiv.appendChild(resultLink);
 
-        	    searchResults.style.display = 'block';
-        	} else {
-        	    showNoResultsMessage();
-        	}
+                 // Aggiungi il div al contenitore dei risultati di ricerca
+                 searchResults.appendChild(resultDiv);
+             });
+
+             searchResults.style.display = 'block';
+         } else {
+             showNoResultsMessage();
+         }
      }
 
      function showNoResultsMessage() {
