@@ -61,7 +61,7 @@ overflow-x:hidden;
     border-radius:10px;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1200px) { 
     .s-sidebar__nav {
         width: 150%; /* Larghezza per schermi medi */
         font-size: 1.1em; /* Dimensione del testo per schermi medi */
