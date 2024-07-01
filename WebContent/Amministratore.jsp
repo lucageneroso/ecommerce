@@ -25,22 +25,105 @@
 body{
 overflow-x:hidden;
 }
-    /* Stili CSS */
-   .s-layout__content {
-   justify-content: center;
-   text-align: center;
-   margin-top: 90px;
-   height: auto;
-   left: -15vw;
-   
+.intestazione {
+    background: linear-gradient(90deg, rgba(255,104,72,1) 0%, rgba(255,150,100,1) 50%, rgba(255,104,72,1) 100%);
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+    border-radius: 0 0 10px 10px;
 }
-    /* Banner */
+
+.intestazione h1 {
+    font-family: 'Arial', sans-serif;
+    font-size: 2.5em;
+    margin: 0;
+}
+    /* Stili CSS */
+    .s-layout {
+    display: flex;
+    flex-wrap: nowrap;
+}
+    
+ 
+.s-sidebar__nav {
+    position: sticky;
+    top: 0px;
+    left: 0;
+    width: 200%; /* Larghezza di default */
+    height: calc(100vh - 60px);
+    background: #ff6848;
+    color: rgba(255, 255, 255, 0.9);
+    transition: all .3s ease-in-out;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    font-size: 1.2em; /* Dimensione di base del testo */
+    border-radius:10px;
+}
+
+@media (max-width: 1200px) {
+    .s-sidebar__nav {
+        width: 150%; /* Larghezza per schermi medi */
+        font-size: 1.1em; /* Dimensione del testo per schermi medi */
+    }
+}
+
+@media (max-width: 1050px) {
+    .s-sidebar__nav {
+        width: 100%; /* Larghezza per tablet */
+        font-size: 1em; /* Dimensione del testo per schermi medi */
+    }
+}
+/*
+@media (max-width: 925px) {
+    .s-sidebar__nav {
+        width: 50%;
+        font-size: 0.7em; 
+    }
+}
+*/
+.s-sidebar__nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.s-sidebar__nav-link {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    color: white;
+    text-decoration: none;
+    transition: background 0.3s ease-in-out;
+    height: 60px; /* Altezza fissa */
+}
+.s-sidebar__nav-link:hover {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.s-sidebar__nav-link i {
+    margin-right: 10px;
+}
+
+.s-sidebar__nav-link em {
+    font-size: 1.2em;
+   } /* Banner */
     .banner {
         background-color: rgba(235, 235, 240, 0.66);
         position: relative;
         height: 90px;
         width: auto;
     }
+    
+    
+  .s-layout__content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+    overflow: auto;
+}
 
     #image {
         position: absolute;
@@ -65,162 +148,147 @@ overflow-x:hidden;
         margin-right: 15px;
     }
 
-	/* Product table */
+.profile-form, .order-form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    display: none; /* Inizialmente nascondi tutte le sezioni */
+}
+
+.profile-form h2, .order-form h2 {
+    text-align: center;
+    color: #343a40;
+}
+
+
 table {
     border-collapse: collapse;
     width: 100%;
-    max-width: 800px; /* Imposta la larghezza massima desiderata per la tabella */
+    max-width: 800px;
+    margin: auto !important;
+    margin-top: 20px !important;
 }
 
-th,
-td {
-    padding: 8px;
+th, td {
+    padding: 12px;
     text-align: center;
+    border: 1px solid #ddd;
 }
 
 th {
-    background-color: #f2f2f2;
+    background-color: #ff6848;
+    color: white;
     font-weight: bold;
+    border-bottom: 2px solid #e63946;
 }
 
-tr:nth-child(even) {
+td {
     background-color: #f9f9f9;
+    transition: background-color 0.3s ease-in-out;
 }
 
-tr:hover {
-    background-color: #e9e9e9;
+tr:hover td {
+    background-color: #ffccd5;
+}
+
+tr:nth-child(even) td {
+    background-color: #f1f1f1;
 }
 
 td a {
-    color: #0066cc;
+    color: #ff6848;
     text-decoration: none;
-    text-align: center;
 }
 
 td a:hover {
     text-decoration: underline;
 }
-	
 
-    /* Order Form */
-    .order-form {
-         display: none;
-         /*
-         margin-left:10vw;
-         margin-top: -70px;
-         margin-bottom: 20vw;
-         */
-         margin-top: -70px;
-         margin-bottom: 20vw;
-         text-align:center;
-    }
-
-    .order-table th,
-    .order-table td {
-        padding: 8px;
-    }
-
-    .order-table th:not(:last-child),
-    .order-table td:not(:last-child) {
-        margin-right: 10px;
-    }
-    
-    input[type="submit"] {
-	  background-color: #333;
-	  color: #fff;
-	  border: none;
-	  margin: 27px;
-	  padding: 10px 20px;
-	  cursor: pointer;
-	  transition: all 0.3s ease-in-out;
-	}
-	
-	input[type="submit"]:hover {
-	  background-color: #FF6848;
-	  border-radius: 14px;
-	}
-	
-	    input[type="reset"] {
-	  background-color: #333;
-	  color: #fff;
-	  border: none;
-	  margin: 27px;
-	  padding: 10px 20px;
-	  cursor: pointer;
-	  transition: all 0.3s ease-in-out;
-	}
-	
-	input[type="reset"]:hover {
-	  background-color: #FF6848;
-	  border-radius: 14px;
-	}
-	
-	.s-sidebar__nav {
-	   position: relative;
-	   top: 0px; /* Aggiungi una margine superiore per allineare la sidebar sotto la navbar */
-	   left: 0;
-	   overflow: hidden;
-	   transition: all .3s ease-in;
-	   width: 15em;
-	   height: calc(100% - 245px); /* Calcola l'altezza della sidebar in base alla navbar */
-	   background: #ff6848;
-	   color: rgba(255, 255, 255, 0.7);
-	   z-index: 0;
-	}
-	
-	.profile-form{
-			display: block;
-	         margin-left:10vw;
-	         margin-top: -70px;
-	         text-align:center;
-	}
-	
-	
-	
-	@media screen and (max-width: 750px) {
-  table {
-    display: block;
-    margin-left:40px;
-  }
-  th,
-  td {
-    display: block;
-    width: 100%;
-  }
-  th {
-    text-align: center;
-  }
-  td {
-    text-align: center;
-  }
-  tr:nth-child(even) {
-    background-color: transparent;
-  }
-  tr {
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-  }
-  td:before {
-    content: attr(data-label);
-    font-weight: bold;
-    display: block;
-    margin-bottom: 5px;
-    text-align: center;
-  }
-}
-input[type="text"], input[type="file"]{
-	width: 80px;
+input[type="submit"], input[type="reset"] {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    margin: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
 }
 
-input[type="file"]{
-	color:transparent;
-}	
-
-table{
-	margin:auto !important;
-	margin-top:20px !important;
-	margin-top:5px;
+input[type="submit"]:hover, input[type="reset"]:hover {
+    background-color: #ff6848;
+    border-radius: 14px;
 }
+
+@media screen and (max-width: 900px) {
+    table {
+        display: block;
+        margin-left: 40px;
+    }
+    th, td {
+        display: block;
+        width: 100%;
+    }
+    th {
+        text-align: center;
+    }
+    td {
+        text-align: center;
+    }
+    tr:nth-child(even) {
+        background-color: transparent;
+    }
+    tr {
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+    }
+    td:before {
+        content: attr(data-label);
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+        text-align: center;
+    }
+}
+  .sidebar {
+                width: 100%;
+                position: fixed;
+                z-index: 1;
+                left: -100%;
+                top: 60px;
+                height: calc(100vh - 60px);
+                overflow-y: auto;
+                transition: all 0.3s ease;
+            }
+            
+            .sidebar.show {
+                left: 0;
+            }
+            
+            .main-content {
+                padding-left: 0;
+                padding-top: 20px;
+            }
+            
+            .form-container {
+                padding: 15px;
+            }
+            
+            .form-container h2 {
+                font-size: 1.5em;
+            }
+        }
+
+input[type="text"], input[type="file"] {
+    width: 80px;
+}
+
+input[type="file"] {
+    color: transparent;
+}
+
+
 
 </style>
 <link href="styleAreautente.css" rel="stylesheet" type="text/css">
@@ -229,14 +297,9 @@ table{
 <body>
 <!--<jsp:include page="fragments/header.jsp"/>-->
 
-<div class="info-box">
-        <h2>Informazioni Amministratore</h2>
-        <p><strong>Nome:</strong> <%= session.getAttribute("nome") %></p>
-        <p><strong>Cognome:</strong> <%= session.getAttribute("cognome") %></p>
-        <p><strong>Email:</strong> <%= session.getAttribute("Email") %></p>
-        <p><strong>IBAN:</strong> <%= session.getAttribute("Iban") %></p>
-        <p><strong>Tipo Account:</strong> <%= session.getAttribute("Tipo_account").equals(0) ? "Standard" : "Amministratore" %></p> 
-    </div>
+<div class="intestazione">
+  <h1>Pagina Amministratore</h1>
+  </div>
 
 <div class="s-layout">
     <div class="s-layout__sidebar">
@@ -259,6 +322,16 @@ table{
                 <li>
                     <a class="s-sidebar__nav-link" href="#0" id="ordiniLink">
                         <i class="fa fa-camera"></i><em>Ordini</em>
+                    </a>
+                </li>
+                 <li>
+                    <a class="s-sidebar__nav-link" href="Profilo.jsp" id="ordiniLink">
+                        <i class="fa fa-camera"></i><em>Profilo</em>
+                    </a>
+                </li>
+                <li>
+                    <a class="s-sidebar__nav-link" href="logout" id="ordiniLink">
+                        <i class="fa fa-camera"></i><em>LogOut</em>
                     </a>
                 </li>
             </ul>
@@ -445,7 +518,6 @@ table{
 			    	<input type="hidden" name="action" value="ViewOrdini">
 			        <input type="text" id="user-email-input-orders" name="email" placeholder="Inserisci l'email del cliente">
 			        <button type="submit" id="search-button">Cerca</button>
-			        <button type="button" id="reset-button-orders">Reset</button>
 			    </form>
 			</div>
 		</div>
