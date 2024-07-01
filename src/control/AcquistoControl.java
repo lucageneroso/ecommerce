@@ -5,6 +5,7 @@ import model.DettagliOrdine;
 import model.Ordine;
 import model.OrdineDAO;
 import model.Prodotto;
+import model.ProductDao;
 import model.DettagliOrdineDAO;
 
 import java.io.IOException;
@@ -152,33 +153,19 @@ public class AcquistoControl extends HttpServlet {
 					e.printStackTrace();
 				}
 				
-				System.out.println(id);
 				
-				
+				ProductDao pDAO= new ProductDao();
 				DettagliOrdineDAO dettagliordinedao= new DettagliOrdineDAO();
 				for(Prodotto p: cart.getProducts()){
 					try {
 						dettagliordinedao.doSave(id, p.getID());
+						pDAO.reduce(p.getID());
 					} catch (SQLException e) {
 						e.printStackTrace(); 
 					}
 				}
 				
 				
-				
-				System.out.println("Aooo funziona");
-				
-				/*
-				request.setAttribute("TipoC", TipoC);
-				request.setAttribute("cart",cart);
-				request.setAttribute("Pagamento", pagamento);
-				request.setAttribute("numeroCarta", numeroCarta);
-				request.setAttribute("card-holder", titolareCarta);
-				request.setAttribute("scadenzaCarta",scadenzaCarta);
-				request.setAttribute("cvv", cvv);
-				*/
-				
-				//model.inserimentoaq(provincia, indirizzo, cap, citta, cart, email, pagamento, numeroCarta , titolareCarta , scadenzaCarta , cvv);
 				
 				
 				
