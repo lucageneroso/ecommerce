@@ -192,33 +192,7 @@
 
 	<%@ include file="fragments/header.jsp" %>
 
-	<!-- 
-    <div class="navbar">
-        <div class="dropdown">
-            <button class="dropbtn">Altro</button>
-            <div class="dropdown-content">
-                <a href="Profilo.jsp">Profilo</a>
-                <a href="#">Impostazioni</a>
-            </div>
-        </div>
-        <a href="chi-siamo.jsp">Chi Siamo</a>
-        <div class="cerca-form">
-            <form action="product" method="GET">
-                <input type="text" name="nome" id="searchInput" placeholder="Cerca prodotto">
-                <button type="submit" onclick="submitSearch(event)">Cerca</button>
-            </form>
-        </div>
-        <div class="dropdown">
-            <button class="dropbtn">Login</button>
-            <div class="dropdown-content">
-                <a href="pagina_accesso.jsp">Login</a>
-                <a href="#">LogOut</a>
-                <a href="Profilo.jsp">Profilo</a>
-            </div>
-        </div>
-        <a href="carrello.jsp">Carrello</a>
-    </div>
-     -->
+	
 
     <div class="container-home">
         <div class="header-Home">
