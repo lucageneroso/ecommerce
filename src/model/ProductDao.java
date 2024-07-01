@@ -241,6 +241,45 @@ public class ProductDao {
 		}
 		return bean;
 	}
+	
+	public synchronized Prodotto doRetrieveByName(String nome) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		Prodotto bean = new Prodotto();
+
+		String selectSQL = "SELECT * FROM " + ProductDao.TABLE_NAME + " WHERE Nome= ?";
+
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+			preparedStatement.setString(1, nome);
+
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				bean.setID(rs.getInt("idProdotto"));
+				bean.setNome(rs.getString("Nome"));
+				bean.setDescrizione(rs.getString("Descrizione"));
+				bean.setPrezzo(rs.getDouble("Prezzo"));
+				bean.setQuantita(rs.getInt("Quantita"));
+				bean.setCategoria(rs.getString("Categoria"));
+				bean.setImg(rs.getBytes("Foto"));
+				bean.setSconto(rs.getDouble("Sconto"));
+
+			}
+
+		}  finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return bean;
+	}
 
 	public synchronized boolean doDelete(int code) throws SQLException {
 		Connection connection = null;

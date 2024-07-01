@@ -58,7 +58,10 @@
 		}
 		
 		.dropdown:hover .dropdown-content {
-		    display: block;
+		    display: flex;
+		     flex-direction: column;
+		     padding:5px;
+		     gap:10px;
 		}
 		
 		.cerca-form {
@@ -191,7 +194,11 @@
         text-align: center; /* Centra il logo */
     }
     
-    .navbar.responsive .nav-list {
+    .navbar.responsive .dropdown-content {
+    	display:none;
+    }
+    
+    .navbar.responsive .nav-list:hover {
         display: flex;
         flex-direction: column;
         margin-top: 20px; /* Spazio superiore per separare dal logo */
@@ -200,6 +207,38 @@
     .navbar.responsive .nav-list li {
         margin-bottom: 10px; /* Spaziatura tra le voci di menu */
     }
+}
+
+.search-results {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1001;
+            width: 300px; /* Modifica la larghezza per adattarla alla tua barra di ricerca */
+            border: 1px solid #ccc; /* Aggiungi un bordo per visibilit */
+        }
+
+        .search-results div {
+            padding: 10px;
+            cursor: pointer;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .search-results div:hover {
+            background-color: #f0f0f0;
+        }
+
+        .search-results .no-results {
+            padding: 10px;
+            text-align: center;
+            color: #666; /* Colore testo meno invasivo */
+        }
+        
+        #searchInput:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset; /* Esempio di nascondere con un box-shadow bianco */
 }
 		
 		
@@ -236,12 +275,16 @@
 		    <div class="dx">
 		        
 		
-		        <div class="cerca-form">
-		            <form action="product" method="GET">
-		                <input type="text" name="nome" id="searchInput" placeholder="Cerca prodotto">
-		                <button type="submit" onclick="submitSearch(event)">Cerca</button>
-		            </form>
-		        </div>
+		       	<div class="cerca-form">
+            <form action="product" method="GET">
+                <input type="text" name="nome" id="searchInput" placeholder="Cerca prodotto" autocomplete="off">
+                <button type="submit" onclick="submitSearch(event)">Cerca</button>
+            </form>
+            <div id="searchResults" class="search-results"></div>
+        </div> 
+		        
+		        
+		        
 		    </div>
 		
 		    <div class="login">
@@ -259,100 +302,181 @@
 		    
 		   
 		</div>
-		<script>
 		
-			document.addEventListener("DOMContentLoaded", function() {
-		    var searchInput = document.getElementById("searchInput");
-		    var searchResults = document.createElement("div");
-		    searchResults.setAttribute("id", "searchResults");
-		    searchResults.classList.add("search-results");
-		    document.body.appendChild(searchResults);
+		
+		
+		
+		
+ <script>
+ document.addEventListener("DOMContentLoaded", function() {
+	    var searchInput = document.getElementById("searchInput");
+	    var searchResults = document.createElement("div");
+	    searchResults.setAttribute("id", "searchResults");
+	    searchResults.classList.add("search-results");
+	    document.body.appendChild(searchResults);
 
-		    var navbar = document.querySelector(".navbar");
-		    var hamburger = document.getElementById("hamburger");
+	    var navbar = document.querySelector(".navbar");
+	    var hamburger = document.getElementById("hamburger");
 
-		    hamburger.addEventListener("click", function() {
-		        navbar.classList.toggle("responsive");
+	    hamburger.addEventListener("click", function() {
+	        navbar.classList.toggle("responsive");
 
-		        // Aggiungi o rimuovi una classe per gestire la visibilità degli elementi
-		        document.body.classList.toggle("navbar-open");
+	        // Aggiungi o rimuovi una classe per gestire la visibilità degli elementi
+	        document.body.classList.toggle("navbar-open");
 
-		        // Chiudi i risultati della ricerca quando si apre il menu a tendina
-		        clearSearchResults();
-		    });
-		    
-		    searchInput.addEventListener("input", function() {
-		        var query = searchInput.value.trim();
+	        // Chiudi i risultati della ricerca quando si apre il menu a tendina
+	        clearSearchResults();
+	    });
+	    
+	    searchInput.addEventListener("input", function() {
+	        var query = searchInput.value.trim();
 
-		        if (query !== "") {
-		            var url = "suggestProducts?query=" + encodeURIComponent(query);
+	        if (query !== "") {
+	            var url = "suggestProducts?query=" + encodeURIComponent(query);
 
-		            fetch(url)
-		                .then(response => response.json())
-		                .then(data => {
-		                    displaySearchResults(data);
-		                })
-		                .catch(error => {
-		                    console.error('Errore durante la richiesta:', error);
-		                });
-		        } else {
-		            clearSearchResults();
-		        }
-		    });
-
-		    function displaySearchResults(results) {
-		        searchResults.innerHTML = '';
-
-		        if (results.length > 0) {
-		            results.forEach(function(result) {
-		                var resultDiv = document.createElement("div");
-		                resultDiv.textContent = result;
-		                resultDiv.addEventListener("click", function() {
-		                    // Gestisci il click su risultato (es. reindirizza alla pagina del prodotto)
-		                    window.location.href = 'Product.jsp?nome=' + encodeURIComponent(result);
-		                });
-		                searchResults.appendChild(resultDiv);
-		            });
-
-		            searchResults.style.display = 'block';
-		        } else {
-		            showNoResultsMessage();
-		        }
-		    }
-
-		    function showNoResultsMessage() {
-		        searchResults.innerHTML = '<div class="no-results">Nessun prodotto trovato</div>';
-		        searchResults.style.display = 'block';
-		    }
-
-		    function clearSearchResults() {
-		        searchResults.innerHTML = '';
-		        searchResults.style.display = 'none';
-		    }
-
-		    window.addEventListener('click', function(e) {
-		        if (!searchResults.contains(e.target) && e.target !== searchInput) {
-		            clearSearchResults();
-		        }
-		    });
-		});
-			
-			// Funzione per la ricerca
-	        function submitSearch(event) {
-	            event.preventDefault(); // Previeni il comportamento predefinito del link
-
-	            var searchInput = document.getElementById("searchInput");
-	            var nome = searchInput.value.trim();
-
-	            if (nome !== "") {
-	                var url = "product?action=search&nome=" + encodeURIComponent(nome);
-	                window.location.href = url;
-	            }
+	            fetch(url)
+	                .then(response => response.json())
+	                .then(data => {
+	                    displaySearchResults(data);
+	                })
+	                .catch(error => {
+	                    console.error('Errore durante la richiesta:', error);
+	                });
+	        } else {
+	            clearSearchResults();
 	        }
-		    
-		    
-		    
-		</script>
+	    });
+
+	    function displaySearchResults(results) {
+	        searchResults.innerHTML = '';
+
+	        if (results.length > 0) {
+	            results.forEach(function(result) {
+	                var resultDiv = document.createElement("div");
+	                resultDiv.textContent = result;
+	                resultDiv.addEventListener("click", function() {
+	                    // Gestisci il click su risultato (es. reindirizza alla pagina del prodotto)
+	                    window.location.href = 'Product.jsp?nome=' + encodeURIComponent(result);
+	                });
+	                searchResults.appendChild(resultDiv);
+	            });
+
+	            searchResults.style.display = 'block';
+	        } else {
+	            showNoResultsMessage();
+	        }
+	    }
+
+	    function showNoResultsMessage() {
+	        searchResults.innerHTML = '<div class="no-results">Nessun prodotto trovato</div>';
+	        searchResults.style.display = 'block';
+	    }
+
+	    function clearSearchResults() {
+	        searchResults.innerHTML = '';
+	        searchResults.style.display = 'none';
+	    }
+
+	    window.addEventListener('click', function(e) {
+	        if (!searchResults.contains(e.target) && e.target !== searchInput) {
+	            clearSearchResults();
+	        }
+	    });
+	});
+ 
+ 
+ document.addEventListener("DOMContentLoaded", function() {
+     var searchInput = document.getElementById("searchInput");
+     var searchResults = document.getElementById("searchResults");
+
+     searchInput.addEventListener("input", function() {
+         var query = searchInput.value.trim();
+
+         if (query !== "") {
+             var url = "suggestProducts?query=" + encodeURIComponent(query);
+
+             fetch(url)
+                 .then(response => response.json())
+                 .then(data => {
+                     displaySearchResults(data);
+                 })
+                 .catch(error => {
+                     console.error('Errore durante la richiesta:', error);
+                 });
+         } else {
+             clearSearchResults();
+         }
+     });
+
+     function displaySearchResults(results) {
+         searchResults.innerHTML = '';
+
+         if (results.length > 0) {
+        	    results.forEach(function(result) {
+        	    	
+        	    	
+        	    	
+        	        var resultDiv = document.createElement("div");
+
+        	        // Crea un link <a> all'interno del div
+        	        var resultLink = document.createElement("a");
+        	        resultLink.textContent = result;
+        	        resultLink.setAttribute("href", 'product?action=search&nome=' + encodeURIComponent(result));
+        	        resultLink.style.textDecoration = "none"; // Rimuovi la sottolineatura se desiderato
+
+        	        // Aggiungi il link come figlio del div
+        	        resultDiv.appendChild(resultLink);
+
+        	        // Aggiungi l'evento click al div, se necessario
+        	        resultDiv.addEventListener("click", function() {
+        	            // Gestisci il click su risultato (es. reindirizza alla pagina del prodotto)
+        	            window.location.href = 'Product.jsp?nome=' + encodeURIComponent(result);
+        	        });
+
+        	        // Aggiungi il div al contenitore dei risultati di ricerca
+        	        searchResults.appendChild(resultDiv);
+        	    });
+
+        	    searchResults.style.display = 'block';
+        	} else {
+        	    showNoResultsMessage();
+        	}
+     }
+
+     function showNoResultsMessage() {
+         searchResults.innerHTML = '<div class="no-results">Nessun prodotto trovato</div>';
+         searchResults.style.display = 'block';
+     }
+
+     function clearSearchResults() {
+         searchResults.innerHTML = '';
+         searchResults.style.display = 'none';
+     }
+
+     window.addEventListener('click', function(e) {
+         if (!searchResults.contains(e.target) && e.target !== searchInput) {
+             clearSearchResults();
+         }
+     });
+ });
+
+ // Funzione per la ricerca
+ function submitSearch(event) {
+     event.preventDefault(); // Previeni il comportamento predefinito del link
+
+     var searchInput = document.getElementById("searchInput");
+     var nome = searchInput.value.trim();
+
+     if (nome !== "") {
+         var url = "product?action=search&nome=" + encodeURIComponent(nome);
+         window.location.href = url;
+     }
+ }
+	    
+	    
+	    
+    </script>
+		
 		
 <br><br><br>
 </body>

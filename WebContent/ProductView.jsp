@@ -137,17 +137,6 @@ Cart cart = (Cart) session.getAttribute("cart");
                 <p>Prezzo: <%= prodotto.getPrezzo() %>€</p>
                 <% if (prodotto.getQuantita() <= 0) { %>
                     <p style="color: red;">Non disponibile</p>
-                <% } else { %>
-                    <form action="product" method="post">
-                        <input type="hidden" name="action" value="addC">
-                        <input type="hidden" name="id" value="<%= prodotto.getID() %>">
-                        <%-- Controlla se il prodotto è già nel carrello --%>
-                        <% if (cart != null && cart.presente(prodotto.getID())) { %>
-                            <button type="button">Prodotto nel carrello</button>
-                        <% } else { %>
-                            <button type="submit">Aggiungi al carrello</button>
-                        <% } %>
-                    </form>
                 <% } %>
                </a>
             </div>
