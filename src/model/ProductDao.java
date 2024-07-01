@@ -65,6 +65,28 @@ public class ProductDao {
 	    }
 	}
 	
+	public synchronized void reduce(int idProdotto) throws SQLException {
+	    Connection connection = null;
+	    PreparedStatement preparedStatement = null;
+	    String update = "UPDATE " + ProductDao.TABLE_NAME + " SET Quantita = Quantita - 1 WHERE idProdotto = ?";
+
+	    try {
+	        connection = ds.getConnection();
+	        preparedStatement = connection.prepareStatement(update);
+	        preparedStatement.setInt(1, idProdotto);
+	        preparedStatement.executeUpdate();
+	    } finally {
+	        try {
+	            if (preparedStatement != null) {
+	                preparedStatement.close();
+	            }
+	        } finally {
+	            if (connection != null) {
+	                connection.close();
+	            }
+	        }
+	    }
+	}
 	public synchronized void doSaveAmministratore(Prodotto product) throws SQLException {
 	    Connection connection = null;
 	    PreparedStatement preparedStatement = null;

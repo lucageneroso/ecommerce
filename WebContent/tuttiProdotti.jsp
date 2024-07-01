@@ -18,7 +18,6 @@ if (prodotti.isEmpty()) {
 <head>
     <meta charset="utf-8">
     <title>Tutti i Prodotti</title>
-    <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/Product.css">
 </head>

@@ -16,7 +16,6 @@
 		<div class="box box1">
 			<h3>Servizi</h3>
 	                        <ul>
-	                            <li><a href="./faq.jsp">FAQ</a></li>
 				    <li><a href="./Errore404.jsp">Privacy Policy</a></li>
 	                            <li><a href="./Errore404.jsp">Termini e Condizioni</a></li>
 	                        </ul>
@@ -25,8 +24,8 @@
 			<h3>Autori</h3>
 	                        <ul>
 	                            <li><a href="https://github.com/PeterGeol">Fasolino Pietro</a></li>
-	                            <li><a href="https://github.com/GiuSeppE898">Riccardo Alfieri</a></li>
-				    <li><a href="https://github.com/emaanuueele11">Luca Generoso Cammarota</a></li>
+	                            <li><a href="https://github.com/Riccardoalfieri2003">Riccardo Alfieri</a></li>
+				    			<li><a href="https://github.com/lucageneroso">Luca Generoso Cammarota</a></li>
 	                        </ul>
 		</div>
 		<div class="box box3">
@@ -36,10 +35,10 @@
 		</div>
 		</div>
 		<div class="col item social" id="items">
-	                    <a href="https://www.facebook.com/dinfunisa"><i class="icon ion-social-facebook"></i></a>
-	                    <a href="https://twitter.com/dinfunisa"><i class="icon ion-social-twitter"></i></a>
-	                    <a href="https://www.youtube.com/watch?v=Oc2WPtUkHWA"><i class="icon ion-social-youtube"></i></a>
-	                    <a href="https://www.instagram.com/dinfunisa/?hl=it"><i class="icon ion-social-instagram"></i></a>
+	                    <a href="https://it.wikipedia.org/wiki/Hawaii"><i class="icon ion-social-facebook"></i></a>
+	                    <a href="https://it.wikipedia.org/wiki/Filippine"><i class="icon ion-social-twitter"></i></a>
+	                    <a href="https://www.youtube.com/watch?v=f8JEilGmNUM"><i class="icon ion-social-youtube"></i></a>
+	                    <a href="https://it.wikipedia.org/wiki/Bora_Bora"><i class="icon ion-social-instagram"></i></a>
 	    </div>   
 		<p class="copyright" id="na">HomeDecore © 2024</p>
 	</div>

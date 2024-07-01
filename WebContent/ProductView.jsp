@@ -129,7 +129,7 @@ Cart cart = (Cart) session.getAttribute("cart");
             %>
             <div class="product">
             
-            <a href='ProductDetails.jsp?id=<%= prodotto.getID() %>'>
+            <a href='ProductDetails.jsp?id=<%= prodotto.getID() %>' style="text-decoration: none;">
             
             
                 <img src="data:image/jpg;base64, <%= base64Image %>" alt="Immagine Prodotto">

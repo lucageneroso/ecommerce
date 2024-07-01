@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homepage</title>
-    
+    <link rel="stylesheet" href="css/header.css">
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
@@ -33,64 +33,8 @@
             z-index: 1;
         }
 
-        /* Stile della barra di navigazione
-        
-        .navbar {
-            background-color: rgba(255, 165, 0, 0.8);
-            padding: 10px 20px;
-            text-align: right;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
 
-        .navbar a {
-            color: #fff;
-            text-decoration: none;
-            padding: 10px 20px;
-            display: inline-block;
-        }
-
-        .navbar a:hover {
-            background-color: #FF8C00;
-        }
-
-        .navbar .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        .navbar .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-            border-radius: 5px;
-            padding: 5px 0;
-        }
-
-        .navbar .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            transition: background-color 0.3s;
-        }
-
-        .navbar .dropdown-content a:hover {
-            background-color: #f1f1f1;
-        }
-
-        .navbar .dropdown:hover .dropdown-content {
-            display: block;
-        }*/
-
-        /* Stile per la barra di ricerca */
+        /* Stile per la barra di ricerca 
         .cerca-form {
             display: inline-block;
         }
@@ -103,6 +47,7 @@
         .cerca-form button {
             padding: 5px;
         }
+        */
 
         /* Stile per i riquadri delle categorie */
    .category-container {
@@ -111,6 +56,10 @@
     display: flex; /* Usa un layout flessibile */
     flex-wrap: wrap; /* Avvolgi i contenuti su più righe se necessario */
     justify-content: space-around; /* Distribuisci uniformemente i box con spazio attorno */
+}
+
+.category-container a{
+	text-decoration: none;
 }
 
 .category-box {
@@ -137,22 +86,21 @@
 }
 
 .category-box h2 {
-    font-size: 20px; /* Dimensione del font per il titolo */
-    color: #FFA500; /* Colore del testo */
-    margin-bottom: 10px; /* Margine inferiore */
+    font-size: 20px; 
+    color: #FFA500;
+    margin-bottom: 10px; 
 }
 
 
-/* Media queries */
-@media screen and (max-width: 1024px) { 
+@media screen and (max-width: 1024px) {
     .category-box {
-        width: 45%; /* Due box per riga su tablet */
+        width: 45%; 
     }
 }
 
 @media screen and (max-width: 600px) {
     .category-box {
-        width: 90%; /* Un box per riga su telefono */
+        width: 90%; 
     }
 }
 
@@ -274,7 +222,7 @@
 
     <div class="container-home">
         <div class="header-Home">
-        	<h1>Benvenuti su HomeDecore</h1>
+        	<h1>Benvenuti su HomeDecor</h1>
     	</div>
        
        <!-- Carosello -->
@@ -332,18 +280,7 @@
 
         
         
-        // Funzione per la ricerca
-        function submitSearch(event) {
-            event.preventDefault(); // Previeni il comportamento predefinito del link
-
-            var searchInput = document.getElementById("searchInput");
-            var nome = searchInput.value.trim();
-
-            if (nome !== "") {
-                var url = "product?action=search&nome=" + encodeURIComponent(nome);
-                window.location.href = url;
-            }
-        }
+        
         
      // Funzione per scorrere automaticamente il carosello
         $(document).ready(function() {
