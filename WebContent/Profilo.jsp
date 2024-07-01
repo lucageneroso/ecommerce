@@ -169,7 +169,8 @@ if (request.getAttribute("email") == null) { // Usa "email" per consistenza
         <p><strong>Tipo Account:</strong> <%= u.getTipo_account()==0 ? "Standard" : "Amministratore" %></p>
         <%} %>
     </div>
-    <% if (request.getAttribute("email") == null) { %>
+    <% if (request.getAttribute("email") == null && session.getAttribute("Tipo_account").equals(0)){
+    %>
      	<div class="button-home">
         	<a href="Home.jsp">Torna alla Home</a>
     	</div>
