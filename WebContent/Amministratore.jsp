@@ -282,7 +282,7 @@ input[type="submit"]:hover, input[type="reset"]:hover {
 
 input[type="text"], input[type="file"] {
     width: 80px;
-}
+} 
 
 input[type="file"] {
     color: transparent;
