@@ -284,17 +284,26 @@ public class ProductDao {
 	public synchronized boolean doDelete(int code) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
+		PreparedStatement preparedStatementDetails = null;
 
 		int result = 0;
 
 		String deleteSQL = "DELETE FROM " + ProductDao.TABLE_NAME + " WHERE idProdotto = ?";
+		String deleteDetailSQL = "DELETE FROM DettagliOrdine WHERE idProdotto = ?";
 
 
 		try {
 			connection = ds.getConnection();
+			
+			preparedStatementDetails = connection.prepareStatement(deleteDetailSQL);
+			preparedStatementDetails.setInt(1, code);
+			
+			
 			preparedStatement = connection.prepareStatement(deleteSQL);
 			preparedStatement.setInt(1, code);
+			
 
+			preparedStatementDetails.executeUpdate();
 			result = preparedStatement.executeUpdate();
 
 		} finally {
