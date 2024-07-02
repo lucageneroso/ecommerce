@@ -23,53 +23,6 @@ import model.Prodotto;
 @WebServlet("/suggestProducts")
 public class SuggestProducts extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	private static final String JDBC_URL = "jdbc:mysql://localhost:3306/ingrosso";
-    private static final String JDBC_USERNAME = "root";
-    private static final String JDBC_PASSWORD = "root";
-
-    	/*
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String query = request.getParameter("query");
-        
-        List<String> results = getProductNamesFromDatabase(query);
-
-        // Converti la lista di risultati in formato JSON
-        Gson gson = new Gson();
-        String json = gson.toJson(results);
-
-        // Imposta il tipo di contenuto della risposta come JSON
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-
-        // Scrivi i risultati come risposta
-        PrintWriter out = response.getWriter();
-        out.write(json);
-    }
-
-    
-    private List<String> getProductNamesFromDatabase(String query) {
-        List<String> results = new ArrayList<>();
-
-        try (Connection conn = DriverManager.getConnection(JDBC_URL, JDBC_USERNAME, JDBC_PASSWORD)) {
-            String sql = "SELECT nome FROM Prodotto WHERE Nome LIKE ?";
-            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-                stmt.setString(1, "%" + query + "%");
-
-                try (ResultSet rs = stmt.executeQuery()) {
-                    while (rs.next()) {
-                        String productName = rs.getString("Nome");
-                        results.add(productName);
-                    }
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return results;
-    }
-    */
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

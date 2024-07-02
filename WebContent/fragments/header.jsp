@@ -277,9 +277,10 @@
 		
 		       	<div class="cerca-form">
             <form action="product" method="GET">
-                <input type="text" name="nome" id="searchInput" placeholder="Cerca prodotto" autocomplete="off">
-                <button type="submit" onclick="submitSearch(event)">Cerca</button>
-            </form>
+    <input type="hidden" name="action" value="search">
+    <input type="text" name="nome" id="searchInput" placeholder="Cerca prodotto" autocomplete="off">
+    <button type="submit" onclick="submitSearch(event)">Cerca</button>
+</form>
             <div id="searchResults" class="search-results"></div>
         </div> 
 		        
